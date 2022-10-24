@@ -1,5 +1,7 @@
 package com.golfzonaca.officesharingplatform.domain;
 
+import com.golfzonaca.officesharingplatform.domain.type.PayType;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 public class ApiPayment {
