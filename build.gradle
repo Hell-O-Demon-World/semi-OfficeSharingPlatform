@@ -31,7 +31,7 @@ dependencies {
 //	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //
 //	//MariaDB 추가
-//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	implementation 'org.mariadb.jdbc:mariadb-java-client'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
