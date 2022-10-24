@@ -1,5 +1,6 @@
 package com.golfzonaca.officesharingplatform.domain;
 
+<<<<<<< Updated upstream
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -23,3 +24,20 @@ public class Place {
     private Map<String, Boolean> placeAddInfo;
     private int postalCode; //우편번호
 }
+=======
+import java.sql.Time;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+
+public class Place {
+    private AtomicLong id;
+    private AtomicLong companyId;
+    private String placeName;
+    private String description;
+    private Map<String, Boolean> businessDays;
+    private Time startTime;
+    private Time endTime;
+    private Map<String, Boolean> information;
+    private AtomicLong addressId;
+}
+>>>>>>> Stashed changes
