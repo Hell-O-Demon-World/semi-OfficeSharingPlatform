@@ -1,6 +1,6 @@
 package com.golfzonaca.backoffice.domain;
 
-import com.golfzonaca.officesharingplatform.domain.type.ProductType;
+import com.golfzonaca.backoffice.domain.type.ProductType;
 
 import java.util.concurrent.atomic.AtomicLong;
 

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class Company {
 
-    private AtomicLong id; //업체식별번호
+    private Long id; //업체식별번호
     private String companyName;
     private String companyTel;
     private String registrationNumber;
