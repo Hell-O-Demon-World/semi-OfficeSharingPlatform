@@ -1,0 +1,8 @@
+.officeList {
+  position: absolute;
+  width: 25%;
+  background: #999;
+  height: 92vh;
+  font-size: 2rem;
+  font-weight: 900;
+}
