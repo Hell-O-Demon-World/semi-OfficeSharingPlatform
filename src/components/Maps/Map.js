@@ -27,26 +27,36 @@ const Map = () => {
       };
       const map = new kakao.maps.Map(container, options);
       setMap(map);
-      const iwContent = `<div class = "customOverlay">Golfzon
-    </div>`;
+      const iwContent = `<div class = "wrap">
+                          <div class = "customOverlay">Golfzon</div>
+                          <div class = "arrow"></div>
+                        </div>`;
       let overlay = new kakao.maps.CustomOverlay({
         content: iwContent,
         map: map,
         position: mainLocation,
       });
       overlay.setMap(map);
+      const polyline = new kakao.maps.Polyline({
+        path: [
+          new kakao.maps.LatLng(37.523853615766534, 127.05514873622471),
+          new kakao.maps.LatLng(37.49147998517995, 127.07276489941023),
+        ],
+      });
+      console.log(polyline.getLength());
     });
   }, []);
   return (
     <Fragment>
-      <div id="map" className={classes.map}></div>
-      <div className={`${classes.customZoomcontrol} ${classes.radiusBorder}`}>
-        <span onClick={zoomIn}>
-          <FontAwesomeIcon icon={faPlus} className={classes.icon} />
-        </span>
-        <span onClick={zoomOut}>
-          <FontAwesomeIcon icon={faMinus} className={classes.icon} />
-        </span>
+      <div id="map" className={classes.map}>
+        <div className={`${classes.customZoomcontrol} ${classes.radiusBorder}`}>
+          <span onClick={zoomIn}>
+            <FontAwesomeIcon icon={faPlus} className={classes.icon} />
+          </span>
+          <span onClick={zoomOut}>
+            <FontAwesomeIcon icon={faMinus} className={classes.icon} />
+          </span>
+        </div>
       </div>
     </Fragment>
   );

@@ -1,3 +1,5 @@
+import { faBorderTopLeft } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useState } from "react";
 import Modal from "../Modal/Modal";
 
@@ -13,11 +15,13 @@ const MainHeader = () => {
   return (
     <Fragment>
       <header className={classes.header}>
-        <h1>Office Sharing Platform</h1>
+        <h1>
+          <FontAwesomeIcon icon={faBorderTopLeft} /> Office Sharing Platform
+        </h1>
         <ul>
-          <li onClick={onClickLogin}>Login</li>
+          <li onClick={onClickLogin}>로그인</li>
           <li>|</li>
-          <li>logout</li>
+          <li>로그아웃</li>
         </ul>
       </header>
       {isLoginClicked && <Modal onConfirm={modalHandler} />}
