@@ -1,30 +1,43 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import Office from "./Office";
 
 import classes from "./OfficeList.module.css";
 import OfficeSearch from "./OfficeSearch";
-const DUMMY_OFFICE = [
-  {
-    name: "롯데월드점",
-    address: "서울 송파구 올림픽로 240 (잠실동) 롯데월드 웰빙센터 8층",
-    option: "다락 직영ㅣ24시간 방문가능ㅣ무료주차 가능",
-    distance: "6.3km",
-  },
-  {
-    name: "건대점",
-    address: "서울 광진구 화양동 94-9 프라하임오피스텔 B1",
-    option: "다락 직영ㅣ24시간 방문가능ㅣ무료주차 가능",
-    distance: "6.7km",
-  },
-];
-
 const OfficeList = () => {
+  const office = [];
+  const [isLoading, setIsLoading] = useState(false);
+  const [officeList, setOfficeList] = useState([]);
+  useEffect(() => {
+    const sendRequest = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(
+          "https://react-http-673e2-default-rtdb.firebaseio.com/office.json"
+        );
+        if (!response.ok) {
+          throw new Error("Someting went wrong");
+        }
+        const data = await response.json();
+        for (const key in data) {
+          office.push({
+            id: key,
+            name: data[key].name,
+            address: data[key].address,
+            option: data[key].option,
+            postcode: data[key].postcode,
+          });
+        }
+        setOfficeList(office);
+      } catch (error) {}
+      setIsLoading(false);
+    };
+    sendRequest();
+  }, []);
   return (
     <div className={classes.officeList}>
       <OfficeSearch />
-      {DUMMY_OFFICE.map((elem) => (
-        <Office item={elem} />
-      ))}
+      {!isLoading && officeList.map((elem) => <Office item={elem} />)}
+      {isLoading && <p>Loading...</p>}
     </div>
   );
 };

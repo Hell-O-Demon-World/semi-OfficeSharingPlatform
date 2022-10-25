@@ -3,4 +3,5 @@
   width: 25%;
   background: #222;
   height: 92vh;
+  overflow-y: scroll;
 }
