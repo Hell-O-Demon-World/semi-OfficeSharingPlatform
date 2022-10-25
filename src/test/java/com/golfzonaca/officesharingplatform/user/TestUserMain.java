@@ -7,7 +7,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class TestUserMain {
     public static void main(String[] args) {
-        User user = new User( "12@hanmail.net", "1234", "1234", 1L);
 
     }
 }

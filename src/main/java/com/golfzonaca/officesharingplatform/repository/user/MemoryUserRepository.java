@@ -4,8 +4,10 @@ import com.golfzonaca.officesharingplatform.domain.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Repository
 public class MemoryUserRepository implements UserRepository {
@@ -24,6 +26,20 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public User findById(long id) {
         return store.get(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        Iterator<Long> keys = store.keySet().iterator();
+
+        while( keys.hasNext() ){
+            Long key = keys.next();
+            User user = store.get(key);
+            if (user.getMail().equals(email)){
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override

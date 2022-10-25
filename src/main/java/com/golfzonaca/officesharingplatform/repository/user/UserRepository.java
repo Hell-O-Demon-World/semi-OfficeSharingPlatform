@@ -13,6 +13,8 @@ public interface UserRepository {
 
     User findById(long id);
 
+    User findByEmail(String email);
+
     User update(long id, User user);
 
     List<User> findAll();

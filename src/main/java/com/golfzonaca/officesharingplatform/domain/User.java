@@ -1,6 +1,8 @@
 package com.golfzonaca.officesharingplatform.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -15,10 +17,15 @@ public class User {
     private String job;
     private String preferType;
 
-    public User(String name, String mail, String pw, long mileageId) {
+    private String role; // 권한
+
+
+    public User(String name, String mail, String pw, String phoneNumber, String job, String preferType) {
         this.name = name;
         this.mail = mail;
         this.pw = pw;
-        this.mileageId = mileageId;
+        this.phoneNumber = phoneNumber;
+        this.job = job;
+        this.preferType = preferType;
     }
 }

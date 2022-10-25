@@ -5,89 +5,61 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MemoryUserRepositoryTest {
     MemoryUserRepository memoryUserRepository = new MemoryUserRepository();
+    String email = "ysh@gmail.com";
 
     @AfterEach
-    public void afterEach() {
+    private void afterEach() {
         memoryUserRepository.clearStore();
     }
-
     @Test
     void save() {
-        // given
-        User user1 = new User("yang", "yang1234@gmail.com", "yang1234!",2L);
-        User user2 = new User("yang2", "yang2@gmail.com", "yang2!", 4L);
-
-        // when
-        User saveUser1 = memoryUserRepository.save(user1);
-        User saveUser2 = memoryUserRepository.save(user2);
-
-        // then
-        System.out.println("user1.getId() = " + user1.getId());
-        System.out.println("user2 = " + user2.getId());
-        User findUser1 = memoryUserRepository.findById(user1.getId());
-        User findUser2 = memoryUserRepository.findById(user2.getId());
-        assertThat(findUser1).isEqualTo(saveUser1);
-        assertThat(findUser2).isEqualTo(saveUser2);
     }
 
     @Test
     void findById() {
+    }
+
+    @Test
+    void findByEmail() {
         //given
-        User user1 = new User( "yang", "yang1234@gmail.com", "yang1234!", 2L);
-        //when
+        User user1 = new User("yang", "ysh@gmail.com", "ysh1234", "010-8776-2222", "", "");
+        User user2 = new User("yang2", "sh2@gmail.com", "444444", "010-2211-7878", "programmer", "");
+        User user3 = new User("yang3", "kkk3@naver.com", "123213", "010-3322-2233", "", "A");
+
         memoryUserRepository.save(user1);
-        User findUser = memoryUserRepository.findById(user1.getId());
-        //then
-        assertThat(findUser.getId()).isEqualTo(user1.getId());
+        memoryUserRepository.save(user2);
+        memoryUserRepository.save(user3);
+        //when
+        User findUser = memoryUserRepository.findByEmail("ysh@gmail.com");
+        System.out.println("findUser = " + findUser);
     }
 
     @Test
     void update() {
-        //given
-        User user1 = new User("yang", "yang1234@gmail.com", "yang1234!", 2L);
-
-        //when
-        memoryUserRepository.save(user1);
-        User updateParam = new User("yang2", "yang22", "yang2", 2L);
-        memoryUserRepository.update(user1.getId(), updateParam);
-        //then
-        assertThat(updateParam.getJob()).isSameAs(user1.getJob());
     }
 
     @Test
     void findAll() {
-        User user1 = new User("yang", "yang1234@gmail.com", "yang1234!", 2L);
-        User user2 = new User("yang2", "yang2@gmail.com", "yang2!", 4L);
+        //given
+        User user1 = new User("yang", "ysh@gmail.com", "ysh1234", "010-8776-2222", "", "");
+        User user2 = new User("yang2", "sh2@gmail.com", "444444", "010-2211-7878", "programmer", "");
+        User user3 = new User("yang3", "kkk3@naver.com", "123213", "010-3322-2233", "", "A");
 
         memoryUserRepository.save(user1);
         memoryUserRepository.save(user2);
-
-        List<User> users = memoryUserRepository.findAll();
-
-        assertThat(users.size()).isEqualTo(2);
-        assertThat(users).contains(user1, user2);
-
+        memoryUserRepository.save(user3);
+        //when
+        List<User> result = memoryUserRepository.findAll();
+        //then
     }
 
     @Test
     void clearStore() {
-        User user1 = new User("yang", "yang1234@gmail.com", "yang1234!", 2L);
-        User user2 = new User("yang2", "yang2@gmail.com", "yang2!", 4L);
-
-        memoryUserRepository.save(user1);
-        memoryUserRepository.save(user2);
-        List<User> beforeUsers = memoryUserRepository.findAll();
-        memoryUserRepository.clearStore();
-        List<User> afterUsers = memoryUserRepository.findAll();
-
-        assertThat(beforeUsers.size()).isEqualTo(2);
-        assertThat(afterUsers.size()).isEqualTo(0);
-
     }
 }
