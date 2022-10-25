@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.domain;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +10,12 @@ import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
+@Setter
 public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id ;
     private Long placeTypeId;
     private Long placeId;
     private Long companyId;

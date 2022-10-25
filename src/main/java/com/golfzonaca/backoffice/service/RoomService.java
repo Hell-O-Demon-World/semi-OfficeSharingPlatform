@@ -2,11 +2,13 @@ package com.golfzonaca.backoffice.service;
 
 import com.golfzonaca.backoffice.domain.Room;
 import com.golfzonaca.backoffice.repository.RoomRepository;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Transactional
+@Service
 public class RoomService {
 
     private final RoomRepository roomRepository;

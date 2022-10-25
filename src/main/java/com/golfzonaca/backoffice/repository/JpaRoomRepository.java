@@ -1,10 +1,12 @@
 package com.golfzonaca.backoffice.repository;
 
 import com.golfzonaca.backoffice.domain.Room;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Repository
 public class JpaRoomRepository implements RoomRepository {
     private final EntityManager entityManager;
 
