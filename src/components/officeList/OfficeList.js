@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Office from "./Office";
 
 import classes from "./OfficeList.module.css";
 import OfficeSearch from "./OfficeSearch";
 const OfficeList = () => {
   const office = [];
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [officeList, setOfficeList] = useState([]);
   useEffect(() => {
@@ -20,14 +22,16 @@ const OfficeList = () => {
         const data = await response.json();
         for (const key in data) {
           office.push({
-            id: key,
+            key,
             name: data[key].name,
             address: data[key].address,
             option: data[key].option,
             postcode: data[key].postcode,
           });
         }
+
         setOfficeList(office);
+        dispatch({ type: "add_officeList", list: office });
       } catch (error) {}
       setIsLoading(false);
     };
@@ -36,7 +40,8 @@ const OfficeList = () => {
   return (
     <div className={classes.officeList}>
       <OfficeSearch />
-      {!isLoading && officeList.map((elem) => <Office item={elem} />)}
+      {!isLoading &&
+        officeList.map((elem) => <Office key={elem.key} item={elem} />)}
       {isLoading && <p>Loading...</p>}
     </div>
   );

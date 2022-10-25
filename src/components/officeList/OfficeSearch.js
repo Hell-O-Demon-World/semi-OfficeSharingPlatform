@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./OfficeSearch.module.css";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
