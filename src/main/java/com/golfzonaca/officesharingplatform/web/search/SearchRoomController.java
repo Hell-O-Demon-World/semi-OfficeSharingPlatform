@@ -16,8 +16,13 @@ public class SearchRoomController {
         /*
         * 1. requestData에서 get해서 검색 조건 뽑아내기
         * 2. 뽑은 검색 조건 데이터로 JPA를 활용하여 검색
-        * 3. 검색한 결과를 json 형태의 resultData로 저장
-        * return resultData;
+        * query : select * from PLACE
+         where PLACE.ADDRESS_ID IN (
+             SELECT Address.ID FROM Address
+                               WHERE Address.ADDRESS like '%판교%'
+             );
+        * 3. 결과를 json 형태의 resultData로 저장
+        * 4. return resultData;
         * */
 
         ResultData resultData = new ResultData();
