@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
@@ -11,11 +12,24 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class Company {
 
-    private AtomicLong id; //업체식별번호
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+    private Long id; //업체식별번호
+
+    @Column(name = "CO_NAME", length = 30)
     private String companyName;
+
+    @Column(name = "CO_TEL", length = 22)
     private String companyTel;
+
+    @Column(name = "CO_REGNUM", length = 12)
     private String registrationNumber;
-    private String companyAddress;
+
+    @Column(name = "CO_CHAIRMANNAME", length = 20)
     private String chairmanName;
-    private int postalCode;
+
+    @OneToOne
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID", foreignKey=@ForeignKey, nullable=false)
+    private Address addressId;
 }
