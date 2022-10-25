@@ -27,14 +27,17 @@ dependencies {
 //	//MyBatis 추가
 //	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 //
-//	//JPA, Spring Data JPA 추가
-//	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//
-//	//MariaDB 추가
+	//JPA, Spring Data JPA 추가
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+	//MariaDB 추가
 	implementation 'org.mariadb.jdbc:mariadb-java-client'
+	//spring security 추가
+	implementation 'org.springframework.boot:spring-boot-starter-security:2.7.4'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
