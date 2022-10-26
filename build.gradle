@@ -25,7 +25,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 //	//MyBatis 추가
-//	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2'
 //
 //	//JPA, Spring Data JPA 추가
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
