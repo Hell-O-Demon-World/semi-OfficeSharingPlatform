@@ -1,6 +1,7 @@
-package com.golfzonaca.backoffice.repository;
+package com.golfzonaca.backoffice.repository.mybatis;
 
 import com.golfzonaca.backoffice.domain.Place;
+import com.golfzonaca.backoffice.repository.PlaceRepository;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.repository.mybatis.PlaceMapper;
 import lombok.RequiredArgsConstructor;

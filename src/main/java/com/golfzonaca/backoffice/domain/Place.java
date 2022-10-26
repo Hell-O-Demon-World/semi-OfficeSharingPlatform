@@ -16,12 +16,12 @@ public class Place {
     private LocalDateTime placeStartTime;
     private LocalDateTime placeEndTime;
     private Map<String, Boolean> placeAddInfo;
-    private int addressId; //우편번호
+    private Long addressId; //우편번호
 
     public Place() {
     }
 
-    public Place(Long companyId, String name, String description, Map<String, Boolean> placeOpen, LocalDateTime placeStartTime, LocalDateTime placeEndTime, Map<String, Boolean> placeAddInfo, int addressId) {
+    public Place(Long companyId, String name, String description, Map<String, Boolean> placeOpen, LocalDateTime placeStartTime, LocalDateTime placeEndTime, Map<String, Boolean> placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.name = name;
         this.description = description;

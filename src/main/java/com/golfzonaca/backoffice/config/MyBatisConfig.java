@@ -1,6 +1,6 @@
 package com.golfzonaca.backoffice.config;
 
-import com.golfzonaca.backoffice.repository.MyBatisPlaceRepository;
+import com.golfzonaca.backoffice.repository.mybatis.MyBatisPlaceRepository;
 import com.golfzonaca.backoffice.repository.PlaceRepository;
 import com.golfzonaca.backoffice.repository.mybatis.PlaceMapper;
 import com.golfzonaca.backoffice.service.MyBatisPlaceService;
