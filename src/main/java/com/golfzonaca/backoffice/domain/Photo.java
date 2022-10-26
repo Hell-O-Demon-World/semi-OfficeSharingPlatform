@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class Photo {
 
-    private AtomicLong id;
+    private Long id;
     private String fileName;
     private String path;
 }

@@ -12,8 +12,8 @@ import java.util.concurrent.atomic.AtomicLong;
 @RequiredArgsConstructor
 public class Comment {
 
-    private AtomicLong id;
-    private AtomicLong placeId;
+    private Long id;
+    private Long placeId;
     private String commentText;
     private String commentWriter;
     private LocalDateTime commentTime;
