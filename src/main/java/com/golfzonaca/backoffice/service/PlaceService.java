@@ -15,5 +15,7 @@ public interface PlaceService {
 
     void delete(Long id);
 
+    Optional<Place> findById(Long Id);
+
     Optional<List<Place>> findAll(Long companyId);
 }

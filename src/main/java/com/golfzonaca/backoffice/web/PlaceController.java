@@ -1,15 +1,13 @@
 package com.golfzonaca.backoffice.web;
 
 import com.golfzonaca.backoffice.domain.Place;
+import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.PlaceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -25,12 +23,22 @@ public class PlaceController {
 
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
-        log.info("places 호출");
         Optional<List<Place>> places = placeService.findAll(companyId);
-        log.info("placeService 호출");
         model.addAttribute("places", places);
-        log.info("model = {}", model);
         return "places";
+    }
+
+    @GetMapping("/{placeId}")
+    public String place(@PathVariable long placeId, Model model) {
+        Place place = placeService.findById(placeId).get();
+        model.addAttribute("place", place);
+        return "place";
+    }
+
+    @GetMapping("/add")
+    public String addForm(Model model) {
+        model.addAttribute("place", new Place());
+        return "addForm";
     }
 
     @PostMapping("/add")
@@ -41,5 +49,24 @@ public class PlaceController {
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/places/{id}";
+    }
+
+    @GetMapping("/{placeId}/edit")
+    public String editForm(@PathVariable Long placeId, Model model) {
+        Place place = placeService.findById(placeId).get();
+        model.addAttribute("place", place);
+        return "editForm";
+    }
+
+    @PostMapping("/{placeId}/edit")
+    public String edit(@PathVariable Long placeId, @ModelAttribute PlaceUpdateDto updateParam) {
+        placeService.update(placeId, updateParam);
+        return "redirect:/places/{placeId}";
+    }
+
+    @PostMapping("/{placeId}/delete")
+    public String delete(@PathVariable Long placeId) {
+        placeService.delete(placeId);
+        return "redirect:/places";
     }
 }

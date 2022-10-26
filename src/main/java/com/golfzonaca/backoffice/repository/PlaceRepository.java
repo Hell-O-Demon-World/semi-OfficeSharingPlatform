@@ -14,5 +14,7 @@ public interface PlaceRepository {
 
     void delete(Long id);
 
-    Optional<List<Place>> findAll(Long id);
+    Optional<Place> findById(Long id);
+
+    Optional<List<Place>> findAll(Long companyId);
 }

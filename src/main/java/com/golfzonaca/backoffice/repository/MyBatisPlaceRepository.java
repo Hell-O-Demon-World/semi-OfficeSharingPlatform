@@ -32,7 +32,12 @@ public class MyBatisPlaceRepository implements PlaceRepository {
     }
 
     @Override
-    public Optional<List<Place>> findAll(Long id) {
-        return placeMapper.findAll(id);
+    public Optional<Place> findById(Long id) {
+        return placeMapper.findById(id);
+    }
+
+    @Override
+    public Optional<List<Place>> findAll(Long companyId) {
+        return placeMapper.findAll(companyId);
     }
 }
