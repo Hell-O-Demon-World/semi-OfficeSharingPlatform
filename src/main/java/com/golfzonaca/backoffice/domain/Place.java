@@ -1,11 +1,10 @@
 package com.golfzonaca.backoffice.domain;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.json.JSONObject;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Map;
 
 @Data
 public class Place {
@@ -15,7 +14,9 @@ public class Place {
     private String name;
     private String description;
     private JSONObject placeOpen;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private LocalTime placeStartTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private LocalTime placeEndTime;
     private JSONObject placeAddInfo;
     private Long addressId; //우편번호

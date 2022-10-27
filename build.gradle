@@ -33,6 +33,9 @@ dependencies {
     implementation 'org.mariadb.jdbc:mariadb-java-client'
     //Json Object 추가
     implementation group: 'org.json', name: 'json', version: '20220924'
+    // datatype-jsr310 추가
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.13.4'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

@@ -41,11 +41,22 @@ public class PlaceController {
         return "addForm";
     }
 
+//    @PostMapping("/add")
+//    public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
+//        log.info("컨트롤러 호출");
+//        Place savedPlace = placeService.save(place);
+//        log.info("저장 완료");
+//        redirectAttributes.addAttribute("id", savedPlace.getId());
+//        redirectAttributes.addAttribute("status", true);
+//        return "redirect:/places/{id}";
+//    }
+
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
+    public String addPlace(@RequestBody Place place, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");
+        log.info("place = {}", place);
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/places/{id}";
