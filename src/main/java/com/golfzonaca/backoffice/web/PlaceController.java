@@ -59,7 +59,7 @@ public class PlaceController {
         log.info("place = {}", place);
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/places/{id}";
+        return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
     }
 
     @GetMapping("/{placeId}/edit")

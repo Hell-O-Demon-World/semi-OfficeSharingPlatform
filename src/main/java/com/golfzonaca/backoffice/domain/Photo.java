@@ -15,3 +15,4 @@ public class Photo {
     private String fileName;
     private String path;
 }
+ 
