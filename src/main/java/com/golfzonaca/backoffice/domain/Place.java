@@ -13,11 +13,13 @@ public class Place {
     private Long companyId; //업체식별번호
     private String name;
     private String description;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT)
     private JSONObject placeOpen;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private LocalTime placeStartTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private LocalTime placeEndTime;
+    @JsonFormat(shape = JsonFormat.Shape.BOOLEAN)
     private JSONObject placeAddInfo;
     private Long addressId; //우편번호
 
