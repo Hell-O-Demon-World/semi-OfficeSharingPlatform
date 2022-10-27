@@ -18,6 +18,8 @@ public class User {
     private String job;
     private String preferType;
 
+    private String authority;
+
     public User(String name, String mail, String pw, String phoneNumber, String job, String preferType) {
         this.name = name;
         this.mail = mail;

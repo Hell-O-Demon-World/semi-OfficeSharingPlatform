@@ -1,23 +1,16 @@
 package com.golfzonaca.officesharingplatform.config.auth;
 
-import com.golfzonaca.officesharingplatform.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -34,8 +27,8 @@ public class PrincipalDetails implements UserDetails, CredentialsContainer {
     private final boolean enabled;
     private final Set<GrantedAuthority> authorities;
 
-    public PrincipalDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this(username, password, true, true, true, true, (Set<GrantedAuthority>) authorities);
+    public PrincipalDetails(String username, String password, Set<GrantedAuthority> authorities) {
+        this(username, password, true, true, true, true, authorities);
     }
 
     @Override

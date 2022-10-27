@@ -1,21 +1,12 @@
-package com.golfzonaca.officesharingplatform.config.auth.token;
+package com.golfzonaca.officesharingplatform.config.auth.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.golfzonaca.officesharingplatform.config.auth.token.IdPwAuthenticationToken;
 import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,9 +14,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Slf4j
-public class MyCustomFilter extends AbstractAuthenticationProcessingFilter {
-    public MyCustomFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
+public class JsonIdPwAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
+    public JsonIdPwAuthenticationProcessingFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
         super(requiresAuthenticationRequestMatcher);
     }
 
@@ -41,9 +31,10 @@ public class MyCustomFilter extends AbstractAuthenticationProcessingFilter {
         String id = (String) parseJsonMap.get("id");
         String pw = (String) parseJsonMap.get("pw");
 
-        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(id, pw);
+        IdPwAuthenticationToken idPwAuthenticationToken = new IdPwAuthenticationToken(id, pw);
+        idPwAuthenticationToken.setDetails(super.authenticationDetailsSource.buildDetails(request));
 
-        return super.getAuthenticationManager().authenticate(authRequest);
+        return super.getAuthenticationManager().authenticate(idPwAuthenticationToken);
     }
 
     private Map<String, Object> parseJsonMap(HttpServletRequest request) throws IOException {
