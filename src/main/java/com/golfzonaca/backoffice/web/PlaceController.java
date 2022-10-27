@@ -50,9 +50,11 @@ public class PlaceController {
     @PostMapping("/add")
     public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
+        log.info("place.placeOpen={}", place.getPlaceOpen());
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");
         log.info("place = {}", place);
+        log.info("placeOpen={}", savedPlace.getPlaceOpen());
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException

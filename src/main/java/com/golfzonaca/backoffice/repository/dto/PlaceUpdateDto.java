@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +15,7 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private DaysType businessDays;
+    private String businessDays;
     private LocalTime placeOpenTime;
     private LocalTime placeCloseTime;
     private String addInformation;

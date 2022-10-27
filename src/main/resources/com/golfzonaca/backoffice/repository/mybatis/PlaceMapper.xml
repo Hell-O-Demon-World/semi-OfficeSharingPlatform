@@ -3,8 +3,7 @@
 <mapper namespace="com.golfzonaca.backoffice.repository.mybatis.PlaceMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into place (co_id, pl_name, pl_description, pl_opendays, pl_start, pl_end, pl_addinfo,
-                           address_id)
+        insert into place (co_id, pl_name, pl_description, pl_opendays, pl_start, pl_end, pl_addinfo, address_id)
         values (#{companyId}, #{name}, #{description}, #{placeOpen}, #{placeStartTime}, #{placeEndTime}, #{placeAddInfo}, #{addressId})
     </insert>
 

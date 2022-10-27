@@ -5,6 +5,7 @@ import com.golfzonaca.backoffice.domain.type.DaysType;
 import lombok.Data;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Data
 public class Place {
@@ -13,7 +14,7 @@ public class Place {
     private Long companyId; //업체식별번호
     private String name;
     private String description;
-    private DaysType placeOpen;
+    private String placeOpen;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private LocalTime placeStartTime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
@@ -24,7 +25,7 @@ public class Place {
     public Place() {
     }
 
-    public Place(Long companyId, String name, String description, DaysType placeOpen, LocalTime placeStartTime, LocalTime placeEndTime, String placeAddInfo, Long addressId) {
+    public Place(Long companyId, String name, String description, String placeOpen, LocalTime placeStartTime, LocalTime placeEndTime, String placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.name = name;
         this.description = description;
