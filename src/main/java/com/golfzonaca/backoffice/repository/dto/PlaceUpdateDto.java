@@ -14,9 +14,9 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private Map<String, Boolean> businessDays;
+    private JsonObject businessDays;
     private LocalDateTime placeOpenTime;
     private LocalDateTime placeCloseTime;
-    private Map<String, Boolean> addInformation;
+    private JsonObject addInformation;
     private Long addressId; //확장이전 issue..
 }
