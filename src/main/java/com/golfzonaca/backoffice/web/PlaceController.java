@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.web;
 
 import com.golfzonaca.backoffice.domain.Place;
+import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.PlaceService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,11 @@ import java.util.Optional;
 public class PlaceController {
 
     private final PlaceService placeService;
+
+    @ModelAttribute("daysTypes")
+    public DaysType[] daysTypes() {
+        return DaysType.values();
+    }
 
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
@@ -41,18 +47,8 @@ public class PlaceController {
         return "addForm";
     }
 
-//    @PostMapping("/add")
-//    public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
-//        log.info("컨트롤러 호출");
-//        Place savedPlace = placeService.save(place);
-//        log.info("저장 완료");
-//        redirectAttributes.addAttribute("id", savedPlace.getId());
-//        redirectAttributes.addAttribute("status", true);
-//        return "redirect:/places/{id}";
-//    }
-
     @PostMapping("/add")
-    public String addPlace(@RequestBody Place place, RedirectAttributes redirectAttributes) {
+    public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");

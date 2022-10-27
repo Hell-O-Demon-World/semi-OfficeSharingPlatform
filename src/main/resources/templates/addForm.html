@@ -2,8 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link th:href="@{/css/bootstrap.min.css}"
-          href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <style>
         .container {
             max-width: 560px;
@@ -21,21 +20,40 @@
     <form action="place.html" th:action th:object="${place}" method="post">
         <div>
             <label for="placeName" th:text="#{label.place.placeName}">사무공간명</label>
-            <input type="text" id="placeName" th:field="*{name}" name="placeName" class="form-control" placeholder="이름을 입력하세요">
+            <input type="text" id="placeName" th:field="*{name}" name="placeName" class="form-control"
+                   placeholder="이름을 입력하세요">
         </div>
         <!-- multi checkbox -->
         <div>
             <div>영업일</div>
-            <div th:each="day : ${placeOpen}" class="form-check form-check-inline">
-                <input type="checkbox" th:field="*{placeOpen}" th:value="${day.key}" class="form-check-input">
-                <label th:for="${#ids.prev('placeOpen')}"
-                       th:text="${day.value}" class="form-check-label">일요일</label>
+            <div th:each="type : ${daysTypes}" class="form-check form-check-inline">
+                <input type="checkbox" th:field="*{placeOpen}" th:value="${type.name()}" class="form-check-input">
+                <label th:for="${#ids.prev('placeType')}" th:text="${type.description}" class="form-check-label">
+                    월요일
+                </label>
             </div>
         </div>
         <div>
             <label for="description">사무공간 설명</label>
             <input type="text" id="description" name="description" class="form-control" placeholder="공간 설명을 입력하세요">
         </div>
+        <div>
+            <label for="openTime">오픈 시간</label>
+            <input type="time" id="openTime" name="openTime" class="form-control">
+            <label for="openTime">종료 시간</label>
+            <input type="time" id="closeTime" name="closeTime" class="form-control">
+        </div>
+
+        <!-- multi checkbox -->
+        <div>
+            <div>공간 부가 정보</div>
+            <div th:each="info : ${placeAddInfo}" class="form-check form-check-inline">
+                <input type="checkbox" th:field="*{placeAddInfo}" th:value="${info.key}" class="form-check-input">
+                <label th:for="${#ids.prev('placeAddInfo')}"
+                       th:text="${info.value}" class="form-check-label">Wifi</label>
+            </div>
+        </div>
+
 
         <hr class="my-4">
 
@@ -47,7 +65,8 @@
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='places.html'"
                         th:onclick="|location.href='@{/places}'|"
-                        type="button">취소</button>
+                        type="button">취소
+                </button>
             </div>
         </div>
 

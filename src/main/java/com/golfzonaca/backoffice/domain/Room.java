@@ -1,3 +1,4 @@
+/*
 package com.golfzonaca.backoffice.domain;
 
 import lombok.NoArgsConstructor;
@@ -30,4 +31,4 @@ public class Room {
     public void setTotalNumber(int totalNumber) {
         this.totalNumber = totalNumber;
     }
-}
+}*/

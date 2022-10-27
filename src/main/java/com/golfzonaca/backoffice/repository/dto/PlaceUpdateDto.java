@@ -1,5 +1,6 @@
 package com.golfzonaca.backoffice.repository.dto;
 
+import com.golfzonaca.backoffice.domain.type.DaysType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private String businessDays;
+    private DaysType businessDays;
     private LocalTime placeOpenTime;
     private LocalTime placeCloseTime;
     private String addInformation;
