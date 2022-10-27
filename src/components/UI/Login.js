@@ -54,7 +54,7 @@ const Login = (props) => {
         <div className={classes.inputInfo}>
           <div className={classes.inputElem}>
             <input
-              type="text"
+              type="email"
               placeholder="이메일"
               className={emailClass}
               ref={emailInput}

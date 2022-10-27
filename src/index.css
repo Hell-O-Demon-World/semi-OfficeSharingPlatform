@@ -28,6 +28,7 @@ body {
   position: absolute;
   top: 0px;
   cursor: pointer;
+  line-height: 100%;
 }
 .arrow {
   background: #111;
@@ -40,4 +41,6 @@ body {
   top: 28px;
   left: 54px;
   transform: rotate(135deg);
+}
+.wrap:hover {
 }

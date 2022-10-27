@@ -1,10 +1,10 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const AddMarker = () => {
-  const officeList = useSelector((state) => state.officeList);
-  console.log(officeList);
-  return <div>1</div>;
+const AddMarker = (props) => {
+  const history = useHistory();
+  const showDetail = () => {
+    history.push("/main/detail");
+  };
 };
 
 export default AddMarker;

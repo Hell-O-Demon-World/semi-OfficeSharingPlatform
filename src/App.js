@@ -1,19 +1,33 @@
-import MainHeader from "./components/Layout/MainHeader";
-import Wrapper from "./components/Layout/Wrapper";
-import Map from "./components/Maps/Map";
-import OfficeList from "./components/officeList/OfficeList";
-import { Provider } from "react-redux";
-import store from "./store";
-function App() {
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+
+import Main from "./pages/Main";
+import NotFound from "./pages/NotFound";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+const App = () => {
   return (
-    <Provider store={store}>
-      <MainHeader />
-      <Wrapper>
-        <OfficeList />
-        <Map />
-      </Wrapper>
-    </Provider>
+    <Switch>
+      <Route path="/" exact>
+        <Redirect to="/main" />
+      </Route>
+      <Route path="/main">
+        <Main />
+      </Route>
+      <Route path="/main">
+        <Main />
+      </Route>
+      <Route path="/members/signin">
+        <SignIn />
+      </Route>
+      <Route path="/members/signup">
+        <SignUp />
+      </Route>
+      <Route path="*" exact>
+        <NotFound />
+      </Route>
+    </Switch>
   );
-}
+};
 
 export default App;

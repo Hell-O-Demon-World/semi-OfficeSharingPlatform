@@ -6,31 +6,46 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import classes from "./Map.module.css";
 const { kakao } = window;
 
 const Map = () => {
-  const officeList = useSelector((state) => state.officeList);
-  officeList.map((elem) => {
-    const iwContent = `<div class = "wrap">
-    <div class = "customOverlay">${elem.name}</div>
-    <div class = "arrow"></div>
-  </div>`;
-    var geocoder = new kakao.maps.services.Geocoder();
-    geocoder.addressSearch(elem.address, (result, status) => {
-      let coords;
-      if (status === kakao.maps.services.Status.OK) {
-        coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-      }
-      return new kakao.maps.CustomOverlay({
-        content: iwContent,
-        map: map,
-        position: coords,
-      });
-    });
-  });
   const [map, setMap] = useState();
+  const history = useHistory();
+  const officeList = useSelector((state) => state.officeList);
+  const showDetailHandler = (e) => {
+    history.push("/main/detail");
+    e.target.style.backgroundColor = "rgb(91, 135, 218)";
+    e.target.nextSibling.style.backgroundColor = "rgb(91, 135, 218)";
+  };
+  officeList.map((elem) => {
+    let content = document.createElement("div");
+    content.classList.add("wrap");
+    let customOverlay = document.createElement("div");
+    customOverlay.classList.add("customOverlay");
+    customOverlay.textContent = elem.name;
+    let arrow = document.createElement("div");
+    arrow.classList.add("arrow");
+    content.appendChild(customOverlay);
+    content.appendChild(arrow);
+    customOverlay.onclick = showDetailHandler;
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    geocoder.addressSearch(elem.address, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+        new kakao.maps.CustomOverlay({
+          content: content,
+          map: map,
+          position: coords,
+        });
+      }
+    });
+    return 0;
+  });
+
   const zoomIn = () => {
     map.setLevel(map.getLevel() - 1);
   };
@@ -39,7 +54,7 @@ const Map = () => {
   };
 
   const getCurrentLocation = () => {
-    if (navigator.geolocation) {
+    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude,
           lng = position.coords.longitude;

@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AddOfficeTest from "../officeList/AddOfficeTest";
 import Card from "../UI/Card";
 import Login from "../UI/Login";
 import classes from "./Modal.module.css";
@@ -12,7 +11,6 @@ const ModalOverlay = (props) => {
   return (
     <Card className={classes.modal}>
       <Login onConfirm={props.onConfirm} />
-      <AddOfficeTest />
     </Card>
   );
 };
