@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.domain;
 
 import lombok.Data;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -12,16 +13,16 @@ public class Place {
     private Long companyId; //업체식별번호
     private String name;
     private String description;
-    private Map<String, Boolean> placeOpen;
+    private JSONObject placeOpen;
     private LocalDateTime placeStartTime;
     private LocalDateTime placeEndTime;
-    private Map<String, Boolean> placeAddInfo;
+    private JSONObject placeAddInfo;
     private Long addressId; //우편번호
 
     public Place() {
     }
 
-    public Place(Long companyId, String name, String description, Map<String, Boolean> placeOpen, LocalDateTime placeStartTime, LocalDateTime placeEndTime, Map<String, Boolean> placeAddInfo, Long addressId) {
+    public Place(Long companyId, String name, String description, JSONObject placeOpen, LocalDateTime placeStartTime, LocalDateTime placeEndTime, JSONObject placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.name = name;
         this.description = description;

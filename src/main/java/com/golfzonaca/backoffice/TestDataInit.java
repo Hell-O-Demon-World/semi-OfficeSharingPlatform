@@ -3,6 +3,7 @@ package com.golfzonaca.backoffice;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.repository.PlaceRepository;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,11 @@ public class TestDataInit {
 
     @PostConstruct
     public void init() {
-        placeRepository.save(new Place(1, "placeA", "place A located Pangyo", ));
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("mon", true);
+
+
+        placeRepository.save(new Place(1, "placeA", "place A located Pangyo", jsonObject, ));
         placeRepository.save(new Place());
     }
 }

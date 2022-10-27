@@ -3,9 +3,9 @@ package com.golfzonaca.backoffice.repository.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -14,9 +14,9 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private JsonObject businessDays;
+    private JSONObject businessDays;
     private LocalDateTime placeOpenTime;
     private LocalDateTime placeCloseTime;
-    private JsonObject addInformation;
+    private JSONObject addInformation;
     private Long addressId; //확장이전 issue..
 }
