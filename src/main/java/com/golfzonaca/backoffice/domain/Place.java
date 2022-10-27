@@ -4,6 +4,7 @@ import lombok.Data;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 
 @Data
@@ -14,15 +15,15 @@ public class Place {
     private String name;
     private String description;
     private JSONObject placeOpen;
-    private LocalDateTime placeStartTime;
-    private LocalDateTime placeEndTime;
+    private LocalTime placeStartTime;
+    private LocalTime placeEndTime;
     private JSONObject placeAddInfo;
     private Long addressId; //우편번호
 
     public Place() {
     }
 
-    public Place(Long companyId, String name, String description, JSONObject placeOpen, LocalDateTime placeStartTime, LocalDateTime placeEndTime, JSONObject placeAddInfo, Long addressId) {
+    public Place(Long companyId, String name, String description, JSONObject placeOpen, LocalTime placeStartTime, LocalTime placeEndTime, JSONObject placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.name = name;
         this.description = description;
