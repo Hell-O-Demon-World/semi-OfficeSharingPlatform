@@ -16,8 +16,8 @@ public class PlaceUpdateDto {
     private String placeName;
     private String placeDescription;
     private String businessDays;
-    private LocalTime placeOpenTime;
-    private LocalTime placeCloseTime;
+    private String placeOpenTime;
+    private String placeCloseTime;
     private String addInformation;
     private Long addressId; //확장이전 issue..
 }

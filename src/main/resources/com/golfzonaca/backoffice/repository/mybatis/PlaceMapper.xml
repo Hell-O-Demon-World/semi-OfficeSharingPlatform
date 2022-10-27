@@ -25,4 +25,8 @@
     <select id="findAll" resultType="Place">
         select * from Place where co_id =#{companyId}
     </select>
+
+    <select id="findById" resultType="Place">
+        select * from Place where id =#{Id}
+    </select>
 </mapper>

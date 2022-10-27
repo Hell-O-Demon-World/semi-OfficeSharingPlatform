@@ -36,7 +36,9 @@ public class PlaceController {
 
     @GetMapping("/{placeId}")
     public String place(@PathVariable long placeId, Model model) {
+        log.info("place form 컨트롤러 호출");
         Place place = placeService.findById(placeId).get();
+        log.info("place={}", place);
         model.addAttribute("place", place);
         return "place";
     }
@@ -62,7 +64,9 @@ public class PlaceController {
 
     @GetMapping("/{placeId}/edit")
     public String editForm(@PathVariable Long placeId, Model model) {
+        log.info("editForm 컨트롤러 호출");
         Place place = placeService.findById(placeId).get();
+        log.info("place={}", place);
         model.addAttribute("place", place);
         return "editForm";
     }
