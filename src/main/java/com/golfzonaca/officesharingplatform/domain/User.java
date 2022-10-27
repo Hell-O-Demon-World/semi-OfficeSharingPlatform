@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Data
@@ -16,9 +17,6 @@ public class User {
     private String phoneNumber;
     private String job;
     private String preferType;
-
-    private String role; // 권한
-
 
     public User(String name, String mail, String pw, String phoneNumber, String job, String preferType) {
         this.name = name;

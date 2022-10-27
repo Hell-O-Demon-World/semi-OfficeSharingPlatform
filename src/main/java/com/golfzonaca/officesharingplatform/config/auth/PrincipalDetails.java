@@ -1,43 +1,51 @@
 package com.golfzonaca.officesharingplatform.config.auth;
 
 import com.golfzonaca.officesharingplatform.domain.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
-public class PrincipalDetails implements UserDetails {
-    private User user;
+@AllArgsConstructor
+@Builder
+public class PrincipalDetails implements UserDetails, CredentialsContainer {
 
-    public PrincipalDetails(User user) {
-        this.user = user;
-    }
-    //권한 한개가 아닐 수 있음 (3개 이상의 권한) 따라서 컬렉션으로 담는다.
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> collector = new ArrayList<>();
-        //        collector.add(new GrantedAuthority() {
-//            @Override
-//            public String getAuthority() {
-//                return user.getRole();
-//            }
-//        });
-        // lambda식으로 함수 넣는 작업.
-        collector.add(() -> { return user.getRole();});
-        return collector;
+    private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+    private static final Log logger = LogFactory.getLog(PrincipalDetails.class);
+    private final String username;
+    private String password;
+    private final boolean accountNonExpired;
+    private final boolean acccountNonLocked;
+    private final boolean creditionalNonExpired;
+    private final boolean enabled;
+    private final Set<GrantedAuthority> authorities;
+
+    public PrincipalDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
+        this(username, password, true, true, true, true, (Set<GrantedAuthority>) authorities);
     }
 
     @Override
     public String getPassword() {
-        return user.getPw();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getMail();
+        return username;
     }
 
     @Override
@@ -58,5 +66,10 @@ public class PrincipalDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true; //활성화 되어 있음
+    }
+
+    @Override
+    public void eraseCredentials() {
+
     }
 }

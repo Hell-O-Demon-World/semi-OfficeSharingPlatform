@@ -3,10 +3,16 @@ package com.golfzonaca.officesharingplatform.config.auth.token;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.SecretKey;
+import javax.validation.Valid;
+import java.security.Key;
 import java.util.Date;
 
 @Slf4j
@@ -14,6 +20,8 @@ import java.util.Date;
 public class JwtUtil {
     // 설정파일로 빼서 환경변수로 사용하는 것을 권장
     private final String SECRET = "secret";
+    @Value("spring.jwt.secret")
+    private String secretKey;
 
     /**
      * 토큰 생성
@@ -29,7 +37,7 @@ public class JwtUtil {
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 1시간
-                .signWith(SignatureAlgorithm.HS256, SECRET)
+                .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
@@ -48,7 +56,7 @@ public class JwtUtil {
     private Claims getAllClaims(String token) {
         log.info("getAllClaims token = {}", token);
         return Jwts.parser()
-                .setSigningKey(SECRET)
+                .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody();
     }
