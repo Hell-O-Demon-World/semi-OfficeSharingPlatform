@@ -24,10 +24,14 @@
   color: #fff;
   cursor: pointer;
 }
-.header ul li:nth-child(2) {
+.header .line {
   padding: 0 20px;
 }
 .link {
   text-decoration: none;
   color: #fff;
+}
+.headerLink {
+  color: #fff;
+  text-decoration: none;
 }

@@ -16,15 +16,23 @@ const MainHeader = () => {
   return (
     <Fragment>
       <header className={classes.header}>
-        <h1>
-          <FontAwesomeIcon icon={faBorderTopLeft} /> Office Sharing Platform
-        </h1>
+        <Link to="/main" className={classes.headerLink}>
+          <h1>
+            <FontAwesomeIcon icon={faBorderTopLeft} /> Office Sharing Platform
+          </h1>
+        </Link>
         <ul>
           <li onClick={onClickLogin}>SignIn</li>
-          <li>|</li>
+          <li className={classes.line}>|</li>
           <li>
-            <Link to="/members/signup" className={classes.link}>
+            <Link to="/auth/signup" className={classes.link}>
               SignUp
+            </Link>
+          </li>
+          <li className={classes.line}>|</li>
+          <li>
+            <Link to="/user" className={classes.link}>
+              MyPage
             </Link>
           </li>
         </ul>

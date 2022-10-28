@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 
 import Main from "./pages/Main";
+import MyPage from "./pages/MyPage";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -14,8 +15,8 @@ const App = () => {
       <Route path="/main">
         <Main />
       </Route>
-      <Route path="/main">
-        <Main />
+      <Route path="/user">
+        <MyPage />
       </Route>
       <Route path="/auth/signin">
         <SignIn />
