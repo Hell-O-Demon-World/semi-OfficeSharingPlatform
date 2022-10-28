@@ -46,14 +46,10 @@ public class PlaceController {
     }
 
     @GetMapping("/{placeId}")
-    public String place(@PathVariable long placeId, Model model) {
-        log.info("place form 컨트롤러 호출");
+    public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
-        log.info("place={}", place);
         PlaceViewForm placeViewForm = transformType.stringToList(place);
         model.addAttribute("place", placeViewForm);
-        log.info("model={}", model);
-        log.info("openDays={}", placeViewForm.getPlaceOpenDays());
         return "place";
     }
 
@@ -87,7 +83,7 @@ public class PlaceController {
         return "redirect:/places/{placeId}";
     }
 
-    @PostMapping("/{placeId}/delete")
+    @GetMapping("/{placeId}/delete")
     public String delete(@PathVariable Long placeId) {
         placeService.delete(placeId);
         return "redirect:/places";
