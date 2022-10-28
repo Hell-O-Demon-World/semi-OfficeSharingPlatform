@@ -47,10 +47,10 @@
         <!-- multi checkbox -->
         <div>
             <div>공간 부가 정보</div>
-            <div th:each="info : ${placeAddInfo}" class="form-check form-check-inline">
-                <input type="checkbox" th:field="*{placeAddInfo}" th:value="${info.key}" class="form-check-input">
+            <div th:each="info : ${AddInfoType}" class="form-check form-check-inline">
+                <input type="checkbox" th:field="*{placeAddInfo}" th:value="${info.name()}" class="form-check-input">
                 <label th:for="${#ids.prev('placeAddInfo')}"
-                       th:text="${info.value}" class="form-check-label">Wifi</label>
+                       th:text="${info.description}" class="form-check-label">Wifi</label>
             </div>
         </div>
 

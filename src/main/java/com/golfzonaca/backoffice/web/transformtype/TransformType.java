@@ -2,7 +2,6 @@ package com.golfzonaca.backoffice.web.transformtype;
 
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.web.transformtype.form.PlaceViewForm;
-import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class TransformType {
         place.setPlaceOpenDays(placeViewForm.getPlaceOpenDays().toString().replace("[", "").replace("]",""));
         place.setPlaceStart(placeViewForm.getPlaceStart());
         place.setPlaceEnd(placeViewForm.getPlaceEnd());
-//        place.setPlaceAddInfo(placeViewForm.getPlaceAddInfo().toString());
+        place.setPlaceAddInfo(placeViewForm.getPlaceAddInfo().toString().replace("[","").replace("]",""));
 //        place.setAddressId(place.getAddressId());
         return place;
     }
@@ -33,7 +32,7 @@ public class TransformType {
         placeViewForm.setPlaceOpenDays(new ArrayList<>(Arrays.asList(place.getPlaceOpenDays().split(", "))));
         placeViewForm.setPlaceStart(place.getPlaceStart());
         placeViewForm.setPlaceEnd(place.getPlaceEnd());
-//        placeViewForm.setPlaceAddInfo(List.of(place.getPlaceAddInfo().split(",")));
+        placeViewForm.setPlaceAddInfo(List.of(place.getPlaceAddInfo().split(", ")));
         return placeViewForm;
     }
 }

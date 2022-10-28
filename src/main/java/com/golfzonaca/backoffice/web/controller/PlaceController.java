@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.web.controller;
 
 import com.golfzonaca.backoffice.domain.Place;
+import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.PlaceService;
@@ -32,6 +33,11 @@ public class PlaceController {
         return DaysType.values();
     }
 
+    @ModelAttribute("AddInfoType")
+    public AddInfoType[] addInfoType() {
+        return AddInfoType.values();
+    }
+
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
         Optional<List<Place>> places = placeService.findAll(companyId);
@@ -59,14 +65,8 @@ public class PlaceController {
 
     @PostMapping("/add")
     public String addPlace(@ModelAttribute PlaceViewForm placeViewForm, RedirectAttributes redirectAttributes) {
-        log.info("컨트롤러 호출");
-        log.info("place={}", placeViewForm);
-        log.info("place.placeOpen={}", placeViewForm.getPlaceOpenDays());
         Place place = transformType.listToString(placeViewForm);
         Place savedPlace = placeService.save(place);
-        log.info("저장 완료");
-        log.info("place = {}", placeViewForm);
-        log.info("placeOpen={}", savedPlace.getPlaceOpenDays());
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
