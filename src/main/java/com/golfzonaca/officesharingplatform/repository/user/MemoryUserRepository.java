@@ -17,8 +17,10 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
+
         user.setId(sequence++);
         store.put(user.getId(), user);
+
         return user;
     }
 
@@ -29,21 +31,41 @@ public class MemoryUserRepository implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
+
+        User findUser = new User("","","","","","");
         Iterator<Long> keys = store.keySet().iterator();
 
         while( keys.hasNext() ){
             Long key = keys.next();
-            User user = store.get(key);
-            if (user.getMail().equals(email)){
-                return user;
+            User storedUser = store.get(key);
+            if (storedUser.getMail().equals(email)){
+                return storedUser;
             }
         }
-        return null;
+
+        return findUser;
+    }
+
+    public int countContainByEmail(String email) {
+
+        Iterator<Long> keys = store.keySet().iterator();
+        int cnt = 0;
+        while( keys.hasNext() ){
+            Long key = keys.next();
+            User storedUser = store.get(key);
+            if (storedUser.getMail().equals(email)){
+                cnt++;
+            }
+        }
+
+        return cnt;
     }
 
     @Override
     public User update(long id, User updateParam) {
+
         User findUser = findById(id);
+
         findUser.setName(updateParam.getName());
         findUser.setMail(updateParam.getMail());
         findUser.setPw(updateParam.getPw());
@@ -51,6 +73,7 @@ public class MemoryUserRepository implements UserRepository {
         findUser.setPhoneNumber(updateParam.getPhoneNumber());
         findUser.setJob(updateParam.getJob());
         findUser.setPreferType(updateParam.getPreferType());
+
         return findUser;
     }
 

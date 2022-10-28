@@ -16,7 +16,6 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 public class PrincipalDetails implements UserDetails, CredentialsContainer {
-
     private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
     private static final Log logger = LogFactory.getLog(PrincipalDetails.class);
     private final String username;

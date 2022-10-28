@@ -15,6 +15,7 @@ public interface UserRepository {
 
     User findByEmail(String email);
 
+    int countContainByEmail(String email);
     User update(long id, User user);
 
     List<User> findAll();

@@ -16,7 +16,6 @@ public class JwtManager {
     private static final Gson gson = new Gson();
 
     public static Jwt createJwt(String id){
-
         return JwtHelper.encode(createPayload(id), macSigner);
     }
 
@@ -37,13 +36,13 @@ public class JwtManager {
 
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement iatJson = jsonObject.get("iat");
-
         long iat = iatJson.getAsLong();
         LocalDateTime iatDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(iat), TimeZone.getDefault().toZoneId());
 
         return iatDateTime.plusMinutes(30).isAfter(LocalDateTime.now());
     }
     public static String getInfo(String jwt, String attr){
+
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement jsonElement = jsonObject.get(attr);
 
@@ -51,6 +50,7 @@ public class JwtManager {
     }
 
     private static JsonObject getJsonObject(String jwt) {
+
         Jwt decodedJwt = JwtHelper.decodeAndVerify(jwt, macSigner);
 
         String claims = decodedJwt.getClaims();

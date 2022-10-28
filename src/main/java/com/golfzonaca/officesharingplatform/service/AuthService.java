@@ -24,30 +24,32 @@ public class AuthService {
 
     private final PrincipalDetailsRepository principalDetailsRepository;
 
-    //    @Transactional
-    public User join(User user) {
-//        검증
-        if (userRepository.findByEmail(user.getMail()) != null) {
-            return null;
+    public boolean emailCheck(String email) {
+        return userRepository.countContainByEmail(email) == 0;
+    }
+
+    public Boolean join(User user) {
+        boolean isJoin = true;
+
+        if (!emailCheck(user.getMail())) {
+            isJoin = false;
         }
 
         String rawPassword = user.getPw();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-        user.setPw(encPassword);
-
         Mileage mileage = mileageService.join();
-        user.setMileageId(mileage.getId());
-
-        user.setAuthority("ROLE_USER");
-
-        User userEntity = userRepository.save(user);
-
         Set<GrantedAuthority> authorities = new HashSet<>();
+
+        user.setPw(encPassword);
+        user.setMileageId(mileage.getId());
+        user.setAuthority("ROLE_USER");
+        User userEntity = userRepository.save(user);
         authorities.add(new SimpleGrantedAuthority(user.getAuthority()));
+
         PrincipalDetails principalDetails = new PrincipalDetails(userEntity.getMail(), userEntity.getPw(), authorities);
         principalDetailsRepository.save(user.getId(), principalDetails);
 
-        return userEntity;
+        return isJoin;
     }
 
 }

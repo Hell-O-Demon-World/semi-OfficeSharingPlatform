@@ -9,7 +9,9 @@ public class PrincipalDetailsRepository {
     private static final ConcurrentHashMap<Long, PrincipalDetails> store = new ConcurrentHashMap<>();
 
     public PrincipalDetails save(Long id, PrincipalDetails principalDetails) {
+
         store.put(id, principalDetails);
+
         return principalDetails;
     }
 }

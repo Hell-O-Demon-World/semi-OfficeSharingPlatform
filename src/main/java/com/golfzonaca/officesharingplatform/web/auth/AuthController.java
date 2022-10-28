@@ -6,6 +6,7 @@ import com.golfzonaca.officesharingplatform.web.auth.form.SignUpSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,21 +23,28 @@ public class AuthController {
     @ResponseBody
     @GetMapping("/mypage")
     public String success() {
-            return "success";
-        }
+        return "success";
+    }
+
     @ResponseBody
     @PostMapping("/signup")
     public ConcurrentHashMap<String, Object> signup(@Valid @RequestBody SignUpSaveForm signUpSaveForm, BindingResult bindingResult) {
         ConcurrentHashMap<String, Object> errorMap = new ConcurrentHashMap<>();
 
-        User user = signUpSaveForm.toEntity();
-        User userEntity = authService.join(user);
-        //        이메일 중복 검증
-        if (userEntity == null) {
-            errorMap.put("emailError", "중복된 이메일 입니다.");
-            log.error("errorMap={}",errorMap);
+        if (bindingResult.hasErrors()) {
+            for (ObjectError objectError : bindingResult.getAllErrors()) {
+                errorMap.put(objectError.getCode() + "ValidationError", objectError.getDefaultMessage());
+            }
             return errorMap;
         }
+
+        User user = signUpSaveForm.toEntity();
+
+        if (!authService.join(user)) {
+            errorMap.put("EmailError", "중복된 이메일 입니다.");
+            return errorMap;
+        }
+
         return errorMap;
     }
 }
