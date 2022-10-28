@@ -1,5 +1,6 @@
 package com.golfzonaca.backoffice.repository.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,9 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private String businessDays;
-    private String placeOpenTime;
-    private String placeCloseTime;
-    private String addInformation;
+    private String placeOpenDays;
+    private String placeStart;
+    private String placeEnd;
+    private String placeAddInfo;
     private Long addressId; //확장이전 issue..
 }

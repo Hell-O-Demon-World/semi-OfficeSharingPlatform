@@ -26,12 +26,12 @@ public class MemoryPlaceRepository implements PlaceRepository {
     @Override
     public void update(Long id, PlaceUpdateDto updateParam) {
         Place findPlace = findById(id).orElseThrow();
-        findPlace.setName(updateParam.getPlaceName());
-        findPlace.setDescription(updateParam.getPlaceDescription());
-        findPlace.setPlaceOpen(updateParam.getBusinessDays());
-        findPlace.setPlaceStartTime(updateParam.getPlaceOpenTime());
-        findPlace.setPlaceEndTime(updateParam.getPlaceCloseTime());
-        findPlace.setPlaceAddInfo(updateParam.getAddInformation());
+        findPlace.setPlaceName(updateParam.getPlaceName());
+        findPlace.setPlaceDescription(updateParam.getPlaceDescription());
+        findPlace.setPlaceOpenDays(updateParam.getPlaceOpenDays());
+        findPlace.setPlaceStart(updateParam.getPlaceStart());
+        findPlace.setPlaceEnd(updateParam.getPlaceEnd());
+        findPlace.setPlaceAddInfo(updateParam.getPlaceAddInfo());
         findPlace.setAddressId(updateParam.getAddressId());
     }
 

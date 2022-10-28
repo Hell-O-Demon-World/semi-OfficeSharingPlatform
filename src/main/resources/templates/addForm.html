@@ -20,15 +20,15 @@
     <form action="place.html" th:action th:object="${place}" method="post">
         <div>
             <label for="placeName" th:text="#{label.place.placeName}">사무공간명</label>
-            <input type="text" id="placeName" th:field="*{name}" name="placeName" class="form-control"
+            <input type="text" id="placeName" th:field="*{placeName}" name="placeName" class="form-control"
                    placeholder="이름을 입력하세요">
         </div>
         <!-- multi checkbox -->
         <div>
             <div>영업일</div>
             <div th:each="type : ${daysTypes}" class="form-check form-check-inline">
-                <input type="checkbox" th:field="*{placeOpen}" th:value="${type.name()}" class="form-check-input">
-                <label th:for="${#ids.prev('placeOpen')}" th:text="${type.description}" class="form-check-label">
+                <input type="checkbox" th:field="*{placeOpenDays}" th:value="${type.name()}" class="form-check-input">
+                <label th:for="${#ids.prev('placeOpenDays')}" th:text="${type.description}" class="form-check-label">
                     월요일
                 </label>
             </div>
@@ -47,7 +47,7 @@
         <!-- multi checkbox -->
         <div>
             <div>공간 부가 정보</div>
-            <div th:each="info : ${placeAddInfo}" class="form-check form-check-inline">
+            <div th:each="info : ${placeAddinFO}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="*{placeAddInfo}" th:value="${info.key}" class="form-check-input">
                 <label th:for="${#ids.prev('placeAddInfo')}"
                        th:text="${info.value}" class="form-check-label">Wifi</label>
