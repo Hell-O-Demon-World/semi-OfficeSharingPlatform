@@ -1,9 +1,11 @@
-package com.golfzonaca.backoffice.web;
+package com.golfzonaca.backoffice.web.controller;
 
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.PlaceService;
+import com.golfzonaca.backoffice.web.transformtype.TransformType;
+import com.golfzonaca.backoffice.web.transformtype.form.PlaceViewForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -23,27 +25,12 @@ import java.util.Optional;
 public class PlaceController {
 
     private final PlaceService placeService;
+    private final TransformType transformType;
 
     @ModelAttribute("DaysType")
     public DaysType[] daysType() {
         return DaysType.values();
     }
-
-/*
-    @ModelAttribute("DaysType")
-    public Map<String, String> daysType() {
-        Map<String, String> daysType = new LinkedHashMap<>();
-        daysType.put("Mon","월요일");
-        daysType.put("Tue","화요일");
-        daysType.put("Wed","수요일");
-        daysType.put("Thu","목요일");
-        daysType.put("Fri","금요일");
-        daysType.put("Sat","토요일");
-        daysType.put("Sun","일요일");
-        return daysType;
-    }
-*/
-
 
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
@@ -57,7 +44,9 @@ public class PlaceController {
         log.info("place form 컨트롤러 호출");
         Place place = placeService.findById(placeId).get();
         log.info("place={}", place);
-        model.addAttribute("place", place);
+        PlaceViewForm placeViewForm = transformType.stringToList(place);
+        model.addAttribute("place", placeViewForm);
+        log.info("model={}", model);
         return "place";
     }
 
@@ -68,13 +57,14 @@ public class PlaceController {
     }
 
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
+    public String addPlace(@ModelAttribute PlaceViewForm placeViewForm, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
-        log.info("place={}", place);
-        log.info("place.placeOpen={}", place.getPlaceOpenDays());
+        log.info("place={}", placeViewForm);
+        log.info("place.placeOpen={}", placeViewForm.getPlaceOpenDays());
+        Place place = transformType.listToString(placeViewForm);
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");
-        log.info("place = {}", place);
+        log.info("place = {}", placeViewForm);
         log.info("placeOpen={}", savedPlace.getPlaceOpenDays());
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
