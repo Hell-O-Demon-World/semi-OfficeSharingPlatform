@@ -42,7 +42,7 @@
         <div>영업일</div>
         <div th:each="type : ${DaysType}" class="form-check form-check-inline">
             <input type="checkbox" th:field="${place.placeOpenDays}" th:value="${type.name()}" class="form-check-input" disabled>
-            <label th:for="${#ids.prev('placeOpenDays')}" th:text="${type.description}" class="form-check-label">서울</label>
+            <label th:for="${#ids.prev('placeOpenDays')}" th:text="${type.description}" class="form-check-label">월요일</label>
         </div>
     </div>
     <div>
@@ -51,17 +51,17 @@
     </div>
     <div>
         <label for="endTime">종료 시간</label>
-        <input type="text" id="endTime" name=endTime class="form-control" value="22:00" th:value="${place.placeEnd}" readonly disabled="true">
+        <input type="time" id="endTime" name=endTime class="form-control" value="22:00" th:value="${place.placeEnd}" readonly disabled="true">
     </div>
 
 
     <!-- multi checkbox -->
     <div>
         <div>부가 정보</div>
-        <div th:each="region : ${AddInfoType}" class="form-check form-check-inline">
-            <input type="checkbox" th:field="${item.regions}" th:value="${region.key}" class="form-check-input" disabled>
-            <label th:for="${#ids.prev('regions')}"
-                   th:text="${region.value}" class="form-check-label">서울</label>
+        <div th:each="type : ${AddInfoType}" class="form-check form-check-inline">
+            <input type="checkbox" th:field="${place.placeAddInfo}" th:value="${type.name()}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('placeAddInfo')}"
+                   th:text="${type.description}" class="form-check-label">와이파이</label>
         </div>
     </div>
 
