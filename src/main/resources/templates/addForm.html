@@ -26,7 +26,7 @@
         <!-- multi checkbox -->
         <div>
             <div>영업일</div>
-            <div th:each="type : ${daysTypes}" class="form-check form-check-inline">
+            <div th:each="type : ${DaysType}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="*{placeOpenDays}" th:value="${type.name()}" class="form-check-input">
                 <label th:for="${#ids.prev('placeOpenDays')}" th:text="${type.description}" class="form-check-label">
                     월요일

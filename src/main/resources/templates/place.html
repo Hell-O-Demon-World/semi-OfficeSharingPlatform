@@ -36,9 +36,9 @@
     <!-- multi checkbox -->
     <div>
         <div>영업일</div>
-        <div th:each="days : ${daysTypes}" class="form-check form-check-inline">
-            <input type="checkbox" th:field="${place.placeOpenDays}" th:value="${days.name()}" class="form-check-input" disabled>
-            <label th:for="${#ids.prev('placeOpenDays')}" th:text="${days.description}" class="form-check-label">서울</label>
+        <div th:each="type : ${DaysType}" class="form-check form-check-inline">
+            <input type="checkbox" th:field="${place.placeOpenDays}" th:value="${type.key}" class="form-check-input" disabled>
+            <label th:for="${#ids.prev('placeOpenDays')}" th:text="${type.value}" class="form-check-label">서울</label>
         </div>
     </div>
     <div>

@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Slf4j
@@ -22,10 +24,26 @@ public class PlaceController {
 
     private final PlaceService placeService;
 
-    @ModelAttribute("daysTypes")
-    public DaysType[] daysTypes() {
+    @ModelAttribute("DaysType")
+    public DaysType[] daysType() {
         return DaysType.values();
     }
+
+/*
+    @ModelAttribute("DaysType")
+    public Map<String, String> daysType() {
+        Map<String, String> daysType = new LinkedHashMap<>();
+        daysType.put("Mon","월요일");
+        daysType.put("Tue","화요일");
+        daysType.put("Wed","수요일");
+        daysType.put("Thu","목요일");
+        daysType.put("Fri","금요일");
+        daysType.put("Sat","토요일");
+        daysType.put("Sun","일요일");
+        return daysType;
+    }
+*/
+
 
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
@@ -52,8 +70,8 @@ public class PlaceController {
     @PostMapping("/add")
     public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
-        log.info("place.placeOpen={}", place.getPlaceOpenDays());
         log.info("place={}", place);
+        log.info("place.placeOpen={}", place.getPlaceOpenDays());
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");
         log.info("place = {}", place);
