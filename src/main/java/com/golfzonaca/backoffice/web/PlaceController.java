@@ -53,6 +53,7 @@ public class PlaceController {
     public String addPlace(@ModelAttribute Place place, RedirectAttributes redirectAttributes) {
         log.info("컨트롤러 호출");
         log.info("place.placeOpen={}", place.getPlaceOpenDays());
+        log.info("place={}", place);
         Place savedPlace = placeService.save(place);
         log.info("저장 완료");
         log.info("place = {}", place);

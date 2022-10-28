@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.golfzonaca.backoffice.domain.type.DaysType;
 import lombok.Data;
 
 @Data
@@ -10,7 +11,7 @@ public class Place {
     private Long companyId; //업체식별번호
     private String placeName;
     private String placeDescription;
-    private String placeOpenDays;
+    private DaysType placeOpenDays;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private String placeStart;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
@@ -20,7 +21,7 @@ public class Place {
     public Place() {
     }
 
-    public Place(Long companyId, String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
+    public Place(Long companyId, String placeName, String placeDescription, DaysType placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.placeName = placeName;
         this.placeDescription = placeDescription;

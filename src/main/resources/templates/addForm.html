@@ -34,20 +34,20 @@
             </div>
         </div>
         <div>
-            <label for="description">사무공간 설명</label>
-            <input type="text" id="description" name="description" class="form-control" placeholder="공간 설명을 입력하세요">
+            <label for="placeDescription" th:text="#{label.place.placeDescription}">사무공간 설명</label>
+            <input type="text" id="placeDescription" th:field="*{placeDescription}" name="placeDescription" class="form-control" placeholder="공간 설명을 입력하세요">
         </div>
         <div>
-            <label for="placeStartTime">오픈 시간</label>
-            <input type="time" id="placeStartTime" name="placeStartTime" class="form-control">
-            <label for="placeEndTime">종료 시간</label>
-            <input type="time" id="placeEndTime" name="placeEndTime" class="form-control">
+            <label for="placeStart">오픈 시간</label>
+            <input type="time" id="placeStart" name="placeStart" class="form-control">
+            <label for="placeEnd">종료 시간</label>
+            <input type="time" id="placeEnd" name="placeEnd" class="form-control">
         </div>
 
         <!-- multi checkbox -->
         <div>
             <div>공간 부가 정보</div>
-            <div th:each="info : ${placeAddinFO}" class="form-check form-check-inline">
+            <div th:each="info : ${placeAddInfo}" class="form-check form-check-inline">
                 <input type="checkbox" th:field="*{placeAddInfo}" th:value="${info.key}" class="form-check-input">
                 <label th:for="${#ids.prev('placeAddInfo')}"
                        th:text="${info.value}" class="form-check-label">Wifi</label>

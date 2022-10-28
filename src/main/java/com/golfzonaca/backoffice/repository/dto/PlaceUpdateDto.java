@@ -16,7 +16,7 @@ public class PlaceUpdateDto {
 
     private String placeName;
     private String placeDescription;
-    private String placeOpenDays;
+    private DaysType placeOpenDays;
     private String placeStart;
     private String placeEnd;
     private String placeAddInfo;
