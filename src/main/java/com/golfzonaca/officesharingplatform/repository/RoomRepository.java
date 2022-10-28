@@ -1,4 +1,4 @@
 package com.golfzonaca.officesharingplatform.repository;
 
-public interface UserRepository {
+public interface RoomRepository {
 }
