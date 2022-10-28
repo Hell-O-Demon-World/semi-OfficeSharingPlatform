@@ -20,31 +20,6 @@ const Map = () => {
     e.target.style.backgroundColor = "rgb(91, 135, 218)";
     e.target.nextSibling.style.backgroundColor = "rgb(91, 135, 218)";
   };
-  officeList.map((elem) => {
-    let content = document.createElement("div");
-    content.classList.add("wrap");
-    let customOverlay = document.createElement("div");
-    customOverlay.classList.add("customOverlay");
-    customOverlay.textContent = elem.name;
-    let arrow = document.createElement("div");
-    arrow.classList.add("arrow");
-    content.appendChild(customOverlay);
-    content.appendChild(arrow);
-    customOverlay.onclick = showDetailHandler;
-    var geocoder = new kakao.maps.services.Geocoder();
-
-    geocoder.addressSearch(elem.address, (result, status) => {
-      if (status === kakao.maps.services.Status.OK) {
-        const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-        new kakao.maps.CustomOverlay({
-          content: content,
-          map: map,
-          position: coords,
-        });
-      }
-    });
-    return 0;
-  });
 
   const zoomIn = () => {
     map.setLevel(map.getLevel() - 1);
@@ -85,6 +60,33 @@ const Map = () => {
       position: mainLocation,
     });
   }, []);
+  useEffect(() => {
+    officeList.map((elem) => {
+      let content = document.createElement("div");
+      content.classList.add("wrap");
+      let customOverlay = document.createElement("div");
+      customOverlay.classList.add("customOverlay");
+      customOverlay.textContent = elem.name;
+      let arrow = document.createElement("div");
+      arrow.classList.add("arrow");
+      content.appendChild(customOverlay);
+      content.appendChild(arrow);
+      customOverlay.onclick = showDetailHandler;
+      var geocoder = new kakao.maps.services.Geocoder();
+
+      geocoder.addressSearch(elem.address, (result, status) => {
+        if (status === kakao.maps.services.Status.OK) {
+          const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+          new kakao.maps.CustomOverlay({
+            content: content,
+            map: map,
+            position: coords,
+          });
+        }
+      });
+      return 0;
+    });
+  }, [officeList, map]);
 
   return (
     <Fragment>

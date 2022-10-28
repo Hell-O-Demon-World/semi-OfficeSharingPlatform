@@ -22,3 +22,7 @@
   cursor: pointer;
   padding: 0;
 }
+.officeMainInfo {
+  position: absolute;
+  top: 150px;
+}

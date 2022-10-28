@@ -9,8 +9,7 @@ const OfficeDetail = () => {
   const history = useHistory();
   const officeList = useSelector((state) => state.officeList);
   const params = useParams();
-  let office = {};
-  office = officeList.filter((elem) => elem.key === params.officeId);
+  const office = officeList.filter((elem) => elem.key === params.officeId);
   console.log(office);
 
   const prevBtnHandler = () => {
@@ -22,10 +21,12 @@ const OfficeDetail = () => {
       <Button type="button" onClick={prevBtnHandler}>
         <FontAwesomeIcon icon={faAngleLeft} />
       </Button>
-      <p>{office[0].name}</p>
-      <p>{office[0].option}</p>
-      <p>{office[0].address}</p>
-      <p>{office[0].postcode}</p>
+      <main className={classes.officeMainInfo}>
+        <p>{office[0].name}</p>
+        <p>{office[0].option}</p>
+        <p>{office[0].address}</p>
+        <p>{office[0].postcode}</p>
+      </main>
     </div>
   );
 };

@@ -27,3 +27,7 @@
 .header ul li:nth-child(2) {
   padding: 0 20px;
 }
+.link {
+  text-decoration: none;
+  color: #fff;
+}

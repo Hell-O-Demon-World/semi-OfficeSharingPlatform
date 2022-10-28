@@ -17,10 +17,10 @@ const App = () => {
       <Route path="/main">
         <Main />
       </Route>
-      <Route path="/members/signin">
+      <Route path="/auth/signin">
         <SignIn />
       </Route>
-      <Route path="/members/signup">
+      <Route path="/auth/signup">
         <SignUp />
       </Route>
       <Route path="*" exact>

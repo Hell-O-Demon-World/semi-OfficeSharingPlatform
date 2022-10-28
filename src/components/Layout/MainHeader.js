@@ -23,7 +23,9 @@ const MainHeader = () => {
           <li onClick={onClickLogin}>SignIn</li>
           <li>|</li>
           <li>
-            <Link to="/members/signup">SignUp</Link>
+            <Link to="/members/signup" className={classes.link}>
+              SignUp
+            </Link>
           </li>
         </ul>
       </header>
