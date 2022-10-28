@@ -19,17 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AuthController {
     private final AuthService authService;
 
-//    @ResponseBody
-//    @PostMapping("/signin")
-//    public String signIn(@Valid @RequestBody SignInSaveForm signInSaveForm, CsrfToken csrfToken) {
-//
-//        // 인증 성공 후 인증된 user의 정보를 갖고옴
-//        System.out.println("signInSaveForm = " + signInSaveForm);
-//        PrincipalDetails principalDetails = principalDetailsRepository.findByEmail(signInSaveForm.getUsername());
-//        System.out.println("principalDetails = " + principalDetails);
-////        PrincipalDetails user = userRepository.findByEmail(signInSaveForm.getUsername());
-//        return jwtTokenProvider.createToken(principalDetails.getUsername(), principalDetails.getAuthorities());
-//    }
     @ResponseBody
     @GetMapping("/mypage")
     public String success() {
