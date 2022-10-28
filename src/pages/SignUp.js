@@ -20,15 +20,14 @@ const SignUp = () => {
  */
     setIsLoading(true);
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
       {
         method: "POST",
         body: JSON.stringify({
           email: enteredEmail,
           password: enteredPassword,
-          returnSecureToken: true,
         }),
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
       }

@@ -1,9 +1,12 @@
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
+import { AuthContext } from "../store/auth-Context";
 import classes from "./SignUp.module.css";
 const SignIn = () => {
+  const history = useHistory();
+  const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -21,7 +24,7 @@ const SignIn = () => {
           password: enteredPassword,
           returnSecureToken: true,
         }),
-        header: {
+        headers: {
           "Content-Type": "application/json",
         },
       }
@@ -41,7 +44,8 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        authCtx.login(data.idToken);
+        history.push("/");
       })
       .catch((err) => {
         alert(err.message);
