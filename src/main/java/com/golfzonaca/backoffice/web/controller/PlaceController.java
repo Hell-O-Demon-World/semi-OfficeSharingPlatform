@@ -47,6 +47,7 @@ public class PlaceController {
         PlaceViewForm placeViewForm = transformType.stringToList(place);
         model.addAttribute("place", placeViewForm);
         log.info("model={}", model);
+        log.info("openDays={}", placeViewForm.getPlaceOpenDays());
         return "place";
     }
 

@@ -6,6 +6,7 @@ import lombok.Builder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -15,7 +16,7 @@ public class TransformType {
         Place place = new Place();
         place.setPlaceName(placeViewForm.getPlaceName());
         place.setPlaceDescription(placeViewForm.getPlaceDescription());
-        place.setPlaceOpenDays(placeViewForm.getPlaceOpenDays().toString());
+        place.setPlaceOpenDays(placeViewForm.getPlaceOpenDays().toString().replace("[", "").replace("]",""));
         place.setPlaceStart(placeViewForm.getPlaceStart());
         place.setPlaceEnd(placeViewForm.getPlaceEnd());
 //        place.setPlaceAddInfo(placeViewForm.getPlaceAddInfo().toString());
@@ -28,10 +29,8 @@ public class TransformType {
         placeViewForm.setId(place.getId());
         placeViewForm.setPlaceName(place.getPlaceName());
         placeViewForm.setPlaceDescription(place.getPlaceDescription());
-        String[] daysString = place.getPlaceOpenDays().split(", ");
         // daysString 배열을 daysList 로 변환하기
-        List<String> result = new ArrayList<>();
-        placeViewForm.setPlaceOpenDays(result);
+        placeViewForm.setPlaceOpenDays(new ArrayList<>(Arrays.asList(place.getPlaceOpenDays().split(", "))));
         placeViewForm.setPlaceStart(place.getPlaceStart());
         placeViewForm.setPlaceEnd(place.getPlaceEnd());
 //        placeViewForm.setPlaceAddInfo(List.of(place.getPlaceAddInfo().split(",")));
