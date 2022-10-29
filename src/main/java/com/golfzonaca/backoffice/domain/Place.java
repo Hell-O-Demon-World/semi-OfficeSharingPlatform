@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +23,7 @@ public class Place {
     private String placeAddInfo;
     private Long addressId; //우편번호
 
+    @Autowired
     public Place(Long companyId, String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.placeName = placeName;
@@ -32,6 +34,4 @@ public class Place {
         this.placeAddInfo = placeAddInfo;
         this.addressId = addressId;
     }
-
-
 }

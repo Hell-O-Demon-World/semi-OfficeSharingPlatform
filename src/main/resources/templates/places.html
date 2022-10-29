@@ -52,18 +52,18 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>상품명</th>
-                <th>가격</th>
-                <th>수량</th>
+                <th>공간명</th>
+                <th>오픈시간</th>
+                <th>마감시간</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="place : ${placeSearch}">
-                <td><a href="place.html" th:href="@{/places/{Id}(Id=${place.id})}" th:text="${place.id}">회원id</a>
+                <td><a href="place.html" th:href="@{/places/{Id}(Id=${place.id})}" th:text="${place.id}">공간ID</a>
                 </td>
-                <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">상품명</a></td>
-                <td th:text="${place.placeStart}">10000</td>
-                <td th:text="${place.placeEnd}">10</td>
+                <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">공간명</a></td>
+                <td th:text="${place.placeStart}">10:00</td>
+                <td th:text="${place.placeEnd}">12:00</td>
             </tr>
             </tbody>
         </table>

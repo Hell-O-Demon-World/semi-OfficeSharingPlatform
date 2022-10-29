@@ -29,7 +29,11 @@
     <select id="findAll" resultType="Place">
         select *
         from Place
-        where company_id = #{companyId}
+        <where>
+            <if test="companyId != null">
+                company_id = #{companyId}
+            </if>
+        </where>
     </select>
 
     <select id="findById" resultType="Place">

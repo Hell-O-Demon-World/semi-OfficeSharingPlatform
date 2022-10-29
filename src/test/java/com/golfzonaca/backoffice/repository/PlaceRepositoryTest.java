@@ -52,8 +52,6 @@ class PlaceRepositoryTest {
         assertThat(findPlace.getPlaceEnd()).isEqualTo(updateParam.getPlaceEnd());
         assertThat(findPlace.getPlaceAddInfo()).isEqualTo(updateParam.getPlaceAddInfo());
         assertThat(findPlace.getAddressId()).isEqualTo(updateParam.getAddressId());
-
-
     }
 
     @Test
@@ -91,15 +89,15 @@ class PlaceRepositoryTest {
         //given
         Long companyId = 1L;
         Place placeA = new Place(companyId, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
-        placeRepository.save(placeA);
+        Place savedPlaceA = placeRepository.save(placeA);
         Place placeB = new Place(companyId, "테스트2", "시험2입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
-        placeRepository.save(placeB);
+        Place savedPlaceB = placeRepository.save(placeB);
 
         //when
         List<Place> result = placeRepository.findAll(companyId);
 
         //then
-        assertThat(result.size()).isEqualTo(2);
+        assertThat(result).contains(savedPlaceA, savedPlaceB);
     }
 
 }
