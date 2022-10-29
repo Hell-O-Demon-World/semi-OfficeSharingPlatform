@@ -16,5 +16,5 @@ public interface PlaceRepository {
 
     Optional<Place> findById(Long id);
 
-    Optional<List<Place>> findAll(Long companyId);
+    List<Place> findAll(Long companyId);
 }

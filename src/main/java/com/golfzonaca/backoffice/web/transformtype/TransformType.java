@@ -43,9 +43,9 @@ public class TransformType {
         place.setPlaceName(placeEditForm.getPlaceName());
         place.setPlaceDescription(placeEditForm.getPlaceDescription());
         place.setPlaceOpenDays(placeEditForm.getPlaceOpenDays().toString().replace("[", "").replace("]",""));
-//        place.setPlaceStart(placeEditForm.getPlaceStart());
-//        place.setPlaceEnd(placeEditForm.getPlaceEnd());
-//        place.setPlaceAddInfo(placeEditForm.getPlaceAddInfo().toString().replace("[","").replace("]",""));
+        place.setPlaceStart(placeEditForm.getPlaceStart());
+        place.setPlaceEnd(placeEditForm.getPlaceEnd());
+        place.setPlaceAddInfo(placeEditForm.getPlaceAddInfo().toString().replace("[","").replace("]",""));
 //        place.setAddressId(place.getAddressId());
         return place;
     }

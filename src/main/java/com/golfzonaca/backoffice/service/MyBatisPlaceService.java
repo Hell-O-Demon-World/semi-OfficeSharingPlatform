@@ -36,7 +36,7 @@ public class MyBatisPlaceService implements PlaceService{
     }
 
     @Override
-    public Optional<List<Place>> findAll(Long companyId) {
+    public List<Place> findAll(Long companyId) {
         return placeRepository.findAll(companyId);
     }
 }

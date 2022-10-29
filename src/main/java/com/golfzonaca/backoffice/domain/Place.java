@@ -2,12 +2,12 @@ package com.golfzonaca.backoffice.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class Place {
 
     private Long id; //대여공간식별번호
@@ -21,8 +21,6 @@ public class Place {
     private String placeEnd;
     private String placeAddInfo;
     private Long addressId; //우편번호
-    public Place() {
-    }
 
     public Place(Long companyId, String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
         this.companyId = companyId;
@@ -34,4 +32,6 @@ public class Place {
         this.placeAddInfo = placeAddInfo;
         this.addressId = addressId;
     }
+
+
 }

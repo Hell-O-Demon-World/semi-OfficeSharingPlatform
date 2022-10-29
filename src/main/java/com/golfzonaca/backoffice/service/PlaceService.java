@@ -17,5 +17,5 @@ public interface PlaceService {
 
     Optional<Place> findById(Long Id);
 
-    Optional<List<Place>> findAll(Long companyId);
+    List<Place> findAll(Long companyId);
 }

@@ -3,10 +3,10 @@ package com.golfzonaca.backoffice.web.controller;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
+import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.PlaceService;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import com.golfzonaca.backoffice.web.transformtype.form.PlaceAddForm;
-import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.web.transformtype.form.PlaceEditForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -39,7 +38,7 @@ public class PlaceController {
 
     @GetMapping
     public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
-        Optional<List<Place>> places = placeService.findAll(companyId);
+        List<Place> places = placeService.findAll(companyId);
         model.addAttribute("places", places);
         return "places";
     }

@@ -3,7 +3,6 @@ package com.golfzonaca.backoffice.web.controller;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.repository.PlaceRepository;
 import com.golfzonaca.backoffice.service.PlaceService;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -34,11 +33,11 @@ class PlaceControllerTest {
         placeService.save(placeB);
 
         //When
-        Optional<List<Place>> result = placeService.findAll(2L);
+        List<Place> result = placeService.findAll(2L);
 
         //Then
-        System.out.println("result : " + result.get());
-        assertThat(result.get()).isIn(placeA, placeB);
+        System.out.println("result : " + result);
+        assertThat(result).isIn(placeA, placeB);
     }
 
     @Test

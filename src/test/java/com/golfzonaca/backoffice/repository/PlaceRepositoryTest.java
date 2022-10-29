@@ -96,10 +96,10 @@ class PlaceRepositoryTest {
         placeRepository.save(placeB);
 
         //when
-        Optional<List<Place>> result = placeRepository.findAll(companyId);
+        List<Place> result = placeRepository.findAll(companyId);
 
         //then
-        assertThat(result.get().size()).isEqualTo(2);
+        assertThat(result.size()).isEqualTo(2);
     }
 
 }
