@@ -1,7 +1,9 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import ReactDOM from "react-dom";
+import SignIn from "../../pages/SignIn";
 import Card from "../UI/Card";
-import Login from "../UI/Login";
 import classes from "./Modal.module.css";
 
 const Backdrop = (props) => {
@@ -10,7 +12,12 @@ const Backdrop = (props) => {
 const ModalOverlay = (props) => {
   return (
     <Card className={classes.modal}>
-      <Login onConfirm={props.onConfirm} />
+      <FontAwesomeIcon
+        icon={faXmark}
+        className={classes.close}
+        onClick={props.onConfirm}
+      />
+      <SignIn />
     </Card>
   );
 };

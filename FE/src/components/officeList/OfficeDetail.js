@@ -10,7 +10,6 @@ const OfficeDetail = () => {
   const officeList = useSelector((state) => state.officeList);
   const params = useParams();
   const office = officeList.filter((elem) => elem.key === params.officeId);
-  console.log(office);
 
   const prevBtnHandler = () => {
     history.push("/main");

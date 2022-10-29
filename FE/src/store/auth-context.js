@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 
-const AuthContext = React.createContext({
-  token: null,
-  isLoggenIn: false,
+export const AuthContext = React.createContext({
+  token: "",
+  isLoggedIn: false,
   login: (token) => {},
   logout: () => {},
 });
 
-export const AuthContextProvider = (props) => {
+const AuthContextProvider = (props) => {
   const [token, setToken] = useState(null);
-  const userLoggedIn = !!token;
-
+  const isLoggedIn = !!token;
   const loginHandler = (token) => {
     setToken(token);
   };
-  const logoutHandler = () => {};
+  const logoutHandler = () => {
+    setToken(null);
+  };
   const contextValue = {
     token,
-    isLoggenIn: userLoggedIn,
+    isLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
   };
@@ -28,4 +29,4 @@ export const AuthContextProvider = (props) => {
   );
 };
 
-export default AuthContext;
+export default AuthContextProvider;

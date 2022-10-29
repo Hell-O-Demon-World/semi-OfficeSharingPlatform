@@ -5,7 +5,6 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 const OfficeSearch = () => {
   const keywordSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(keywordInputRef.current.value);
   };
   const keywordInputRef = useRef();
   return (
