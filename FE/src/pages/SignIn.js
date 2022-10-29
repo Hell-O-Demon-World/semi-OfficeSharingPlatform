@@ -40,6 +40,7 @@ const SignIn = () => {
         }
       })
       .then((data) => {
+        console.log(data)
         authCtx.login(data.accessToken);
         history.push("/");
       })

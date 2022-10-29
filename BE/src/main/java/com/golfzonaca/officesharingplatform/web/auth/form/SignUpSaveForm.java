@@ -1,6 +1,7 @@
 package com.golfzonaca.officesharingplatform.web.auth.form;
 
 import com.golfzonaca.officesharingplatform.domain.User;
+import com.golfzonaca.officesharingplatform.web.auth.form.prefertype.PreferType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -31,7 +33,7 @@ public class SignUpSaveForm {
     @Size(max = 20,message = "직업명의 길이는 최대 20자 이내 입니다.")
     private String job;
     @NotNull(message = "선호 유형은 Null일 수 없습니다.")
-    private String preferType;
+    private List<PreferType> preferType;
 
     public User toEntity() {
         return new User(name, email, password, phoneNumber, job, preferType);

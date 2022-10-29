@@ -29,9 +29,8 @@ const SignUp = () => {
       body: JSON.stringify({
         email: enteredEmail,
         password: enteredPassword,
-        returnSecureToken: true,
         name: enteredName,
-        phone: enteredPhone,
+        phoneNumber: enteredPhone,
         job: enteredJob,
         preferType: [
           {
