@@ -1,25 +1,27 @@
-package com.golfzonaca.backoffice.repository.dto;
+package com.golfzonaca.backoffice.web.transformtype.form;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
-public class PlaceUpdateDto {
+public class PlaceEditForm {
 
     private String placeName;
     private String placeDescription;
-    private String placeOpenDays;
+    private List<String> placeOpenDays;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private String placeStart;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private String placeEnd;
-    private String placeAddInfo;
+    private List<String> placeAddInfo;
     private Long addressId; //우편번호
 
-    public PlaceUpdateDto() {
+    public PlaceEditForm() {
     }
 
-    public PlaceUpdateDto(String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
+    public PlaceEditForm(String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
         this.placeName = placeName;
         this.placeDescription = placeDescription;
         this.placeOpenDays = placeOpenDays;

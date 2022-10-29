@@ -20,7 +20,7 @@
     <form action="place.html" th:action method="post">
         <div>
             <label for="id">공간 ID</label>
-            <input type="text" id="id" name="id" class="form-control" value="1" th:value="${place.id}" readonly>
+            <input type="text" id="id" name="id" class="form-control" value="1" th:value="${place.id}" readonly disabled="true">
         </div>
         <div>
             <label for="placeName">공간명</label>
@@ -50,7 +50,7 @@
         </div>
         <div>
             <label for="endTime">종료 시간</label>
-            <input type="text" id="endTime" name=endTime class="form-control" value="22:00" th:value="${place.placeEnd}">
+            <input type="time" id="endTime" name=endTime class="form-control" value="22:00" th:value="${place.placeEnd}">
         </div>
         <!-- multi checkbox -->
         <div>

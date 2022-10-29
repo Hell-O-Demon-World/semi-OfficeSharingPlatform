@@ -1,11 +1,13 @@
 package com.golfzonaca.backoffice.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
+@Builder
+@AllArgsConstructor
 public class Place {
 
     private Long id; //대여공간식별번호

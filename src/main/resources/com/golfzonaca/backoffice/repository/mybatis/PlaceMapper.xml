@@ -9,12 +9,12 @@
 
     <update id="update">
         update place
-        set pl_name=#{updateParam.placeName},
-            pl_description=#{updateParam.placeDescription},
-            pl_opendays=#{updateParam.businessDays},
-            pl_start=#{updateParam.placeOpenTime},
-            pl_end=#{updateParam.placeCloseTime},
-            pl_addinfo=#{updateParam.addInformation},
+        set place_name=#{updateParam.placeName},
+            place_description=#{updateParam.placeDescription},
+            place_opendays=#{updateParam.placeOpenDays},
+            place_start=#{updateParam.placeStart},
+            place_end=#{updateParam.placeEnd},
+            place_addinfo=#{updateParam.placeAddInfo},
             address_id=#{updateParam.addressId}
     </update>
 
@@ -23,7 +23,7 @@
     </delete>
 
     <select id="findAll" resultType="Place">
-        select * from Place where co_id =#{companyId}
+        select * from Place where company_id =#{companyId}
     </select>
 
     <select id="findById" resultType="Place">

@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PlaceViewForm {
+public class PlaceAddForm {
 
     private Long id; //대여공간식별번호
     private Long companyId; //업체식별번호
@@ -20,10 +20,10 @@ public class PlaceViewForm {
     private List<String> placeAddInfo;
     private Long addressId; //우편번호
 
-    public PlaceViewForm() {
+    public PlaceAddForm() {
     }
 
-    public PlaceViewForm(Long companyId, String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
+    public PlaceAddForm(Long companyId, String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
         this.companyId = companyId;
         this.placeName = placeName;
         this.placeDescription = placeDescription;
