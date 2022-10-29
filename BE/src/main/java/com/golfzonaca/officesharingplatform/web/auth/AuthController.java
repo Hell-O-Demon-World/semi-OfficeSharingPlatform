@@ -29,8 +29,8 @@ public class AuthController {
     @ResponseBody
     @PostMapping("/signup")
     public ConcurrentHashMap<String, Object> signup(@Valid @RequestBody SignUpSaveForm signUpSaveForm, BindingResult bindingResult) {
-        ConcurrentHashMap<String, Object> errorMap = new ConcurrentHashMap<>();
 
+        ConcurrentHashMap<String, Object> errorMap = new ConcurrentHashMap<>();
         if (bindingResult.hasErrors()) {
             for (ObjectError objectError : bindingResult.getAllErrors()) {
                 errorMap.put(objectError.getCode() + "ValidationError", objectError.getDefaultMessage());
@@ -39,7 +39,6 @@ public class AuthController {
         }
 
         User user = signUpSaveForm.toEntity();
-
         if (!authService.join(user)) {
             errorMap.put("EmailError", "중복된 이메일 입니다.");
             return errorMap;
