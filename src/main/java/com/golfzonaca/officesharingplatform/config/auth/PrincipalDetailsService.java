@@ -10,7 +10,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(username);
-        if (user == null) {
+        if (user.equals(new User("","","","","", new ArrayList<>()))) {
             throw new UsernameNotFoundException("User Not Found");
         }
 

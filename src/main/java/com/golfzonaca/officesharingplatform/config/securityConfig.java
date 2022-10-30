@@ -1,4 +1,4 @@
-package com.golfzonaca.officesharingplatform.config.auth.config;
+package com.golfzonaca.officesharingplatform.config;
 
 import com.golfzonaca.officesharingplatform.config.auth.filter.JsonIdPwAuthenticationProcessingFilter;
 import com.golfzonaca.officesharingplatform.config.auth.filter.JwtAuthenticationFilter;
