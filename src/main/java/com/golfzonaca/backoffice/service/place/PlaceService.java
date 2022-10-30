@@ -1,4 +1,4 @@
-package com.golfzonaca.backoffice.service;
+package com.golfzonaca.backoffice.service.place;
 
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;

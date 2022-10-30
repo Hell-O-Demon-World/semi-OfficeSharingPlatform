@@ -24,7 +24,7 @@ class PlaceRepositoryTest {
     @Test
     void 공간저장() {
         //Given
-        Place place = new Place(2L, 2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
+        Place place = new Place(2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
         //When
         Place savedPlace = placeRepository.save(place);
         //Then

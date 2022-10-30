@@ -1,27 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.golfzonaca.backoffice.repository.mybatis.PlaceMapper">
+<mapper namespace="com.golfzonaca.backoffice.repository.mybatis.CompanyMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into place (company_name, company_tel, company_regnum, company_repname, address_id)
-        values (#{companyName}, #{companyTel}, #{companyRegNum}, #{companyRepName}, #{addressId})
+        insert into company (company_loginid, company_pw, company_name, company_tel, company_regnum, company_repname,
+                             address_id)
+        values (#{companyLoginId}, #{companyPw}, #{companyName}, #{companyTel}, #{companyRegNum}, #{companyRepName},
+                #{addressId})
     </insert>
-
-    <delete id="delete">
-        delete
-        from company
-        where id = #{id}
-    </delete>
 
     <select id="findAll" resultType="Company">
         select *
         from Company
-        where id = #{id}
     </select>
 
-    <select id="findById" resultType="Company">
+    <select id="findByCompanyLoginId" resultType="Company">
         select *
         from Company
-        where id = #{id}
+        where company_loginid = #{companyLoginId}
     </select>
 </mapper>

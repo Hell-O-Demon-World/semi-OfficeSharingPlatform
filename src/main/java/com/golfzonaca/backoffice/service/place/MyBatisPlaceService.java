@@ -1,4 +1,4 @@
-package com.golfzonaca.backoffice.service;
+package com.golfzonaca.backoffice.service.place;
 
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.repository.PlaceRepository;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class MyBatisPlaceService implements PlaceService{
+public class MyBatisPlaceService implements PlaceService {
 
     private final PlaceRepository placeRepository;
 

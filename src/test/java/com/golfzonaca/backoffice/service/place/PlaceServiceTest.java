@@ -1,9 +1,8 @@
-package com.golfzonaca.backoffice.web.controller;
+package com.golfzonaca.backoffice.service.place;
 
 import com.golfzonaca.backoffice.domain.Place;
-import com.golfzonaca.backoffice.repository.PlaceRepository;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
-import com.golfzonaca.backoffice.service.PlaceService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,17 +13,40 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 @SpringBootTest
 @Transactional
-class PlaceControllerTest {
+class PlaceServiceTest {
 
     @Autowired
     PlaceService placeService;
-    @Autowired
-    PlaceRepository placeRepository;
 
     @Test
-    void FindByCompanyId() {
+    void 공간생성() {
+        //Given
+        Place place = new Place(2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
+        //When
+        Place savedPlace = placeService.save(place);
+        //Then
+        assertThat(savedPlace).isEqualTo(place);
+    }
+
+    @Test
+    void FindByPlaceId() {
+        //Given
+        Place place = new Place(2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
+        Place savedPlace = placeService.save(place);
+        Long id = savedPlace.getId();
+
+        //When
+        Optional<Place> findPlace = placeService.findById(id);
+
+        //Then
+        assertThat(findPlace.get()).isEqualTo(savedPlace);
+    }
+
+    @Test
+    void FindAllByCompanyId() {
         //Given
         Long companyId = 1L;
 
@@ -39,31 +61,6 @@ class PlaceControllerTest {
 
         //Then
         assertThat(result).contains(savedPlaceA, savedPlaceB);
-    }
-
-    @Test
-    void FindById() {
-        //Given
-        Place place = new Place(2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
-        Place savedPlace = placeService.save(place);
-        Long id = savedPlace.getId();
-
-        //When
-        Optional<Place> findPlace = placeService.findById(id);
-
-        //Then
-        assertThat(findPlace.get()).isEqualTo(savedPlace);
-    }
-
-
-    @Test
-    void 공간생성() {
-        //Given
-        Place place = new Place(2L, "테스트1", "시험1입니다.", "[Mon, Tue, Wed]", "11:00:00", "22:00:00", "[Wifi, Coffee]", 1L);
-        //When
-        Place savedPlace = placeService.save(place);
-        //Then
-        assertThat(savedPlace).isEqualTo(place);
     }
 
 

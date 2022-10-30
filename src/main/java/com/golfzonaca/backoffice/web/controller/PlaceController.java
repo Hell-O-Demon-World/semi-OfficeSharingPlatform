@@ -4,7 +4,7 @@ import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
-import com.golfzonaca.backoffice.service.PlaceService;
+import com.golfzonaca.backoffice.service.place.PlaceService;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import com.golfzonaca.backoffice.web.transformtype.form.PlaceAddForm;
 import com.golfzonaca.backoffice.web.transformtype.form.PlaceEditForm;
