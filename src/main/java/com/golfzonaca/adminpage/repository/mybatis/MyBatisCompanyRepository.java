@@ -15,6 +15,17 @@ public class MyBatisCompanyRepository implements CompanyRepository {
     private final CompanyMapper companyMapper;
 
     @Override
+    public Company save(Company company) {
+        companyMapper.save(company);
+        return company;
+    }
+
+    @Override
+    public void delete(Long id) {
+        companyMapper.delete(id);
+    }
+
+    @Override
     public List<Company> findCompanies(CompanySearchCond companySearch) {
         return companyMapper.findCompanies(companySearch);
     }

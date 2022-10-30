@@ -12,4 +12,11 @@
         </where>
     </select>
 
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into company(company_loginid, company_pw, company_name, company_tel, company_regnum,
+                            company_repname, address_id)
+        values (#{companyLoginId}, #{companyPw}, #{companyName}, #{companyTel}, #{companyRegNum}, #{companyRepName},
+                #{addressId})
+    </insert>
+
 </mapper>

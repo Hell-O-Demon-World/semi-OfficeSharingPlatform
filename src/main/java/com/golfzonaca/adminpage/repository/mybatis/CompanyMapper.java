@@ -9,5 +9,9 @@ import java.util.List;
 @Mapper
 public interface CompanyMapper {
 
+    void save(Company company);
+
+    void delete(Long id);
+
     List<Company> findCompanies(CompanySearchCond companySearch);
 }

@@ -15,6 +15,16 @@ public class MyBatisCompanyService implements CompanyService {
     private final CompanyRepository companyRepository;
 
     @Override
+    public Company save(Company company) {
+        return companyRepository.save(company);
+    }
+
+    @Override
+    public void delete(Long id) {
+        companyRepository.delete(id);
+    }
+
+    @Override
     public List<Company> findCompanies(CompanySearchCond companySearch) {
         return companyRepository.findCompanies(companySearch);
     }
