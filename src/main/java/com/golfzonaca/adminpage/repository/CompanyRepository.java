@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface CompanyRepository {
 
-    List<Company> findAllCompanyId(Long id);
+    List<Company> findCompanies(CompanySearchCond companySearch);
 }

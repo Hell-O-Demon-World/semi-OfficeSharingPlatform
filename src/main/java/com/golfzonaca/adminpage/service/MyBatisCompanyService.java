@@ -2,6 +2,7 @@ package com.golfzonaca.adminpage.service;
 
 import com.golfzonaca.adminpage.domain.Company;
 import com.golfzonaca.adminpage.repository.CompanyRepository;
+import com.golfzonaca.adminpage.repository.CompanySearchCond;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class MyBatisCompanyService implements CompanyService {
     private final CompanyRepository companyRepository;
 
     @Override
-    public List<Company> findAllCompanyId(Long id) {
-        return companyRepository.findAllCompanyId(id);
+    public List<Company> findCompanies(CompanySearchCond companySearch) {
+        return companyRepository.findCompanies(companySearch);
     }
 }

@@ -2,6 +2,7 @@ package com.golfzonaca.adminpage.repository.mybatis;
 
 import com.golfzonaca.adminpage.domain.Company;
 import com.golfzonaca.adminpage.repository.CompanyRepository;
+import com.golfzonaca.adminpage.repository.CompanySearchCond;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ public class MyBatisCompanyRepository implements CompanyRepository {
     private final CompanyMapper companyMapper;
 
     @Override
-    public List<Company> findAllCompanyId(Long id) {
-        return companyMapper.findAllCompanyId(id);
+    public List<Company> findCompanies(CompanySearchCond companySearch) {
+        return companyMapper.findCompanies(companySearch);
     }
 }
