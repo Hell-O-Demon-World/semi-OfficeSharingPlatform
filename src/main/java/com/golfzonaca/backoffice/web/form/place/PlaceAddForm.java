@@ -1,4 +1,4 @@
-package com.golfzonaca.backoffice.web.transformtype.form;
+package com.golfzonaca.backoffice.web.form.place;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -6,8 +6,10 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class PlaceEditForm {
+public class PlaceAddForm {
 
+    private Long id; //대여공간식별번호
+    private Long companyId; //업체식별번호
     private String placeName;
     private String placeDescription;
     private List<String> placeOpenDays;
@@ -18,10 +20,11 @@ public class PlaceEditForm {
     private List<String> placeAddInfo;
     private Long addressId; //우편번호
 
-    public PlaceEditForm() {
+    public PlaceAddForm() {
     }
 
-    public PlaceEditForm(String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
+    public PlaceAddForm(Long companyId, String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
+        this.companyId = companyId;
         this.placeName = placeName;
         this.placeDescription = placeDescription;
         this.placeOpenDays = placeOpenDays;

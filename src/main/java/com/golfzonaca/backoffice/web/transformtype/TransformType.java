@@ -1,9 +1,9 @@
 package com.golfzonaca.backoffice.web.transformtype;
 
 import com.golfzonaca.backoffice.domain.Place;
-import com.golfzonaca.backoffice.web.transformtype.form.PlaceAddForm;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
-import com.golfzonaca.backoffice.web.transformtype.form.PlaceEditForm;
+import com.golfzonaca.backoffice.web.form.place.PlaceAddForm;
+import com.golfzonaca.backoffice.web.form.place.PlaceEditForm;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,10 +17,10 @@ public class TransformType {
         Place place = new Place();
         place.setPlaceName(placeAddForm.getPlaceName());
         place.setPlaceDescription(placeAddForm.getPlaceDescription());
-        place.setPlaceOpenDays(placeAddForm.getPlaceOpenDays().toString().replace("[", "").replace("]",""));
+        place.setPlaceOpenDays(placeAddForm.getPlaceOpenDays().toString().replace("[", "").replace("]", ""));
         place.setPlaceStart(placeAddForm.getPlaceStart());
         place.setPlaceEnd(placeAddForm.getPlaceEnd());
-        place.setPlaceAddInfo(placeAddForm.getPlaceAddInfo().toString().replace("[","").replace("]",""));
+        place.setPlaceAddInfo(placeAddForm.getPlaceAddInfo().toString().replace("[", "").replace("]", ""));
 //        place.setAddressId(place.getAddressId());
         return place;
     }
@@ -42,10 +42,10 @@ public class TransformType {
         PlaceUpdateDto place = new PlaceUpdateDto();
         place.setPlaceName(placeEditForm.getPlaceName());
         place.setPlaceDescription(placeEditForm.getPlaceDescription());
-        place.setPlaceOpenDays(placeEditForm.getPlaceOpenDays().toString().replace("[", "").replace("]",""));
+        place.setPlaceOpenDays(placeEditForm.getPlaceOpenDays().toString().replace("[", "").replace("]", ""));
         place.setPlaceStart(placeEditForm.getPlaceStart());
         place.setPlaceEnd(placeEditForm.getPlaceEnd());
-        place.setPlaceAddInfo(placeEditForm.getPlaceAddInfo().toString().replace("[","").replace("]",""));
+        place.setPlaceAddInfo(placeEditForm.getPlaceAddInfo().toString().replace("[", "").replace("]", ""));
 //        place.setAddressId(place.getAddressId());
         return place;
     }

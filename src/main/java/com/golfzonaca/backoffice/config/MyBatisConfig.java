@@ -8,6 +8,7 @@ import com.golfzonaca.backoffice.repository.mybatis.MyBatisPlaceRepository;
 import com.golfzonaca.backoffice.repository.mybatis.PlaceMapper;
 import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.company.MyBatisCompanyService;
+import com.golfzonaca.backoffice.service.login.LoginService;
 import com.golfzonaca.backoffice.service.place.MyBatisPlaceService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,10 @@ public class MyBatisConfig {
     @Bean
     public CompanyRepository companyRepository() {
         return new MyBatisCompanyRepository(companyMapper);
+    }
+
+    @Bean
+    public LoginService loginService() {
+        return new LoginService(new MyBatisCompanyService(new MyBatisCompanyRepository(companyMapper)));
     }
 }
