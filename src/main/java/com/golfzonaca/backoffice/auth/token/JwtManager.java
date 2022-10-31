@@ -34,7 +34,6 @@ public class JwtManager {
     }
 
     public static boolean validateJwt(String jwt){
-        log.error("jwt={}",jwt);
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement iatJson = jsonObject.get("iat");
         long iat = iatJson.getAsLong();
@@ -46,8 +45,6 @@ public class JwtManager {
 
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement jsonElement = jsonObject.get(attr);
-        log.info("jsonObject", getJsonObject(jwt));
-        log.info("jsonElement", jsonObject.get(attr));
         return jsonElement.getAsString();
     }
 

@@ -1,5 +1,6 @@
-package com.golfzonaca.backoffice.auth;
+package com.golfzonaca.backoffice.service.auth;
 
+import com.golfzonaca.backoffice.auth.CompanyPrincipalDetails;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +23,21 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
     private final MyBatisCompanyRepository myBatisCompanyRepository;
+    private final PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        myBatisCompanyRepository.findByCompanyLoginId(username);
         Company company = myBatisCompanyRepository.findByCompanyLoginId(username).get();
-        log.info("company={}",company);
         if (company == null) {
             throw new UsernameNotFoundException(username);
         }
+        String rawPassword = company.getCompanyPw();
+        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         Set<GrantedAuthority> grantedAuthorityList = new HashSet<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_REGISTER"));
 
         return CompanyPrincipalDetails.builder()
                 .username(company.getCompanyLoginId())
-                .password(company.getCompanyPw())
+                .password(encPassword)
                 .authorities(grantedAuthorityList)
                 .build();
     }

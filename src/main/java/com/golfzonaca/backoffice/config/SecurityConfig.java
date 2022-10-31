@@ -1,4 +1,4 @@
-package com.golfzonaca.backoffice.auth;
+package com.golfzonaca.backoffice.config;
 
 import com.golfzonaca.backoffice.auth.filter.JsonIdPwAuthenticationProcessingFilter;
 import com.golfzonaca.backoffice.auth.filter.JwtAuthenticationFilter;
@@ -6,10 +6,9 @@ import com.golfzonaca.backoffice.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.backoffice.auth.provider.IdPwAuthenticationProvider;
 import com.golfzonaca.backoffice.repository.mybatis.CompanyMapper;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
+import com.golfzonaca.backoffice.service.auth.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,7 +19,6 @@ import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper
 import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -28,12 +26,14 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @RequiredArgsConstructor
-@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CompanyMapper companyMapper;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/signin", "POST");
-
+    @Bean
+    public PasswordEncoder passwordEncoder() {  // passwordEncoder라는 인터페이스를 BcryptPasswordEncoder가 implement 하기 떄문에 new 가능!
+        return new BCryptPasswordEncoder();
+    }
     @Bean
     public UserDetailsService userDetailsService() {
         return new AuthService(new MyBatisCompanyRepository(companyMapper));
@@ -63,20 +63,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin()
                 .loginPage("/signin").permitAll()
-                .defaultSuccessUrl("/places")
-                .loginProcessingUrl("/signin");
+                .loginProcessingUrl("/auth/signin")
+                .defaultSuccessUrl("/places");
         http.authorizeRequests()
-                .antMatchers("/places", "/places/**").permitAll()
-                .antMatchers("/","/**").permitAll();
+                .antMatchers("/**","/places", "/places/**").hasRole("REGISTOR")
+                .antMatchers("/").permitAll();
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(),UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
         http.userDetailsService(userDetailsService());
     }
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("SecurityConfig.configure");
         auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService(),
-                PasswordEncoderFactories.createDelegatingPasswordEncoder(),
+                passwordEncoder(),
                 new SimpleAuthorityMapper()));
     }
 }

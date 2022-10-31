@@ -41,7 +41,4 @@ public class MyBatisConfig {
         return new MyBatisCompanyRepository(companyMapper);
     }
 
-//    public LoginService loginService() {
-//        return new LoginService(new MyBatisCompanyService(new MyBatisCompanyRepository(companyMapper)));
-//    }
 }
