@@ -65,7 +65,7 @@ public class PlaceController {
         Place savedPlace = placeService.save(place);
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/place/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
+        return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
     }
 
     @GetMapping("/{placeId}/edit")
@@ -85,12 +85,12 @@ public class PlaceController {
         log.info("update");
         PlaceUpdateDto place = transformType.editTransform(updateViewParam);
         placeService.update(placeId, place);
-        return "redirect:/place/places/{placeId}";
+        return "redirect:/places/{placeId}";
     }
 
     @GetMapping("/{placeId}/delete")
     public String delete(@PathVariable Long placeId) {
         placeService.delete(placeId);
-        return "redirect:/place/places";
+        return "redirect:/places";
     }
 }
