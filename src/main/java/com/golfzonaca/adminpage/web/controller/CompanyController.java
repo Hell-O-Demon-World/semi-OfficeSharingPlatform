@@ -41,7 +41,7 @@ public class CompanyController {
         return "redirect:/companies";
     }
 
-    @GetMapping("{id}/delete")
+    @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
         companyService.delete(id);
         return "redirect:/companies";
