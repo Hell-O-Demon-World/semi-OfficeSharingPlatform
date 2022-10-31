@@ -18,7 +18,6 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
-    private final PasswordEncoder passwordEncoder;
     private final MyBatisCompanyRepository myBatisCompanyRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
