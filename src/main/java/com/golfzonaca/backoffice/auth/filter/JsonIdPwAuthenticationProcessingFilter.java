@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.auth.filter;
 
 import com.golfzonaca.backoffice.auth.token.IdPwAuthenticationToken;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class JsonIdPwAuthenticationProcessingFilter extends AbstractAuthenticationProcessingFilter {
     public JsonIdPwAuthenticationProcessingFilter(RequestMatcher requiresAuthenticationRequestMatcher) {
         super(requiresAuthenticationRequestMatcher);
@@ -25,7 +27,7 @@ public class JsonIdPwAuthenticationProcessingFilter extends AbstractAuthenticati
         if (!request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
-
+        log.info("request={}",request);
         IdPwAuthenticationToken idPwAuthenticationToken = new IdPwAuthenticationToken(request.getParameter("id"), request.getParameter("pw"));
         idPwAuthenticationToken.setDetails(super.authenticationDetailsSource.buildDetails(request));
 

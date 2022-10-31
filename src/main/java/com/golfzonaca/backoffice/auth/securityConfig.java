@@ -47,7 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/places")
                 .loginProcessingUrl("/signin");
         http.authorizeRequests()
-                .antMatchers("/places", "/places/**", "/**").hasRole("REGISTER");
+                .antMatchers("/places", "/places/**").hasRole("REGISTER")
+                .antMatchers("/").permitAll();
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
         http.userDetailsService(userDetailsService);
