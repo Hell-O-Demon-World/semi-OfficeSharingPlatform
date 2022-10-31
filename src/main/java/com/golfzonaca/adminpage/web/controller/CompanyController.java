@@ -38,10 +38,10 @@ public class CompanyController {
         log.info("savedCompany={} ",savedCompany);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/companies/{companyId}";
+        return "redirect:/companies";
     }
 
-    @PostMapping("{id}/delete")
+    @GetMapping("{id}/delete")
     public String delete(@PathVariable Long id) {
         companyService.delete(id);
         return "redirect:/companies";

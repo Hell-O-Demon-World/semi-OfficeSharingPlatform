@@ -12,6 +12,12 @@
         </where>
     </select>
 
+    <delete id="delete">
+        delete
+        from company
+        where id = #{id}
+    </delete>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into company(company_loginid, company_pw, company_name, company_tel, company_regnum,
                             company_repname, address_id)
