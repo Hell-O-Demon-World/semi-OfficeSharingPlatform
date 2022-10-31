@@ -24,7 +24,6 @@ public class IdPwAuthenticationProvider implements AuthenticationProvider {
         String userId = String.valueOf(authentication.getPrincipal());
         UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
 
-        // bcrypt 된 비밀번호 일치 여부 확인
         if (!this.passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())) {
             throw new BadCredentialsException("AbstractUserDetailsAuthenticationProvider.badCredentials");
         }

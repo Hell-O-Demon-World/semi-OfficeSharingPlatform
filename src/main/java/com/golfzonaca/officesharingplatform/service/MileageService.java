@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MileageService {
     private final MileageRepository mileageRepository;
-
-//    @Transactional
+    private final int initialPoint = 0;
     public Mileage join() {
+
         Mileage mileage = new Mileage();
-        mileage.setPoint(0);
+        mileage.setPoint(initialPoint);
+
         mileageRepository.save(mileage);
+
         return mileage;
     }
 }

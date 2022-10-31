@@ -17,17 +17,17 @@ import java.util.Set;
 @Service
 public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
-    // 1. 패스워드는 알아서 체킹하니까 신경쓸필요 없다.
-    // 2. 리턴이 잘 되면 자동으로 UserDetails 타입 세션으로 만든다.
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
         User user = userRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User Not Found");
         }
+
         Set<GrantedAuthority> grantedAuthorityList = new HashSet<>();
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getAuthority()); // 역할 설정
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
         grantedAuthorityList.add(simpleGrantedAuthority);
 
         return new PrincipalDetails(user.getMail(), user.getPw(), grantedAuthorityList);
