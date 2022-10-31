@@ -8,20 +8,19 @@ import com.golfzonaca.backoffice.repository.mybatis.MyBatisPlaceRepository;
 import com.golfzonaca.backoffice.repository.mybatis.PlaceMapper;
 import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.company.MyBatisCompanyService;
-import com.golfzonaca.backoffice.service.login.LoginService;
 import com.golfzonaca.backoffice.service.place.MyBatisPlaceService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
 import lombok.RequiredArgsConstructor;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @RequiredArgsConstructor
 public class MyBatisConfig {
-
     private final PlaceMapper placeMapper;
     private final CompanyMapper companyMapper;
-
     @Bean
     public PlaceService placeService() {
         return new MyBatisPlaceService(placeRepository());
@@ -42,8 +41,7 @@ public class MyBatisConfig {
         return new MyBatisCompanyRepository(companyMapper);
     }
 
-    @Bean
-    public LoginService loginService() {
-        return new LoginService(new MyBatisCompanyService(new MyBatisCompanyRepository(companyMapper)));
-    }
+//    public LoginService loginService() {
+//        return new LoginService(new MyBatisCompanyService(new MyBatisCompanyRepository(companyMapper)));
+//    }
 }

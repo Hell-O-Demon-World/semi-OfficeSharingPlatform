@@ -2,7 +2,6 @@ package com.golfzonaca.backoffice.web.controller;
 
 import com.golfzonaca.backoffice.auth.TokenForm;
 import com.golfzonaca.backoffice.domain.Company;
-import com.golfzonaca.backoffice.service.login.LoginService;
 import com.golfzonaca.backoffice.web.form.login.LoginForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,6 @@ import javax.validation.Valid;
 @Controller
 public class LoginController {
 
-    private final LoginService loginService;
 
     @GetMapping("/signin")
     public String loginForm(@ModelAttribute LoginForm loginForm, Model model) {

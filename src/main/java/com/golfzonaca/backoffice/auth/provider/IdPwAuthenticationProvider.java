@@ -1,5 +1,6 @@
 package com.golfzonaca.backoffice.auth.provider;
 
+import com.golfzonaca.backoffice.auth.AuthService;
 import com.golfzonaca.backoffice.auth.token.IdPwAuthenticationToken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,11 @@ public class IdPwAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        System.out.println("IdPwAuthenticationProvider.authenticate");
         String userId = String.valueOf(authentication.getPrincipal());
+        log.info("userId={}", userId);
+        log.info("userDetailsService={}",userDetailsService);
+        log.info("result={}",userDetailsService.loadUserByUsername(userId));
         UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
         log.info("userDetails.getUsername()={}",userDetails.getUsername());
         log.info("authentication.getPrincipal()={}",authentication.getPrincipal());

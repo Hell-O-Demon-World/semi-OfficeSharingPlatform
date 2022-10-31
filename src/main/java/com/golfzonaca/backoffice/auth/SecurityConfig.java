@@ -8,6 +8,7 @@ import com.golfzonaca.backoffice.repository.mybatis.CompanyMapper;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,20 +28,19 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @RequiredArgsConstructor
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService userDetailsService;
+    private final CompanyMapper companyMapper;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/signin", "POST");
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth){
-        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService, PasswordEncoderFactories.createDelegatingPasswordEncoder()
-                ,new SimpleAuthorityMapper()));
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new AuthService(new MyBatisCompanyRepository(companyMapper));
     }
-
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(userDetailsService);
+        return new JwtAuthenticationFilter(userDetailsService());
     }
     @Bean
     public GrantedAuthoritiesMapper grantedAuthoritiesMapper() {
@@ -67,9 +67,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/signin");
         http.authorizeRequests()
                 .antMatchers("/places", "/places/**").permitAll()
-                .antMatchers("/").permitAll();
+                .antMatchers("/","/**").permitAll();
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(),UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
-        http.userDetailsService(userDetailsService);
+        http.userDetailsService(userDetailsService());
+    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        System.out.println("SecurityConfig.configure");
+        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService(),
+                PasswordEncoderFactories.createDelegatingPasswordEncoder(),
+                new SimpleAuthorityMapper()));
     }
 }

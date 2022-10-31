@@ -1,8 +1,11 @@
 package com.golfzonaca.backoffice.auth;
 
 import com.golfzonaca.backoffice.domain.Company;
+import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,14 +17,15 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
-@Service
+@Slf4j
 @RequiredArgsConstructor
 public class AuthService implements UserDetailsService {
     private final MyBatisCompanyRepository myBatisCompanyRepository;
-    @Override
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        myBatisCompanyRepository.findByCompanyLoginId(username);
         Company company = myBatisCompanyRepository.findByCompanyLoginId(username).get();
+        log.info("company={}",company);
         if (company == null) {
             throw new UsernameNotFoundException(username);
         }
@@ -34,5 +38,4 @@ public class AuthService implements UserDetailsService {
                 .authorities(grantedAuthorityList)
                 .build();
     }
-
 }

@@ -1,6 +1,7 @@
 package com.golfzonaca.backoffice.repository;
 
 import com.golfzonaca.backoffice.domain.Company;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Optional;

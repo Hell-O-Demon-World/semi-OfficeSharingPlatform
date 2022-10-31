@@ -3,6 +3,7 @@ package com.golfzonaca.backoffice.auth.token;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.jwt.Jwt;
 import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.MacSigner;
@@ -10,7 +11,7 @@ import org.springframework.security.jwt.crypto.sign.MacSigner;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
-
+@Slf4j
 public class JwtManager {
     private static final MacSigner macSigner = new MacSigner("will-b-fine");
     private static final Gson gson = new Gson();
@@ -33,7 +34,7 @@ public class JwtManager {
     }
 
     public static boolean validateJwt(String jwt){
-
+        log.error("jwt={}",jwt);
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement iatJson = jsonObject.get("iat");
         long iat = iatJson.getAsLong();
@@ -45,7 +46,8 @@ public class JwtManager {
 
         JsonObject jsonObject = getJsonObject(jwt);
         JsonElement jsonElement = jsonObject.get(attr);
-
+        log.info("jsonObject", getJsonObject(jwt));
+        log.info("jsonElement", jsonObject.get(attr));
         return jsonElement.getAsString();
     }
 
