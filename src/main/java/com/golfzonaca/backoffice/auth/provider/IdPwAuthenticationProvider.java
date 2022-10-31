@@ -23,7 +23,8 @@ public class IdPwAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userId = String.valueOf(authentication.getPrincipal());
         UserDetails userDetails = userDetailsService.loadUserByUsername(userId);
-
+        log.info("userDetails.getUsername()={}",userDetails.getUsername());
+        log.info("authentication.getPrincipal()={}",authentication.getPrincipal());
         if (!this.passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())) {
             throw new BadCredentialsException("AbstractUserDetailsAuthenticationProvider.badCredentials");
         }
