@@ -9,5 +9,6 @@ public interface CompanyRepository {
     Company save(Company company);
 
     void delete(Long id);
+
     List<Company> findCompanies(CompanySearchCond companySearch);
 }
