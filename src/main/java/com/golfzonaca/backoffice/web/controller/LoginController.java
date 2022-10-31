@@ -1,5 +1,6 @@
 package com.golfzonaca.backoffice.web.controller;
 
+import com.golfzonaca.backoffice.auth.TokenForm;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.service.login.LoginService;
 import com.golfzonaca.backoffice.web.form.login.LoginForm;
@@ -7,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -27,6 +25,11 @@ public class LoginController {
         return "login/loginForm";
     }
 
+    @ResponseBody
+    @PostMapping("/auth/signin")
+    public String loginTest(@ModelAttribute TokenForm tokenForm) {
+        return "/places";
+    }
     @PostMapping
     public String login(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
