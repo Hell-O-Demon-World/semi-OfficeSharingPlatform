@@ -23,20 +23,16 @@ public class JsonIdPwAuthenticationProcessingFilter extends AbstractAuthenticati
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException {
-
         if (!request.getMethod().equals("POST")) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+
         }
-        log.info("request={}",request);
+        log.info("success request={}",request);
+        log.info("id={}",request.getParameter("id"));
+        log.info("pw={}",request.getParameter("pw"));
         IdPwAuthenticationToken idPwAuthenticationToken = new IdPwAuthenticationToken(request.getParameter("id"), request.getParameter("pw"));
         idPwAuthenticationToken.setDetails(super.authenticationDetailsSource.buildDetails(request));
 
         return super.getAuthenticationManager().authenticate(idPwAuthenticationToken);
-    }
-
-    private Map<String, Object> parseJsonMap(HttpServletRequest request) throws IOException {
-        String body = request.getReader().lines().collect(Collectors.joining());
-        GsonJsonParser gsonJsonParser = new GsonJsonParser();
-        return gsonJsonParser.parseMap(body);
     }
 }

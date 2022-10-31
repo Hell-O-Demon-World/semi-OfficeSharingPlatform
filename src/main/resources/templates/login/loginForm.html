@@ -30,15 +30,15 @@
 
         <div>
             <label for="loginId">로그인 ID</label>
-            <input type="text" id="loginId" th:field="*{companyLoginId}" class="form-control"
+            <input type="text" id="loginId" th:field="*{id}" class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{companyLoginId}" />
+            <div class="field-error" th:errors="*{id}" />
         </div>
         <div>
             <label for="password">비밀번호</label>
-            <input type="password" id="password" th:field="*{companyPw}" class="form-control"
+            <input type="password" id="password" th:name="pw" th:field="*{pw}" class="form-control"
                    th:errorclass="field-error">
-            <div class="field-error" th:errors="*{companyPw}" />
+            <div class="field-error" th:errors="*{pw}" />
         </div>
 
         <hr class="my-4">

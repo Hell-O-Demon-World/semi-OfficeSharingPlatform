@@ -20,8 +20,8 @@ public class CompanyPrincipalDetails implements UserDetails {
     private final String username;
     private String password;
     private final boolean accountNonExpired;
-    private final boolean acccountNonLocked;
-    private final boolean creditionalNonExpired;
+    private final boolean accountNonLocked;
+    private final boolean credentialsNonExpired;
     private final boolean enabled;
     private final Set<GrantedAuthority> authorities;
 
