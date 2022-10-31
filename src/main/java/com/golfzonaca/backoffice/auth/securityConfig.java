@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -19,13 +18,15 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/signin", "POST");
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/signin", "POST");
+
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
         return new JwtSuccessHandler();
     }
+
     @Bean
     public JsonIdPwAuthenticationProcessingFilter jsonIdPwAuthenticationProcessingFilter() throws Exception {
         JsonIdPwAuthenticationProcessingFilter jsonAuthenticationFilter = new JsonIdPwAuthenticationProcessingFilter(LOGIN_REQUEST_MATCHER);
@@ -33,14 +34,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jsonAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
         return jsonAuthenticationFilter;
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin()
-                .loginPage("/")
+                .loginPage("/signin")
                 .defaultSuccessUrl("/places")
-                .loginProcessingUrl("/");
+                .loginProcessingUrl("/signin");
         http.authorizeRequests()
                 .antMatchers("/places", "/places/**", "/**").hasRole("REGISTER");
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
