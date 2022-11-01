@@ -2,10 +2,12 @@ package com.golfzonaca.backoffice.web.controller;
 
 import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
 import com.golfzonaca.backoffice.domain.Company;
+import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
+import com.golfzonaca.backoffice.service.address.LocationService;
 import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
 import com.golfzonaca.backoffice.web.form.place.PlaceAddForm;
@@ -24,12 +26,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/places") //기본 url 시작을 위한 RequestMapping
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:8080")
 public class PlaceController {
     private final JwtRepostiory jwtRepostiory;
-
     private final PlaceService placeService;
     private final CompanyService companyService;
+    private final LocationService locationService;
     private final TransformType transformType;
 
     @ModelAttribute("DaysType")
@@ -44,6 +45,8 @@ public class PlaceController {
 
     @GetMapping
     public String places(Model model) {
+        System.out.println("PlaceController.placesForm");
+        System.out.println("jwtRepostiory = " + jwtRepostiory.getId());
         Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
@@ -63,11 +66,14 @@ public class PlaceController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("place", new Place());
+        model.addAttribute("location", new Location());
         return "place/addForm";
     }
 
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, RedirectAttributes redirectAttributes) {
+    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RedirectAttributes redirectAttributes) {
+        Location savedAddress = locationService.save(location);
+        placeAddForm.setAddressId(savedAddress.getId());
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place);
         redirectAttributes.addAttribute("id", savedPlace.getId());
@@ -87,9 +93,6 @@ public class PlaceController {
 
     @PostMapping("/{placeId}/edit")
     public String edit(@PathVariable Long placeId, @ModelAttribute PlaceEditForm updateViewParam) {
-        log.info("placeId={}", placeId);
-        log.info("updateParam={}", updateViewParam);
-        log.info("update");
         PlaceUpdateDto place = transformType.editTransform(updateViewParam);
         placeService.update(placeId, place);
         return "redirect:/places/{placeId}";

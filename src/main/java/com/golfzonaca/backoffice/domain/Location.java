@@ -1,8 +1,17 @@
 package com.golfzonaca.backoffice.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Location {
 
-    private Long id;
+    private long id;
     private String Address;
-    private Long addressId;
+    private String postalCode;
+
 }
+

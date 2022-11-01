@@ -9,7 +9,7 @@ public interface CompanyService {
 
     Company save(Company company);
 
-    public List<Company> findAll();
+    List<Company> findAll();
 
     Optional<Company> findByCompanyLoginId(String loginId);
 }
