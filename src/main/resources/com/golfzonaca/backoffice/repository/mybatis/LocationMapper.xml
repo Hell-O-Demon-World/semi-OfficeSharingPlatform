@@ -9,7 +9,7 @@
 
     <update id="update">
         update location
-        set location=#{updateParam.address},
+        set address=#{updateParam.address},
             postalcode=#{updateParam.postalCode}
     </update>
 

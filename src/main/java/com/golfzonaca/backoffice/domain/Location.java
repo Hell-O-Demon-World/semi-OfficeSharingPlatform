@@ -13,5 +13,9 @@ public class Location {
     private String Address;
     private String postalCode;
 
+    public Location(String address, String postalCode) {
+        Address = address;
+        this.postalCode = postalCode;
+    }
 }
 

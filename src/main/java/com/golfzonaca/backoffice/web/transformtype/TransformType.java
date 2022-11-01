@@ -21,7 +21,7 @@ public class TransformType {
         place.setPlaceStart(placeAddForm.getPlaceStart());
         place.setPlaceEnd(placeAddForm.getPlaceEnd());
         place.setPlaceAddInfo(placeAddForm.getPlaceAddInfo().toString().replace("[", "").replace("]", ""));
-//        place.setAddressId(place.getAddressId());
+        place.setAddressId(placeAddForm.getAddressId());
         return place;
     }
 
@@ -35,6 +35,7 @@ public class TransformType {
         placeAddForm.setPlaceStart(place.getPlaceStart());
         placeAddForm.setPlaceEnd(place.getPlaceEnd());
         placeAddForm.setPlaceAddInfo(List.of(place.getPlaceAddInfo().split(", ")));
+        placeAddForm.setAddressId(place.getAddressId());
         return placeAddForm;
     }
 
@@ -46,7 +47,7 @@ public class TransformType {
         place.setPlaceStart(placeEditForm.getPlaceStart());
         place.setPlaceEnd(placeEditForm.getPlaceEnd());
         place.setPlaceAddInfo(placeEditForm.getPlaceAddInfo().toString().replace("[", "").replace("]", ""));
-//        place.setAddressId(place.getAddressId());
+        place.setAddressId(placeEditForm.getAddressId());
         return place;
     }
 }

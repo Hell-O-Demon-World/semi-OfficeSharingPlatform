@@ -33,8 +33,12 @@
         <input type="text" id="placeDescription" name="placeDescription" class="form-control" value="판교에 위치한 공간A입니다." th:value="${place.placeDescription}" readonly disabled="true">
     </div>
     <div>
-        <label for="addressId">주소</label>
-        <input type="text" id="addressId" name=addressId class="form-control" value="1" th:value="${place.addressId}" readonly disabled="true">
+        <label for="postalCode">우편번호</label>
+        <input type="text" id="postalCode" name=postalCode class="form-control" value="1" th:value="${location.postalCode}" readonly disabled="true">
+    </div>
+    <div>
+        <label for="address">주소</label>
+        <input type="text" id="address" name=address class="form-control" value="1" th:value="${location.address}" readonly disabled="true">
     </div>
 
     <!-- multi checkbox -->

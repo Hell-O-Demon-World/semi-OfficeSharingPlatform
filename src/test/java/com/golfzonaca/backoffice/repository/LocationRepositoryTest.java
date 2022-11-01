@@ -1,12 +1,14 @@
 package com.golfzonaca.backoffice.repository;
 
-import com.golfzonaca.backoffice.domain.Address;
+import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.repository.dto.LocationUpdateDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 @Transactional
@@ -19,38 +21,38 @@ class LocationRepositoryTest {
     @Test
     void 주소저장() {
         //Given
-        Address address = new Address("경기도 성남시 분당구", "11111");
+        Location location = new Location("경기도 성남시 분당구", "11111");
         //When
-        Address savedAddress = locationRepository.save(address);
+        Location savedLocation = locationRepository.save(location);
         //Then
-        Address findAddress = locationRepository.findByAddressId(savedAddress.getId());
-        assertThat(savedAddress).isEqualTo(findAddress);
+        Location findLocation = locationRepository.findByAddressId(savedLocation.getId());
+        assertThat(savedLocation).isEqualTo(findLocation);
     }
 
     @Test
     void 주소수정() {
         //Given
-        Address address = new Address("경기도 성남시 분당구", "11111");
-        Address savedAddress = locationRepository.save(address);
-        long AddressId = savedAddress.getId();
+        Location location = new Location("경기도 성남시 분당구", "11111");
+        Location savedLocation = locationRepository.save(location);
+        long AddressId = savedLocation.getId();
         LocationUpdateDto updateParam = new LocationUpdateDto("서울시 강남구", "00000");
         //When
         locationRepository.update(AddressId, updateParam);
         //Then
-        Address findAddress = locationRepository.findByAddressId(AddressId);
-        assertThat(findAddress.getLocation()).isEqualTo(updateParam.getLocation());
-        assertThat(findAddress.getPostalCode()).isEqualTo(updateParam.getPostalCode());
+        Location findLocation = locationRepository.findByAddressId(AddressId);
+        assertThat(findLocation.getAddress()).isEqualTo(updateParam.getAddress());
+        assertThat(findLocation.getPostalCode()).isEqualTo(updateParam.getPostalCode());
     }
 
     @Test
     void 주소조회() {
         //Given
-        Address address = new Address("경기도 성남시 분당구", "11111");
-        Address savedAddress = locationRepository.save(address);
-        long AddressId = savedAddress.getId();
+        Location location = new Location("경기도 성남시 분당구", "11111");
+        Location savedLocation = locationRepository.save(location);
+        long AddressId = savedLocation.getId();
         //When
-        Address findAddress = locationRepository.findByAddressId(AddressId);
+        Location findLocation = locationRepository.findByAddressId(AddressId);
         //Then
-        assertThat(findAddress).isEqualTo(savedAddress);
+        assertThat(findLocation).isEqualTo(savedLocation);
     }
 }

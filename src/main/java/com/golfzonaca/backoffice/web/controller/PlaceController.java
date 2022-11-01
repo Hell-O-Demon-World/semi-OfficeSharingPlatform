@@ -6,6 +6,7 @@ import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
+import com.golfzonaca.backoffice.repository.dto.LocationUpdateDto;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.address.LocationService;
 import com.golfzonaca.backoffice.service.company.CompanyService;
@@ -45,8 +46,6 @@ public class PlaceController {
 
     @GetMapping
     public String places(Model model) {
-        System.out.println("PlaceController.placesForm");
-        System.out.println("jwtRepostiory = " + jwtRepostiory.getId());
         Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
@@ -56,10 +55,10 @@ public class PlaceController {
     @GetMapping("/{placeId}")
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
-        log.info("place={}", place);
+        Location location = locationService.findByAddressId(place.getAddressId());
         PlaceAddForm placeAddForm = transformType.stringToList(place);
-        log.info("placeAddForm={}", placeAddForm);
         model.addAttribute("place", placeAddForm);
+        model.addAttribute("location", location);
         return "place/place";
     }
 
@@ -83,18 +82,21 @@ public class PlaceController {
 
     @GetMapping("/{placeId}/edit")
     public String editForm(@PathVariable Long placeId, Model model) {
-        log.info("editForm 컨트롤러 호출");
         Place findPlace = placeService.findById(placeId).get();
         PlaceAddForm place = transformType.stringToList(findPlace);
-        log.info("place={}", place);
+        Location location = locationService.findByAddressId(place.getAddressId());
         model.addAttribute("place", place);
+        model.addAttribute("location", location);
         return "place/editForm";
     }
 
     @PostMapping("/{placeId}/edit")
-    public String edit(@PathVariable Long placeId, @ModelAttribute PlaceEditForm updateViewParam) {
+    public String edit(@PathVariable Long placeId, @ModelAttribute PlaceEditForm updateViewParam, LocationUpdateDto updateParam) {
+        long addressId = placeService.findById(placeId).get().getAddressId();
+        updateViewParam.setAddressId(addressId);
         PlaceUpdateDto place = transformType.editTransform(updateViewParam);
         placeService.update(placeId, place);
+        locationService.update(addressId, updateParam);
         return "redirect:/places/{placeId}";
     }
 

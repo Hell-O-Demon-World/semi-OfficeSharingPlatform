@@ -1,6 +1,5 @@
 package com.golfzonaca.backoffice.service.address;
 
-import com.golfzonaca.backoffice.domain.Address;
 import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.repository.dto.LocationUpdateDto;
 import lombok.extern.slf4j.Slf4j;
@@ -33,27 +32,27 @@ class LocationServiceTest {
     @Test
     void 주소수정() {
         //Given
-        Address address = new Address("경기도 성남시 분당구", "11111");
-        Address savedAddress = locationService.save(address);
-        long AddressId = savedAddress.getId();
+        Location location = new Location("경기도 성남시 분당구", "11111");
+        Location savedLocation = locationService.save(location);
+        long AddressId = savedLocation.getId();
         LocationUpdateDto updateParam = new LocationUpdateDto("서울시 강남구", "00000");
         //When
         locationService.update(AddressId, updateParam);
         //Then
-        Address findAddress = locationService.findByAddressId(AddressId);
-        assertThat(findAddress.getLocation()).isEqualTo(updateParam.getLocation());
-        assertThat(findAddress.getPostalCode()).isEqualTo(updateParam.getPostalCode());
+        Location findLocation = locationService.findByAddressId(AddressId);
+        assertThat(findLocation.getAddress()).isEqualTo(updateParam.getAddress());
+        assertThat(findLocation.getPostalCode()).isEqualTo(updateParam.getPostalCode());
     }
 
     @Test
     void 주소조회() {
         //Given
-        Address address = new Address("경기도 성남시 분당구", "11111");
-        Address savedAddress = locationService.save(address);
-        long AddressId = savedAddress.getId();
+        Location location = new Location("경기도 성남시 분당구", "11111");
+        Location savedLocation = locationService.save(location);
+        long AddressId = savedLocation.getId();
         //When
-        Address findAddress = locationService.findByAddressId(AddressId);
+        Location findLocation = locationService.findByAddressId(AddressId);
         //Then
-        assertThat(findAddress).isEqualTo(savedAddress);
+        assertThat(findLocation).isEqualTo(savedLocation);
     }
 }

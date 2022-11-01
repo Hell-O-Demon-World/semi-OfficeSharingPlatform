@@ -33,8 +33,12 @@
                    th:value="${place.placeDescription}">
         </div>
         <div>
-            <label for="addressId">주소</label>
-            <input type="text" id="addressId" name="addressId" class="form-control" value="" th:value="${place.addressId}">
+            <label for="postalCode">우편번호</label>
+            <input type="text" id="postalCode" name="postalCode" class="form-control" value="" th:value="${location.postalCode}">
+        </div>
+        <div>
+            <label for="address">주소</label>
+            <input type="text" id="address" name="address" class="form-control" value="" th:value="${location.address}">
         </div>
         <!-- multi checkbox -->
         <div>
