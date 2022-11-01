@@ -1,6 +1,6 @@
 package com.golfzonaca.adminpage.repository.mybatis;
 
-import com.golfzonaca.adminpage.domain.Address;
+import com.golfzonaca.adminpage.domain.Location;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;
@@ -8,7 +8,7 @@ import java.util.Optional;
 @Mapper
 public interface AddressMapper {
 
-    void save(Address address);
+    void save(Location location);
 
-    Optional<Address> findByAddressId(Long id);
+    Optional<Location> findByAddressId(Long id);
 }

@@ -1,12 +1,12 @@
 package com.golfzonaca.adminpage.repository;
 
-import com.golfzonaca.adminpage.domain.Address;
+import com.golfzonaca.adminpage.domain.Location;
 
 import java.util.Optional;
 
 public interface AddressRepository {
 
-    Address save(Address address);
+    Location save(Location location);
 
-    Optional<Address> findByAddressId(Long id);
+    Optional<Location> findByAddressId(Long id);
 }

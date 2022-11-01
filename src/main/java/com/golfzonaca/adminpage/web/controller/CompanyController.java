@@ -1,6 +1,6 @@
 package com.golfzonaca.adminpage.web.controller;
 
-import com.golfzonaca.adminpage.domain.Address;
+import com.golfzonaca.adminpage.domain.Location;
 import com.golfzonaca.adminpage.domain.Company;
 import com.golfzonaca.adminpage.repository.CompanySearchCond;
 import com.golfzonaca.adminpage.service.AddressService;
@@ -34,23 +34,24 @@ public class CompanyController {
     @GetMapping("/{companyId}")
     public String company(@PathVariable Long companyId, Model model) {
         Company company = companyService.findById(companyId).get();
-        Address address = addressService.findByAddressId(company.getAddressId()).get();
+        Location location = addressService.findByAddressId(company.getAddressId()).get();
         log.info("company={} ", company);
         model.addAttribute("company", company);
-        model.addAttribute("address", address);
+        model.addAttribute("location", location);
         return "/company/company";
     }
 
     @GetMapping("/add")
     public String addCompanyForm(Model model) {
         model.addAttribute("company", new Company());
-        return "/company/addCompanyForm";
+        model.addAttribute("location", new Location());
+        return "/company/addForm";
     }
 
     @PostMapping("/add")
-    public String addCompany(@ModelAttribute Company company, Address address, RedirectAttributes redirectAttributes) {
-        Address savedAddress = addressService.save(address);
-        company.setAddressId(savedAddress.getId());
+    public String addCompany(@ModelAttribute Company company, Location location, RedirectAttributes redirectAttributes) {
+        Location savedLocation = addressService.save(location);
+        company.setAddressId(savedLocation.getId());
         Company savedCompany = companyService.save(company);
         log.info("savedCompany={} ", savedCompany);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());

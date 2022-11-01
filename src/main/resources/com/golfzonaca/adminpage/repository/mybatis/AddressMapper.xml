@@ -3,13 +3,13 @@
 <mapper namespace="com.golfzonaca.adminpage.repository.mybatis.AddressMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into address(location, postalCode)
-        values (#{location}, #{postalCode})
+        insert into location(address, postalCode)
+        values (#{address}, #{postalCode})
     </insert>
 
-    <select id="findByAddressId" resultType="address">
+    <select id="findByAddressId" resultType="location">
         select *
-        from address
+        from location
         where id = #{id}
     </select>
 </mapper>

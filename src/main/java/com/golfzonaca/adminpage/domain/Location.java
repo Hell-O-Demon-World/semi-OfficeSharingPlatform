@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Location {
 
     private Long id;
-    private String location;
+    private String address;
     private String postalCode;
 }
