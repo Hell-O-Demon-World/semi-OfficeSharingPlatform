@@ -25,4 +25,10 @@
                 #{addressId})
     </insert>
 
+    <select id="findById" resultType="company">
+        select *
+        from company
+        where id = #{id}
+    </select>
+
 </mapper>

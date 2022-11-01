@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Repository
@@ -28,5 +29,10 @@ public class MyBatisCompanyRepository implements CompanyRepository {
     @Override
     public List<Company> findCompanies(CompanySearchCond companySearch) {
         return companyMapper.findCompanies(companySearch);
+    }
+
+    @Override
+    public Optional<Company> findById(Long id) {
+        return companyMapper.findById(id);
     }
 }

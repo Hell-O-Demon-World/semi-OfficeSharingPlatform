@@ -5,6 +5,7 @@ import com.golfzonaca.adminpage.repository.CompanySearchCond;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface CompanyMapper {
@@ -14,4 +15,6 @@ public interface CompanyMapper {
     void delete(Long id);
 
     List<Company> findCompanies(CompanySearchCond companySearch);
+
+    Optional<Company> findById(Long id);
 }

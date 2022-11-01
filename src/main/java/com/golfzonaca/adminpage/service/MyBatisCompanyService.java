@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +28,10 @@ public class MyBatisCompanyService implements CompanyService {
     @Override
     public List<Company> findCompanies(CompanySearchCond companySearch) {
         return companyRepository.findCompanies(companySearch);
+    }
+
+    @Override
+    public Optional<Company> findById(Long id) {
+        return companyRepository.findById(id);
     }
 }

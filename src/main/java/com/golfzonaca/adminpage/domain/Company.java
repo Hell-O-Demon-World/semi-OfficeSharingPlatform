@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Company {
-
+    
     private Long id;
     private String companyLoginId; // 업체의 백오피스 아이디
     private String companyPw;
