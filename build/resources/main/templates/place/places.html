@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>공간 목록</h2>
+    </div>
+
+    <!--
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='addForm.html'"
+                        th:onclick="|location.href='@{/items/add}'|"
+                        type="button">상품 등록
+                </button>
+            </div>
+        </div>
+    -->
+    <form method="get" class="form-inline">
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="상품명"/>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-secondary mb-2">검색</button>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            onclick="location.href='addForm.html'"
+                            th:onclick="|location.href='@{/places/add}'|"
+                            type="button">상품 등록
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>공간명</th>
+                <th>오픈시간</th>
+                <th>마감시간</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="place : ${places}">
+                <td><a href="place.html" th:href="@{/places/{Id}(Id=${place.id})}" th:text="${place.id}">공간ID</a>
+                </td>
+                <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">공간명</a></td>
+                <td th:text="${place.placeStart}">10:00</td>
+                <td th:text="${place.placeEnd}">12:00</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div> <!-- /container -->
+
+</body>
+</html>
