@@ -9,6 +9,8 @@ public interface LocationRepository {
 
     void update(long id, LocationUpdateDto updateParam);
 
+    void delete(long id);
+
     Location findByAddressId(long id);
 
 }

@@ -16,6 +16,7 @@ public class TransformType {
     public Place listToString(PlaceAddForm placeAddForm) {
         Place place = new Place();
         place.setPlaceName(placeAddForm.getPlaceName());
+        place.setCompanyId(placeAddForm.getCompanyId());
         place.setPlaceDescription(placeAddForm.getPlaceDescription());
         place.setPlaceOpenDays(placeAddForm.getPlaceOpenDays().toString().replace("[", "").replace("]", ""));
         place.setPlaceStart(placeAddForm.getPlaceStart());
@@ -28,9 +29,9 @@ public class TransformType {
     public PlaceAddForm stringToList(Place place) {
         PlaceAddForm placeAddForm = new PlaceAddForm();
         placeAddForm.setId(place.getId());
+        placeAddForm.setCompanyId(place.getCompanyId());
         placeAddForm.setPlaceName(place.getPlaceName());
         placeAddForm.setPlaceDescription(place.getPlaceDescription());
-        // daysString 배열을 daysList 로 변환하기
         placeAddForm.setPlaceOpenDays(new ArrayList<>(Arrays.asList(place.getPlaceOpenDays().split(", "))));
         placeAddForm.setPlaceStart(place.getPlaceStart());
         placeAddForm.setPlaceEnd(place.getPlaceEnd());

@@ -103,6 +103,7 @@ public class PlaceController {
 
     @GetMapping("/{placeId}/delete")
     public String delete(@PathVariable Long placeId) {
+        locationService.delete(placeService.findById(placeId).get().getAddressId());
         placeService.delete(placeId);
         return "redirect:/places";
     }

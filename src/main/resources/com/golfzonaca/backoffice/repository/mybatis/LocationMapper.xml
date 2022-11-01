@@ -11,6 +11,7 @@
         update location
         set address=#{updateParam.address},
             postalcode=#{updateParam.postalCode}
+        where id = #{id}
     </update>
 
     <select id="findByAddressId" resultType="Location">
@@ -18,4 +19,10 @@
         from location
         where id = #{Id}
     </select>
+
+    <delete id="delete">
+        delete
+        from location
+        where id = #{id}
+    </delete>
 </mapper>

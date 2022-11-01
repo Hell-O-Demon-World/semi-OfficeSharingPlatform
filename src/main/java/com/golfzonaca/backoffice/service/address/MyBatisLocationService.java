@@ -23,6 +23,11 @@ public class MyBatisLocationService implements LocationService {
     }
 
     @Override
+    public void delete(long id) {
+        locationRepository.delete(id);
+    }
+
+    @Override
     public Location findByAddressId(long id) {
         return locationRepository.findByAddressId(id);
     }

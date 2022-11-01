@@ -18,6 +18,7 @@
             place_end=#{updateParam.placeEnd},
             place_addinfo=#{updateParam.placeAddInfo},
             address_id=#{updateParam.addressId}
+        where id = #{id}
     </update>
 
     <delete id="delete">

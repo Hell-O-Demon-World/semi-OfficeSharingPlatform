@@ -12,6 +12,8 @@ public interface LocationMapper {
 
     void update(@Param("id") long id, @Param("updateParam") LocationUpdateDto updateParam);
 
+    void delete(long id);
+
     Location findByAddressId(long id);
 
 }

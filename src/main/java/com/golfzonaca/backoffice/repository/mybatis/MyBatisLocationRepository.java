@@ -24,6 +24,11 @@ public class MyBatisLocationRepository implements LocationRepository {
     }
 
     @Override
+    public void delete(long id) {
+        locationMapper.delete(id);
+    }
+
+    @Override
     public Location findByAddressId(long id) {
         return locationMapper.findByAddressId(id);
     }
