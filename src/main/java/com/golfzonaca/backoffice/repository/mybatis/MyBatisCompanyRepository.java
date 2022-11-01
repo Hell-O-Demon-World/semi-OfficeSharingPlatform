@@ -16,8 +16,7 @@ public class MyBatisCompanyRepository implements CompanyRepository {
 
     @Override
     public Company save(Company company) {
-        companyMapper.save(company);
-        return company;
+        return companyMapper.save(company);
     }
 
     @Override

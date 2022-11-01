@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @NoArgsConstructor
 public class Place {
 
-    private Long id; //대여공간식별번호
-    private Long companyId; //업체식별번호
+    private long id; //대여공간식별번호
+    private long companyId; //업체식별번호
     private String placeName;
     private String placeDescription;
     private String placeOpenDays;
@@ -21,10 +21,10 @@ public class Place {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private String placeEnd;
     private String placeAddInfo;
-    private Long addressId; //우편번호
+    private long addressId; //우편번호
 
     @Autowired
-    public Place(Long companyId, String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, Long addressId) {
+    public Place(long companyId, String placeName, String placeDescription, String placeOpenDays, String placeStart, String placeEnd, String placeAddInfo, long addressId) {
         this.companyId = companyId;
         this.placeName = placeName;
         this.placeDescription = placeDescription;

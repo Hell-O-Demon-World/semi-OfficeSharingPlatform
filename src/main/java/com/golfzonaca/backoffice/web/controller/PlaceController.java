@@ -1,9 +1,11 @@
 package com.golfzonaca.backoffice.web.controller;
 
+import com.golfzonaca.backoffice.domain.Address;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
+import com.golfzonaca.backoffice.service.address.AddressService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
 import com.golfzonaca.backoffice.web.form.place.PlaceAddForm;
 import com.golfzonaca.backoffice.web.form.place.PlaceEditForm;
@@ -24,6 +26,8 @@ import java.util.List;
 public class PlaceController {
 
     private final PlaceService placeService;
+
+    private final AddressService addressService;
     private final TransformType transformType;
 
     @ModelAttribute("DaysType")
@@ -56,11 +60,14 @@ public class PlaceController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("place", new Place());
+        model.addAttribute("address", new Address());
         return "place/addForm";
     }
 
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, RedirectAttributes redirectAttributes) {
+    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Address address, RedirectAttributes redirectAttributes) {
+        Address savedAddress = addressService.save(address);
+        placeAddForm.setAddressId(savedAddress.getId());
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place);
         redirectAttributes.addAttribute("id", savedPlace.getId());
