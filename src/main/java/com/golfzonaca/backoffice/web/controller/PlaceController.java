@@ -1,12 +1,10 @@
 package com.golfzonaca.backoffice.web.controller;
 
-import com.golfzonaca.backoffice.auth.CompanyPrincipalDetails;
 import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
-import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
@@ -15,15 +13,11 @@ import com.golfzonaca.backoffice.web.form.place.PlaceEditForm;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.access.method.P;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.security.Principal;
 import java.util.List;
 
 @Slf4j
@@ -50,12 +44,9 @@ public class PlaceController {
 
     @GetMapping
     public String places(Model model) {
-        System.out.println("PlaceController.placesForm");
-        System.out.println("jwtRepostiory = " + jwtRepostiory.getId());
         Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
-        System.out.println("company = " + company);
         List<Place> places = placeService.findAll(company.getId());
-        model.addAttribute("placeSearch", places);
+        model.addAttribute("places", places);
         return "place/places";
     }
 

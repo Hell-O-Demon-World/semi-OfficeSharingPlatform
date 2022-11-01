@@ -23,10 +23,10 @@
             </div>
         </div>
     -->
-    <form th:object="${placeSearch}" method="get" class="form-inline">
+    <form method="get" class="form-inline">
         <div class="row">
             <div class="col">
-                <input type="text" th:field="*{placeName}" class="form-control" placeholder="상품명"/>
+                <input type="text" class="form-control" placeholder="상품명"/>
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-secondary mb-2">검색</button>
@@ -37,7 +37,7 @@
                 <div class="col">
                     <button class="btn btn-primary float-end"
                             onclick="location.href='addForm.html'"
-                            th:onclick="|location.href='@{/items/add}'|"
+                            th:onclick="|location.href='@{/places/add}'|"
                             type="button">상품 등록
                     </button>
                 </div>
@@ -58,7 +58,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="place : ${placeSearch}">
+            <tr th:each="place : ${places}">
                 <td><a href="place.html" th:href="@{/places/{Id}(Id=${place.id})}" th:text="${place.id}">공간ID</a>
                 </td>
                 <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">공간명</a></td>

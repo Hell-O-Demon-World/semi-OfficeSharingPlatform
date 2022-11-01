@@ -1,8 +1,8 @@
 package com.golfzonaca.backoffice.domain;
 
-public class Address {
+public class Location {
 
     private Long id;
-    private String location;
+    private String Address;
     private Long addressId;
 }
