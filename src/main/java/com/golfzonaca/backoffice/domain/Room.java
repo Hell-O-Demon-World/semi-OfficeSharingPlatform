@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class Room {
 
-    private Long id;
-    private Long roomKindId;
-    private Long placeId;
-    private Long companyId;
-    private int totalNumber;
+    private long id;
+    private long roomKindId;
+    private long placeId;
+    private long companyId;
+    private int totalNum;
     private Boolean roomState;
 }
