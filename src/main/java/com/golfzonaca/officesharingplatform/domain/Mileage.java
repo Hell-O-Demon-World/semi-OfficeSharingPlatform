@@ -1,8 +1,10 @@
 package com.golfzonaca.officesharingplatform.domain;
 
-import java.util.concurrent.atomic.AtomicLong;
+import lombok.Data;
 
+import java.util.concurrent.atomic.AtomicLong;
+@Data
 public class Mileage {
-    private AtomicLong id;
+    private long id;
     private int point;
 }

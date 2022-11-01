@@ -1,25 +1,29 @@
 package com.golfzonaca.officesharingplatform.domain;
 
+import com.golfzonaca.officesharingplatform.web.auth.form.prefertype.PreferType;
 import lombok.Data;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
 @Data
 public class User {
-    private AtomicLong id;
+    private long id;
     private String name;
     private String mail;
     private String pw;
-    private AtomicLong mileageId;
+    private long mileageId;
     private String phoneNumber;
     private String job;
-    private String preferType;
+    private List<PreferType> preferType;
 
-    public User(AtomicLong id, String name, String mail, String pw, AtomicLong mileageId) {
-        this.id = id;
+    private String authority;
+
+    public User(String name, String mail, String pw, String phoneNumber, String job, List<PreferType> preferType) {
         this.name = name;
         this.mail = mail;
         this.pw = pw;
-        this.mileageId = mileageId;
+        this.phoneNumber = phoneNumber;
+        this.job = job;
+        this.preferType = preferType;
     }
 }
