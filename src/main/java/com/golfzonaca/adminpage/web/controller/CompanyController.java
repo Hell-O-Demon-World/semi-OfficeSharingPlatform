@@ -42,7 +42,8 @@ public class CompanyController {
     }
 
     @GetMapping("/add")
-    public String addCompanyForm() {
+    public String addCompanyForm(Model model) {
+        model.addAttribute("company", new Company());
         return "/company/addCompanyForm";
     }
 

@@ -11,5 +11,5 @@ public class Address {
 
     private Long id;
     private String location;
-    private int postalCode;
+    private String postalCode;
 }
