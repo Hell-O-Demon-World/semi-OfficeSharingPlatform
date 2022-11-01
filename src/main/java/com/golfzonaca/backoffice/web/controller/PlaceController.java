@@ -1,29 +1,41 @@
 package com.golfzonaca.backoffice.web.controller;
 
+import com.golfzonaca.backoffice.auth.CompanyPrincipalDetails;
+import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
+import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.domain.Place;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
+import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
+import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
 import com.golfzonaca.backoffice.web.form.place.PlaceAddForm;
 import com.golfzonaca.backoffice.web.form.place.PlaceEditForm;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.method.P;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Slf4j
 @Controller
 @RequestMapping("/places") //기본 url 시작을 위한 RequestMapping
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:8080")
 public class PlaceController {
+    private final JwtRepostiory jwtRepostiory;
 
     private final PlaceService placeService;
+    private final CompanyService companyService;
     private final TransformType transformType;
 
     @ModelAttribute("DaysType")
@@ -37,9 +49,13 @@ public class PlaceController {
     }
 
     @GetMapping
-    public String places(@ModelAttribute("placeSearch") Long companyId, Model model) {
-        List<Place> places = placeService.findAll(companyId);
-        model.addAttribute("places", places);
+    public String places(Model model) {
+        System.out.println("PlaceController.placesForm");
+        System.out.println("jwtRepostiory = " + jwtRepostiory.getId());
+        Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
+        System.out.println("company = " + company);
+        List<Place> places = placeService.findAll(company.getId());
+        model.addAttribute("placeSearch", places);
         return "place/places";
     }
 

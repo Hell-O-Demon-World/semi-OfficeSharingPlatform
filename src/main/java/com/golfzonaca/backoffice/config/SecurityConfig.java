@@ -4,6 +4,7 @@ import com.golfzonaca.backoffice.auth.filter.JsonIdPwAuthenticationProcessingFil
 import com.golfzonaca.backoffice.auth.filter.JwtAuthenticationFilter;
 import com.golfzonaca.backoffice.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.backoffice.auth.provider.IdPwAuthenticationProvider;
+import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
 import com.golfzonaca.backoffice.repository.mybatis.CompanyMapper;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
 import com.golfzonaca.backoffice.service.auth.AuthService;
@@ -24,6 +25,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -34,9 +38,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {  // passwordEncoder라는 인터페이스를 BcryptPasswordEncoder가 implement 하기 떄문에 new 가능!
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new AuthService(new MyBatisCompanyRepository(companyMapper));
+    }
+    @Bean
+    public JwtRepostiory jwtRepostiory() {
+        return new JwtRepostiory();
     }
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -48,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new JwtSuccessHandler();
+        return new JwtSuccessHandler(jwtRepostiory());
     }
     @Bean
     public JsonIdPwAuthenticationProcessingFilter jsonIdPwAuthenticationProcessingFilter() throws Exception {
@@ -63,11 +72,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin()
                 .loginPage("/signin").permitAll()
-                .loginProcessingUrl("/auth/signin")
-                .defaultSuccessUrl("/places");
-        http.authorizeRequests()
-                .antMatchers("/**","/places", "/places/**").hasRole("REGISTOR")
-                .antMatchers("/").permitAll();
+                .and()
+                .authorizeRequests()
+                .antMatchers("/**").permitAll();
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(),UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
         http.userDetailsService(userDetailsService());
@@ -78,4 +85,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 passwordEncoder(),
                 new SimpleAuthorityMapper()));
     }
+
 }
