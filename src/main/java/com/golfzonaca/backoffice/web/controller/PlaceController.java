@@ -1,6 +1,6 @@
 package com.golfzonaca.backoffice.web.controller;
 
-import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
+import com.golfzonaca.backoffice.auth.token.JwtRepository;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.domain.Place;
@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping("/places") //기본 url 시작을 위한 RequestMapping
 @RequiredArgsConstructor
 public class PlaceController {
-    private final JwtRepostiory jwtRepostiory;
+    private final JwtRepository jwtRepository;
     private final PlaceService placeService;
     private final CompanyService companyService;
     private final LocationService locationService;
@@ -46,7 +46,7 @@ public class PlaceController {
 
     @GetMapping
     public String places(Model model) {
-        Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
+        Company company = companyService.findByCompanyLoginId(jwtRepository.getId()).get();
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
         return "place/places";
@@ -72,7 +72,7 @@ public class PlaceController {
     @PostMapping("/add")
     public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RedirectAttributes redirectAttributes) {
         Location savedAddress = locationService.save(location);
-        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepostiory.getId()).get().getId());
+        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepository.getId()).get().getId());
         placeAddForm.setAddressId(savedAddress.getId());
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place);
