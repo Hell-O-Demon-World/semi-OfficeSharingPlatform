@@ -1,9 +1,7 @@
 package com.golfzonaca.officesharingplatform.domain;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 public class Address {
-    private AtomicLong id;
+    private long id;
     private String address;
     private int postalCode;
 }

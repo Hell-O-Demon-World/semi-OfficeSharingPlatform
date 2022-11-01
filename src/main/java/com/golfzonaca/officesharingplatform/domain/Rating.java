@@ -5,14 +5,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 @ToString
 @RequiredArgsConstructor
 public class Rating {
 
-    private AtomicLong id;
+    private long id;
     private int score;
     private String review;
     private String assessmentWriter;
