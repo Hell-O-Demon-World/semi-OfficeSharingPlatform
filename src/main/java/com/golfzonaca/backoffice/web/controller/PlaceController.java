@@ -72,6 +72,7 @@ public class PlaceController {
     @PostMapping("/add")
     public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RedirectAttributes redirectAttributes) {
         Location savedAddress = locationService.save(location);
+        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepostiory.getId()).get().getId());
         placeAddForm.setAddressId(savedAddress.getId());
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place);
