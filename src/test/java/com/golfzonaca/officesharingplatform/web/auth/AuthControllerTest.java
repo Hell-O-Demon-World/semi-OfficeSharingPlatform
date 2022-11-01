@@ -24,23 +24,6 @@ class AuthControllerTest {
 
     @Test
     public void signup() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        ConcurrentHashMap<String, Object> errorMap = new ConcurrentHashMap<>();
 
-        SignUpSaveForm signUpSaveForm = new SignUpSaveForm(null,"1234"
-                ,"kim","010-","programmer","A");
-
-        Set<ConstraintViolation<SignUpSaveForm>> validate = validator.validate(signUpSaveForm);
-        for (ConstraintViolation<SignUpSaveForm> violation : validate) {
-            errorMap.put(violation.getPropertyPath()+"ValidationError", violation.getMessage());
-
-            System.out.println("violation = " + violation);
-            System.out.println("violation.getMessage() = " + violation.getMessage());
-        }
-        System.out.println("errorMap = " + errorMap.values());
-        User user = signUpSaveForm.toEntity();
-
-        System.out.println("errorMap = " + errorMap);
     }
 }

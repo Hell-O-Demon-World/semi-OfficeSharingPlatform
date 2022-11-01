@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemoryUserRepository implements UserRepository {
 
     private static final ConcurrentHashMap<Long, User> store = new ConcurrentHashMap<>();
-
     private static long sequence = 0L;
 
     @Override
@@ -32,9 +31,8 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public User findByEmail(String email) {
 
-        User findUser = new User("","","","","","");
+        User findUser = new User("","","","","", new ArrayList<>());
         Iterator<Long> keys = store.keySet().iterator();
-
         while( keys.hasNext() ){
             Long key = keys.next();
             User storedUser = store.get(key);
