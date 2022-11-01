@@ -1,18 +1,23 @@
 .signUp {
-  width: 350px;
+  width: 500px;
   background: rgb(255, 255, 255);
   margin: 120px auto;
-  height: 600px;
+  height: 700px;
   border: 1px solid #111;
 }
 .signUp header {
   text-align: center;
   font-weight: 900;
   font-size: 30px;
+  width: 100%;
 }
+
 .headerLink {
   color: #111;
   text-decoration: none;
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
 }
 .signUpForm form {
   width: 100%;
@@ -28,8 +33,9 @@
 }
 .signUpForm .select {
   display: flex;
-  margin-right: 33px;
+  margin-left: 46px;
   flex-direction: column;
+  align-self: flex-start;
 }
 .signUpForm .select p {
   margin: 0;
@@ -42,13 +48,17 @@
 .signUpForm .select .selectBox {
   width: 100%;
 }
-.signUpForm .select .selectBox label {
-  margin-left: 10px;
-}
+
 Button {
   width: 80%;
   margin-top: 20px;
 }
 .navLink {
   text-align: center;
+}
+.signIn {
+  height: 500px;
+  width: 500px;
+  padding: 0;
+  margin: 0 auto;
 }

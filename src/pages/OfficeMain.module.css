@@ -1,0 +1,8 @@
+.productList {
+  width: 70%;
+  float: left;
+}
+.reservationForm {
+  width: 30%;
+  float: right;
+}

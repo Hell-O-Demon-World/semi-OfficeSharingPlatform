@@ -44,6 +44,7 @@ const SignIn = () => {
         }
       })
       .then((data) => {
+        localStorage.setItem("token", data.idToken);
         authCtx.login(data.idToken);
         history.push("/");
       })
@@ -52,31 +53,34 @@ const SignIn = () => {
       });
   };
   return (
-    <Card>
+    <Card className={classes.signIn}>
       <header>
         <Link to="/main" className={classes.headerLink}>
-          Office Sharing Platform
+          <h1>Office Sharing Platform</h1>
         </Link>
-        <section className={classes.signUpForm}>
-          <form onSubmit={submitHandler}>
-            <input
-              type="email"
-              name="email"
-              placeholder="아이디(이메일 형식)"
-              ref={emailInputRef}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="패스워드"
-              ref={passwordInputRef}
-            />
-
-            {isLoading && <p>loading...</p>}
-            {!isLoading && <Button type="submit">로그인</Button>}
-          </form>
-        </section>
       </header>
+      <section className={classes.signUpForm}>
+        <form onSubmit={submitHandler}>
+          <input
+            type="email"
+            name="email"
+            placeholder="아이디(이메일 형식)"
+            ref={emailInputRef}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="패스워드"
+            ref={passwordInputRef}
+          />
+
+          {isLoading && <p>loading...</p>}
+          {!isLoading && <Button type="submit">로그인</Button>}
+          <p className={classes.navLink}>
+            계정이 없으신가요?<Link to="/auth/signup">회원가입</Link>
+          </p>
+        </form>
+      </section>
     </Card>
   );
 };

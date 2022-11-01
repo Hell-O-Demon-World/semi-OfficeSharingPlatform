@@ -7,18 +7,40 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  /* const nameInputRef = useRef();
+  const nameInputRef = useRef();
   const phoneInputRef = useRef();
-  const jobInputRef = useRef(); */
+  const jobInputRef = useRef();
+  const deskCheckedRef = useRef();
+  const meetingCheckedRef = useRef();
+  const officeCheckedRef = useRef();
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    /* const enteredName = nameInputRef.current.value;
+    const enteredName = nameInputRef.current.value;
     const enteredPhone = phoneInputRef.current.value;
     const enteredJob = jobInputRef.current.value;
- */
+    const checkedDesk = deskCheckedRef.current.checked;
+    const checkedMeeting = meetingCheckedRef.current.checked;
+    const checkedOffice = officeCheckedRef.current.checked;
+    console.log(checkedDesk, checkedMeeting, checkedOffice);
     setIsLoading(true);
+    console.log(
+      JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        name: enteredName,
+        phone: enteredPhone,
+        job: enteredJob,
+        preferType: [
+          {
+            desk: checkedDesk,
+            meetingroom: checkedMeeting,
+            office: checkedOffice,
+          },
+        ],
+      })
+    );
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
       {
@@ -26,6 +48,16 @@ const SignUp = () => {
         body: JSON.stringify({
           email: enteredEmail,
           password: enteredPassword,
+          name: enteredName,
+          phone: enteredPhone,
+          job: enteredJob,
+          preferType: [
+            {
+              desk: checkedDesk,
+              meetingroom: checkedMeeting,
+              office: checkedOffice,
+            },
+          ],
         }),
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +82,7 @@ const SignUp = () => {
     <Card className={classes.signUp}>
       <header>
         <Link to="/main" className={classes.headerLink}>
-          Office Sharing Platform
+          <h1>Office Sharing Platform</h1>
         </Link>
       </header>
       <section className={classes.signUpForm}>
@@ -67,22 +99,47 @@ const SignUp = () => {
             placeholder="패스워드"
             ref={passwordInputRef}
           />
-          <input type="text" name="name" placeholder="이름" />
-          <input type="text" name="phone" placeholder="전화번호" />
-          <input type="text" name="job" placeholder="직업" />
+          <input
+            type="text"
+            name="name"
+            placeholder="이름"
+            ref={nameInputRef}
+          />
+          <input
+            type="text"
+            name="phone"
+            placeholder="전화번호"
+            ref={phoneInputRef}
+          />
+          <input type="text" name="job" placeholder="직업" ref={jobInputRef} />
           <div className={classes.select}>
             <p>선호 공간 선택</p>
             <div className={classes.selectBox}>
               <label htmlFor="desk">
-                <input type="checkbox" name="desk" value="desk" />
+                <input
+                  type="checkbox"
+                  name="desk"
+                  value="desk"
+                  ref={deskCheckedRef}
+                />
                 데스크
               </label>
               <label htmlFor="meeting">
-                <input type="checkbox" name="meeting" value="meeting" />
+                <input
+                  type="checkbox"
+                  name="meeting"
+                  value="meeting"
+                  ref={meetingCheckedRef}
+                />
                 회의실
               </label>
               <label htmlFor="office">
-                <input type="checkbox" name="office" value="office" />
+                <input
+                  type="checkbox"
+                  name="office"
+                  value="office"
+                  ref={officeCheckedRef}
+                />
                 오피스
               </label>
             </div>

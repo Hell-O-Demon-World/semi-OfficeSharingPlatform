@@ -4,6 +4,7 @@ import Office from "./Office";
 
 import classes from "./OfficeList.module.css";
 import OfficeSearch from "./OfficeSearch";
+import { officeLocationActions } from "../../store/officeLocation";
 const OfficeList = () => {
   const office = [];
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const OfficeList = () => {
         }
 
         setOfficeList(office);
-        dispatch({ type: "add_officeList", list: office });
+        dispatch(officeLocationActions.addOfficeList(office));
       } catch (error) {}
       setIsLoading(false);
     };

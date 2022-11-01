@@ -7,19 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 import classes from "./Map.module.css";
 const { kakao } = window;
 
 const Map = () => {
   const [map, setMap] = useState();
   const history = useHistory();
-  const officeList = useSelector((state) => state.officeList);
-  const showDetailHandler = (e) => {
-    history.push("/main/detail");
-    e.target.style.backgroundColor = "rgb(91, 135, 218)";
-    e.target.nextSibling.style.backgroundColor = "rgb(91, 135, 218)";
-  };
+  const officeList = useSelector((state) => state.location.officeList);
 
   const zoomIn = () => {
     map.setLevel(map.getLevel() - 1);
@@ -61,6 +55,11 @@ const Map = () => {
     });
   }, []);
   useEffect(() => {
+    const showDetailHandler = (e) => {
+      history.push(`/main/${e.target.id}`);
+      e.target.style.backgroundColor = "rgb(91, 135, 218)";
+      e.target.nextSibling.style.backgroundColor = "rgb(91, 135, 218)";
+    };
     officeList.map((elem) => {
       let content = document.createElement("div");
       content.classList.add("wrap");
@@ -86,7 +85,7 @@ const Map = () => {
       });
       return 0;
     });
-  }, [officeList, map]);
+  }, [officeList, map, history]);
 
   return (
     <Fragment>

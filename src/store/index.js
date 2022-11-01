@@ -1,12 +1,9 @@
-import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
+import officeLocation from "./officeLocation";
+import selectItem from "./selectItem";
 
-const officeLocation = (state = { officeList: [] }, action) => {
-  if (action.type === "add_officeList") {
-    return { officeList: state.officeList.concat(...action.list) };
-  }
-  return state;
-};
-
-const store = createStore(officeLocation);
+const store = configureStore({
+  reducer: { item: selectItem, location: officeLocation },
+});
 
 export default store;

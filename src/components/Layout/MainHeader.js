@@ -1,7 +1,7 @@
 import { faBorderTopLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment, useContext, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/auth-Context";
 
 import Modal from "../Modal/Modal";
@@ -37,7 +37,6 @@ const MainHeader = () => {
               </Link>
             </li>
           )}
-          {!authCtx.isLoggedIn && <li className={classes.line}>|</li>}
           {authCtx.isLoggedIn && (
             <li>
               <Link to="/user" className={classes.link}>
@@ -48,7 +47,7 @@ const MainHeader = () => {
           {authCtx.isLoggedIn && <li className={classes.line}>|</li>}
           {authCtx.isLoggedIn && (
             <li>
-              <Link to="/main" className={classes.link} onClick={logoutHandler}>
+              <Link to="/" className={classes.link} onClick={logoutHandler}>
                 Logout
               </Link>
             </li>
