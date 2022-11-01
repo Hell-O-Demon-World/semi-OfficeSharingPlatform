@@ -1,0 +1,23 @@
+package com.golfzonaca.backoffice.service.room;
+
+import com.golfzonaca.backoffice.domain.Room;
+import com.golfzonaca.backoffice.repository.dto.RoomStatusDto;
+import com.golfzonaca.backoffice.repository.dto.RoomUpdateDto;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface RoomService {
+
+    Room save(Room room);
+
+    void updateInfo(long id, RoomUpdateDto updateParam);
+
+    void updateStatus(long id, RoomStatusDto updateStatus);
+
+    void delete(long id);
+
+    Optional<Room> findByRoomId(long id);
+
+    List<Room> findAllByPlaceId(long id);
+}

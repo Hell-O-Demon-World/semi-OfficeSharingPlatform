@@ -9,7 +9,7 @@ import java.util.Optional;
 @Mapper
 public interface CompanyMapper {
 
-    Company save(Company company);
+    void save(Company company);
 
     List<Company> findAll();
 
