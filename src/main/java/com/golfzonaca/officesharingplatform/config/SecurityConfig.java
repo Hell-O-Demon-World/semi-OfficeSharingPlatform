@@ -22,7 +22,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @RequiredArgsConstructor
 @EnableWebSecurity // 해당 파일로 시큐리티를 활성화
-public class SecurityConfig2 extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/auth/signin", "POST");
