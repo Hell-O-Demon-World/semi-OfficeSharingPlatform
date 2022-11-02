@@ -1,10 +1,12 @@
 package com.golfzonaca.officesharingplatform.repository.user;
 
 import com.golfzonaca.officesharingplatform.domain.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class MyBatisUserRepository implements UserRepository{
+@Repository
+public class MyBatisUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         return null;

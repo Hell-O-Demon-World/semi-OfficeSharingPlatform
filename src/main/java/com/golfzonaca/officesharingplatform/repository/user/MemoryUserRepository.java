@@ -1,14 +1,12 @@
 package com.golfzonaca.officesharingplatform.repository.user;
 
 import com.golfzonaca.officesharingplatform.domain.User;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Repository
 public class MemoryUserRepository implements UserRepository {
 
     private static final ConcurrentHashMap<Long, User> store = new ConcurrentHashMap<>();
@@ -31,12 +29,12 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public User findByEmail(String email) {
 
-        User findUser = new User("","","","","", new ArrayList<>());
+        User findUser = new User("", "", "", "", "", new ArrayList<>());
         Iterator<Long> keys = store.keySet().iterator();
-        while( keys.hasNext() ){
+        while (keys.hasNext()) {
             Long key = keys.next();
             User storedUser = store.get(key);
-            if (storedUser.getUserMail().equals(email)){
+            if (storedUser.getUserMail().equals(email)) {
                 return storedUser;
             }
         }
@@ -48,10 +46,10 @@ public class MemoryUserRepository implements UserRepository {
 
         Iterator<Long> keys = store.keySet().iterator();
         int cnt = 0;
-        while( keys.hasNext() ){
+        while (keys.hasNext()) {
             Long key = keys.next();
             User storedUser = store.get(key);
-            if (storedUser.getUserMail().equals(email)){
+            if (storedUser.getUserMail().equals(email)) {
                 cnt++;
             }
         }
