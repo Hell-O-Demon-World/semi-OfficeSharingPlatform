@@ -99,7 +99,7 @@ public class PlaceController {
         Location savedAddress = locationService.save(location); // 주소 추가
         placeAddForm.setAddressId(savedAddress.getId()); //주소ID 추가
 
-        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepostiory.getId()).get().getId()); //회사ID 추가
+        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepository.getId()).get().getId()); //회사ID 추가
 
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place); //Place 저장
@@ -152,7 +152,7 @@ public class PlaceController {
             List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
             roomTypeQuantity.set((new Integer(String.valueOf(result.get(0))) - 1), new Integer(String.valueOf(result.get(1))));
         }
-        
+
         model.addAttribute("place", place);
         model.addAttribute("location", location);
         model.addAttribute("rooms", roomTypeQuantity);
