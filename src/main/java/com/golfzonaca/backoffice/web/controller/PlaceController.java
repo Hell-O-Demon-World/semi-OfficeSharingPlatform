@@ -66,11 +66,12 @@ public class PlaceController {
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
         Location location = locationService.findByAddressId(place.getAddressId());
-        List<Room> rooms = roomService.findAllByPlaceId(place.getId());
+        List<Integer> roomTypeQuantity = roomService.countByRoomType(placeId);
+        log.info("roomTypeQuantity={}", roomTypeQuantity);
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);
         model.addAttribute("location", location);
-        model.addAttribute("rooms", rooms);
+        model.addAttribute("rooms", roomTypeQuantity);
         return "place/place";
     }
 

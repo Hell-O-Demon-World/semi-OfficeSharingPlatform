@@ -23,4 +23,6 @@ public interface RoomMapper {
     List<Room> findAllByPlaceId(long id);
 
     Optional<Room> findByRoomId(long id);
+
+    List<Integer> countByRoomType(long placeId);
 }

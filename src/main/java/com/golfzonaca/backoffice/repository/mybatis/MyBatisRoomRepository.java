@@ -46,4 +46,9 @@ public class MyBatisRoomRepository implements RoomRepository {
     public List<Room> findAllByPlaceId(long id) {
         return roomMapper.findAllByPlaceId(id);
     }
+
+    @Override
+    public List<Integer> countByRoomType(long placeId) {
+        return roomMapper.countByRoomType(placeId);
+    }
 }

@@ -42,4 +42,11 @@
         from room
         where id = #{Id}
     </select>
+
+    <select id="countByRoomType" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM ROOM
+        WHERE PLACE_ID = #{placeId}
+        GROUP BY ROOM_KIND_ID;
+    </select>
 </mapper>
