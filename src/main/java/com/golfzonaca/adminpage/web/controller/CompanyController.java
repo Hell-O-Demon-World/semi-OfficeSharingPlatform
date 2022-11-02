@@ -53,7 +53,6 @@ public class CompanyController {
         Location savedLocation = addressService.save(location);
         company.setAddressId(savedLocation.getId());
         Company savedCompany = companyService.save(company);
-        log.info("savedCompany={} ", savedCompany);
         redirectAttributes.addAttribute("companyId", savedCompany.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/companies/{companyId}";
