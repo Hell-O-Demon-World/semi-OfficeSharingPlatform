@@ -4,7 +4,8 @@ import com.golfzonaca.officesharingplatform.domain.Mileage;
 
 import java.util.List;
 
-public class MyBatisMileageRepository implements MileageRepository{
+public class MyBatisMileageRepository implements MileageRepository {
+    
     @Override
     public Mileage save(Mileage mileage) {
         return null;

@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    void save(User user);
+    User save(User user);
 
     User findById(long id);
 
@@ -18,7 +18,7 @@ public interface UserMapper {
 
     int countContainByEmail(String email);
 
-    void update(@Param("id") long id, @Param("updateParam") UserInfoDto updateParam);
+    User update(@Param("id") long id, @Param("updateParam") UserInfoDto updateParam);
 
     List<User> findAll();
 }
