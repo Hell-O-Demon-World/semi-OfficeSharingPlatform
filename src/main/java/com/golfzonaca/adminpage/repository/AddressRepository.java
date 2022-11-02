@@ -9,4 +9,6 @@ public interface AddressRepository {
     Location save(Location location);
 
     Optional<Location> findByAddressId(Long id);
+
+    void delete(Long id);
 }

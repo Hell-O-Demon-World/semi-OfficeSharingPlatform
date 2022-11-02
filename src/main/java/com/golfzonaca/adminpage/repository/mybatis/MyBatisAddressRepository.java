@@ -23,4 +23,9 @@ public class MyBatisAddressRepository implements AddressRepository {
     public Optional<Location> findByAddressId(Long id) {
         return addressMapper.findByAddressId(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        addressMapper.delete(id);
+    }
 }

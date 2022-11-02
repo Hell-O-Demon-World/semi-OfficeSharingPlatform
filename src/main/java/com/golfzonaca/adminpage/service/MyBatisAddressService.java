@@ -22,4 +22,9 @@ public class MyBatisAddressService implements AddressService{
     public Optional<Location> findByAddressId(Long id) {
         return addressRepository.findByAddressId(id);
     }
+
+    @Override
+    public void delete(Long id) {
+        addressRepository.delete(id);
+    }
 }
