@@ -12,7 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MyBatisUserRepository implements UserRepository {
 
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Override
     public User save(User user) {

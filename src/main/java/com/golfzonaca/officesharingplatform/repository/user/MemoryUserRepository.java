@@ -1,6 +1,8 @@
 package com.golfzonaca.officesharingplatform.repository.user;
 
 import com.golfzonaca.officesharingplatform.domain.User;
+import com.golfzonaca.officesharingplatform.repository.mybatis.dto.UserInfoDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -58,17 +60,13 @@ public class MemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User update(long id, User updateParam) {
+    public User update(long id, UserInfoDto updateParam) {
 
         User findUser = findById(id);
 
-        findUser.setUserName(updateParam.getUserName());
-        findUser.setUserMail(updateParam.getUserMail());
-        findUser.setUserPw(updateParam.getUserPw());
-        findUser.setMileageId(updateParam.getMileageId());
         findUser.setUserTel(updateParam.getUserTel());
         findUser.setUserJob(updateParam.getUserJob());
-        findUser.setUserPlace(updateParam.getUserPlace());
+        findUser.setUserPlace(updateParam.getPreferType());
 
         return findUser;
     }
@@ -78,8 +76,4 @@ public class MemoryUserRepository implements UserRepository {
         return new ArrayList<>(store.values());
     }
 
-    @Override
-    public void clearStore() {
-        store.clear();
-    }
 }

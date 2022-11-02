@@ -2,6 +2,7 @@ package com.golfzonaca.officesharingplatform.repository.user;
 
 import com.golfzonaca.officesharingplatform.domain.User;
 import com.golfzonaca.officesharingplatform.repository.mybatis.dto.UserInfoDto;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -18,5 +19,4 @@ public interface UserRepository {
 
     List<User> findAll();
 
-    void clearStore();
 }
