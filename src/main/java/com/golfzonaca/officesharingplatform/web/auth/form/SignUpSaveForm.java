@@ -37,10 +37,9 @@ public class SignUpSaveForm {
     private List<PreferType> preferType;
 
     public User toEntity() {
-        List<String> userPreferType = new ArrayList<>();
+        String changePreferString = "";
         int cnt = 0;
         for (PreferType preferType1: preferType) {
-            String changePreferString = "";
             if (cnt == 0) {
                 changePreferString.concat("desk:");
             }
@@ -50,9 +49,8 @@ public class SignUpSaveForm {
             if (cnt == 2) {
                 changePreferString.concat("office:");
             }
-            changePreferString.concat(preferType1.toString());
-            userPreferType.add(changePreferString);
+            changePreferString.concat(preferType1.toString()+"&");
         }
-        return new User(name, email, password, phoneNumber, job, userPreferType);
+        return new User(name, email, password, phoneNumber, job, changePreferString);
     }
 }
