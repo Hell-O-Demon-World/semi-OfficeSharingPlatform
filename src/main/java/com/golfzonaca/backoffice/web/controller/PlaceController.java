@@ -75,10 +75,8 @@ public class PlaceController {
         for (int i = 0; i < roomService.countByRoomType(placeId).size(); i++) {
             List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
             roomTypeQuantity.set((new Integer(String.valueOf(result.get(0))) - 1), new Integer(String.valueOf(result.get(1))));
-            log.info("result={}", result);
         }
-
-        log.info("roomTypeQuantity={}", roomTypeQuantity);
+        
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);
         model.addAttribute("location", location);
