@@ -45,10 +45,10 @@ public class SignUpSaveForm {
                 changePreferString.concat("desk:");
             }
             if (cnt == 1) {
-                changePreferString.concat("meetingroom");
+                changePreferString.concat("meetingroom:");
             }
             if (cnt == 2) {
-                changePreferString.concat("office");
+                changePreferString.concat("office:");
             }
             changePreferString.concat(preferType1.toString());
             userPreferType.add(changePreferString);
