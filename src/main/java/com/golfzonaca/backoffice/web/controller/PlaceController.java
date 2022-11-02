@@ -4,15 +4,19 @@ import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.domain.Location;
 import com.golfzonaca.backoffice.domain.Place;
+import com.golfzonaca.backoffice.domain.Room;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
+import com.golfzonaca.backoffice.domain.type.RoomType;
 import com.golfzonaca.backoffice.repository.dto.LocationUpdateDto;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.address.LocationService;
 import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
+import com.golfzonaca.backoffice.service.room.RoomService;
 import com.golfzonaca.backoffice.web.form.place.PlaceAddForm;
 import com.golfzonaca.backoffice.web.form.place.PlaceEditForm;
+import com.golfzonaca.backoffice.web.form.room.RoomAddForm;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,7 @@ import java.util.List;
 public class PlaceController {
     private final JwtRepostiory jwtRepostiory;
     private final PlaceService placeService;
+    private final RoomService roomService;
     private final CompanyService companyService;
     private final LocationService locationService;
     private final TransformType transformType;
@@ -44,6 +49,11 @@ public class PlaceController {
         return AddInfoType.values();
     }
 
+    @ModelAttribute("RoomType")
+    public RoomType[] roomType() {
+        return RoomType.values();
+    }
+
     @GetMapping
     public String places(Model model) {
         Company company = companyService.findByCompanyLoginId(jwtRepostiory.getId()).get();
@@ -56,26 +66,61 @@ public class PlaceController {
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
         Location location = locationService.findByAddressId(place.getAddressId());
+        List<Room> rooms = roomService.findAllByPlaceId(place.getId());
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);
         model.addAttribute("location", location);
+        model.addAttribute("rooms", rooms);
         return "place/place";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("place", new Place());
+        model.addAttribute("roomQuantity", new RoomAddForm());
         model.addAttribute("location", new Location());
         return "place/addForm";
     }
 
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RedirectAttributes redirectAttributes) {
-        Location savedAddress = locationService.save(location);
-        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepostiory.getId()).get().getId());
-        placeAddForm.setAddressId(savedAddress.getId());
+    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RoomAddForm roomAddForm, RedirectAttributes redirectAttributes) {
+
+        Location savedAddress = locationService.save(location); // 주소 추가
+        placeAddForm.setAddressId(savedAddress.getId()); //주소ID 추가
+
+        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepostiory.getId()).get().getId()); //회사ID 추가
+
         Place place = transformType.listToString(placeAddForm);
-        Place savedPlace = placeService.save(place);
+        Place savedPlace = placeService.save(place); //Place 저장
+
+        for (int i = 0; i < roomAddForm.getDesk(); i++) {
+            roomService.save(new Room(1L, savedPlace.getId(), savedPlace.getCompanyId(), 1, false));
+        }
+        for (int i = 0; i < roomAddForm.getMeetingRoom4(); i++) {
+            roomService.save(new Room(2L, savedPlace.getId(), savedPlace.getCompanyId(), 4, false));
+        }
+        for (int i = 0; i < roomAddForm.getMeetingRoom6(); i++) {
+            roomService.save(new Room(3L, savedPlace.getId(), savedPlace.getCompanyId(), 6, false));
+        }
+        for (int i = 0; i < roomAddForm.getMeetingRoom10(); i++) {
+            roomService.save(new Room(4L, savedPlace.getId(), savedPlace.getCompanyId(), 10, false));
+        }
+        for (int i = 0; i < roomAddForm.getMeetingRoom20(); i++) {
+            roomService.save(new Room(5L, savedPlace.getId(), savedPlace.getCompanyId(), 20, false));
+        }
+        for (int i = 0; i < roomAddForm.getOffice20(); i++) {
+            roomService.save(new Room(6L, savedPlace.getId(), savedPlace.getCompanyId(), 20, false));
+        }
+        for (int i = 0; i < roomAddForm.getOffice40(); i++) {
+            roomService.save(new Room(7L, savedPlace.getId(), savedPlace.getCompanyId(), 40, false));
+        }
+        for (int i = 0; i < roomAddForm.getOffice70(); i++) {
+            roomService.save(new Room(8L, savedPlace.getId(), savedPlace.getCompanyId(), 70, false));
+        }
+        for (int i = 0; i < roomAddForm.getOffice100(); i++) {
+            roomService.save(new Room(9L, savedPlace.getId(), savedPlace.getCompanyId(), 100, false));
+        }
+
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
@@ -86,8 +131,10 @@ public class PlaceController {
         Place findPlace = placeService.findById(placeId).get();
         PlaceAddForm place = transformType.stringToList(findPlace);
         Location location = locationService.findByAddressId(place.getAddressId());
+        List<Room> rooms = roomService.findAllByPlaceId(placeId);
         model.addAttribute("place", place);
         model.addAttribute("location", location);
+        model.addAttribute("rooms", rooms);
         return "place/editForm";
     }
 
@@ -105,6 +152,7 @@ public class PlaceController {
     public String delete(@PathVariable Long placeId) {
         locationService.delete(placeService.findById(placeId).get().getAddressId());
         placeService.delete(placeId);
+        roomService.deleteByPlaceId(placeId);
         return "redirect:/places";
     }
 }

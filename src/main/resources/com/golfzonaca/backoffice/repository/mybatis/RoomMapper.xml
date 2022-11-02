@@ -21,10 +21,10 @@
         where id = #{id}
     </update>
 
-    <delete id="delete">
+    <delete id="deleteByPlaceId">
         delete
         from room
-        where id = #{id}
+        where place_id = #{placeId}
     </delete>
 
     <select id="findAllByPlaceId" resultType="Room">

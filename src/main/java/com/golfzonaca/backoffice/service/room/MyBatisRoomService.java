@@ -32,8 +32,8 @@ public class MyBatisRoomService implements RoomService {
     }
 
     @Override
-    public void delete(long id) {
-        roomRepository.delete(id);
+    public void deleteByPlaceId(long placeId) {
+        roomRepository.deleteByPlaceId(placeId);
     }
 
     @Override

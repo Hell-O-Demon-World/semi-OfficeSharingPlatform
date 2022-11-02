@@ -18,7 +18,7 @@ public interface RoomMapper {
 
     void updateStatus(@Param("id") long id, @Param("updateStatus") RoomStatusDto updateStatus);
 
-    void delete(long id);
+    void deleteByPlaceId(long PlaceId);
 
     List<Room> findAllByPlaceId(long id);
 

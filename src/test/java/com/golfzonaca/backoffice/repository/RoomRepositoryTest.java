@@ -68,11 +68,11 @@ class RoomRepositoryTest {
         //Given
         Room room = new Room(1L, 1L, 1L, 10, false);
         Room savedRoom = roomRepository.save(room);
-        long roomId = savedRoom.getId();
+        long placeId = savedRoom.getPlaceId();
         //When
-        roomRepository.delete(roomId);
+        roomRepository.deleteByPlaceId(placeId);
         //Then
-        Optional<Room> findRoom = roomRepository.findByRoomId(roomId);
+        Optional<Room> findRoom = roomRepository.findByRoomId(placeId);
         assertThat(findRoom).isEmpty();
     }
 

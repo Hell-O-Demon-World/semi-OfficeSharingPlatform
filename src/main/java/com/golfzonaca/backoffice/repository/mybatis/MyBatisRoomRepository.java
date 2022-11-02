@@ -33,8 +33,8 @@ public class MyBatisRoomRepository implements RoomRepository {
     }
 
     @Override
-    public void delete(long id) {
-        roomMapper.delete(id);
+    public void deleteByPlaceId(long placeId) {
+        roomMapper.deleteByPlaceId(placeId);
     }
 
     @Override

@@ -68,11 +68,11 @@ class RoomServiceTest {
         //Given
         Room room = new Room(1L, 1L, 1L, 10, false);
         Room savedRoom = roomService.save(room);
-        long roomId = savedRoom.getId();
+        long placeId = savedRoom.getPlaceId();
         //When
-        roomService.delete(roomId);
+        roomService.deleteByPlaceId(placeId);
         //Then
-        Optional<Room> findRoom = roomService.findByRoomId(roomId);
+        Optional<Room> findRoom = roomService.findByRoomId(placeId);
         assertThat(findRoom).isEmpty();
     }
 

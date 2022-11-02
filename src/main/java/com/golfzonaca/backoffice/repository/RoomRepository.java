@@ -15,7 +15,7 @@ public interface RoomRepository {
 
     void updateStatus(long id, RoomStatusDto updateStatus);
 
-    void delete(long id);
+    void deleteByPlaceId(long placeId);
 
     Optional<Room> findByRoomId(long id);
 
