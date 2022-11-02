@@ -1,11 +1,11 @@
 package com.golfzonaca.officesharingplatform.repository.mileage;
 
 import com.golfzonaca.officesharingplatform.domain.Mileage;
+import com.golfzonaca.officesharingplatform.repository.mybatis.dto.MileageUpdateDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-@Repository
 public class MemoryMileageRepository implements MileageRepository{
     private static final ConcurrentHashMap<Long, Mileage> store = new ConcurrentHashMap<>();
 
@@ -24,8 +24,8 @@ public class MemoryMileageRepository implements MileageRepository{
     }
 
     @Override
-    public Mileage update(long id, Mileage mileage) {
-        return null;
+    public void update(long id, MileageUpdateDto mileage) {
+
     }
 
     @Override
@@ -33,8 +33,4 @@ public class MemoryMileageRepository implements MileageRepository{
         return null;
     }
 
-    @Override
-    public void clearStore() {
-
-    }
 }
