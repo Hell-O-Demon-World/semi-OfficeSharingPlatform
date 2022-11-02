@@ -3,6 +3,7 @@ package com.golfzonaca.officesharingplatform.web.auth;
 import com.golfzonaca.officesharingplatform.domain.User;
 import com.golfzonaca.officesharingplatform.service.auth.MemoryAuthService;
 import com.golfzonaca.officesharingplatform.web.auth.form.SignUpSaveForm;
+import com.golfzonaca.officesharingplatform.web.auth.form.prefertype.PreferType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
