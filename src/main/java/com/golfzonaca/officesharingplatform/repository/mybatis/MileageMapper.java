@@ -1,4 +1,4 @@
-package com.golfzonaca.officesharingplatform.repository.mybatis.mapper;
+package com.golfzonaca.officesharingplatform.repository.mybatis;
 
 import com.golfzonaca.officesharingplatform.domain.Mileage;
 import com.golfzonaca.officesharingplatform.repository.mybatis.dto.MileageUpdateDto;

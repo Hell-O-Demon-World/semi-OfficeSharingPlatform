@@ -1,8 +1,8 @@
 package com.golfzonaca.officesharingplatform.repository.mileage;
 
 import com.golfzonaca.officesharingplatform.domain.Mileage;
+import com.golfzonaca.officesharingplatform.repository.mybatis.MileageMapper;
 import com.golfzonaca.officesharingplatform.repository.mybatis.dto.MileageUpdateDto;
-import com.golfzonaca.officesharingplatform.repository.mybatis.mapper.MileageMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

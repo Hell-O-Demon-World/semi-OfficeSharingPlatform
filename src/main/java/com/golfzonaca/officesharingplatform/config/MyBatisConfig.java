@@ -2,8 +2,8 @@ package com.golfzonaca.officesharingplatform.config;
 
 import com.golfzonaca.officesharingplatform.repository.mileage.MileageRepository;
 import com.golfzonaca.officesharingplatform.repository.mileage.MyBatisMileageRepository;
-import com.golfzonaca.officesharingplatform.repository.mybatis.mapper.MileageMapper;
-import com.golfzonaca.officesharingplatform.repository.mybatis.mapper.UserMapper;
+import com.golfzonaca.officesharingplatform.repository.mybatis.MileageMapper;
+import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import com.golfzonaca.officesharingplatform.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;

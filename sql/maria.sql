@@ -80,13 +80,14 @@ values (8, 'OFFICE70', '300000');
 INSERT INTO `ROOM_KIND`
 values (9, 'OFFICE100', '500000');
 
-CREATE TABLE `USER` (
-                        `ID`	BIGINT UNSIGNED primary key AUTO_INCREMENT	NOT NULL,
-                        `MILEAGE_ID`	BIGINT UNSIGNED	NOT NULL,
-                        `USER_MAIL`	VARCHAR(32)	NOT NULL,
-                        `USER_PW`	VARCHAR(15)	NOT NULL,
-                        `USER_NAME`	VARCHAR(20)	NOT NULL,
-                        `USER_TEL`	VARCHAR(22)	NOT NULL,
-                        `USER_JOB`	VARCHAR(20)	NOT NULL,
-                        `prefer_type`	JSON	NOT NULL
+CREATE TABLE `USER`
+(
+    `ID`          BIGINT UNSIGNED primary key AUTO_INCREMENT NOT NULL,
+    `MILEAGE_ID`  BIGINT UNSIGNED NOT NULL,
+    `USER_MAIL`   VARCHAR(32) NOT NULL,
+    `USER_PW`     VARCHAR(15) NOT NULL,
+    `USER_NAME`   VARCHAR(20) NOT NULL,
+    `USER_TEL`    VARCHAR(22) NOT NULL,
+    `USER_JOB`    VARCHAR(20) NOT NULL,
+    `prefer_type` JSON        NOT NULL
 );
