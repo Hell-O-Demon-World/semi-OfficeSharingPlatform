@@ -16,7 +16,8 @@ public class MyBatisUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-        return userMapper.save(user);
+        userMapper.save(user);
+        return user;
     }
 
     @Override

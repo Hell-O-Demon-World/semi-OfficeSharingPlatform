@@ -15,7 +15,8 @@ public class MyBatisMileageRepository implements MileageRepository {
 
     @Override
     public Mileage save(Mileage mileage) {
-        return mileageMapper.save(mileage);
+        mileageMapper.save(mileage);
+        return mileage;
     }
 
     @Override

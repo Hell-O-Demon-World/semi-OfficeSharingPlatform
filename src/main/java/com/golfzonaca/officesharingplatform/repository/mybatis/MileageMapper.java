@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface MileageMapper {
-    Mileage save(Mileage mileage);
+    void save(Mileage mileage);
 
     Mileage findById(long id);
 

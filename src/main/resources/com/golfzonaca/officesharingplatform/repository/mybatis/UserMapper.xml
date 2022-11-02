@@ -3,8 +3,8 @@
 <mapper namespace="com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into user (user_mail, user_pw, user_name, user_tel, user_job, user_place)
-        values (#{userMail}, #{userPw}, #{userName}, #{userTel}, #{userJob}, #{userPlace})
+        insert into user (mileage_id, user_mail, user_pw, user_name, user_tel, user_job, prefer_type)
+        values (#{mileageId}, #{userMail}, #{userPw}, #{userName}, #{userTel}, #{userJob}, #{userPlace})
     </insert>
 
     <select id="findById" resultType="User">
