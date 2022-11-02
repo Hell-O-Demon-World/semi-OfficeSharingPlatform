@@ -30,14 +30,12 @@ public class AuthService implements UserDetailsService {
         if (company == null) {
             throw new UsernameNotFoundException(username);
         }
-        String rawPassword = company.getCompanyPw();
-        String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         Set<GrantedAuthority> grantedAuthorityList = new HashSet<>();
         grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_REGISTER"));
 
         return CompanyPrincipalDetails.builder()
                 .username(company.getCompanyLoginId())
-                .password(encPassword)
+                .password(company.getCompanyPw())
                 .authorities(grantedAuthorityList)
                 .build();
     }
