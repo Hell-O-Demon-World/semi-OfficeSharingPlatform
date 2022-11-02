@@ -1,6 +1,5 @@
 package com.golfzonaca.officesharingplatform.domain;
 
-import com.golfzonaca.officesharingplatform.web.auth.form.prefertype.PreferType;
 import lombok.Data;
 
 import java.util.List;
@@ -14,9 +13,9 @@ public class User {
     private long mileageId;
     private String userTel;
     private String userJob;
-    private List<PreferType> userPlace;
+    private List<String> userPlace;
 
-    public User(String userName, String userMail, String userPw, String userTel, String userJob, List<PreferType> userPlace) {
+    public User(String userName, String userMail, String userPw, String userTel, String userJob, List<String> userPlace) {
         this.userName = userName;
         this.userMail = userMail;
         this.userPw = userPw;
