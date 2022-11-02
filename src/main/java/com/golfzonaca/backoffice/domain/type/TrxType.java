@@ -1,11 +1,13 @@
 package com.golfzonaca.backoffice.domain.type;
 
-public enum ProductType {
-    DESK("데스크"), MEETINGROOM("회의실"), OFFICE("사무실");
+public enum TrxType {
+    Deposit("보증금"), Balance("잔금"), FullPayment("전체 결제");
     private final String description;
-    ProductType(String description) {
+
+    TrxType(String description) {
         this.description = description;
     }
+
     public String getDescription() {
         return description;
     }

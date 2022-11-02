@@ -1,16 +1,26 @@
 package com.golfzonaca.backoffice.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @NoArgsConstructor
-@Setter
+@AllArgsConstructor
 public class Room {
 
-    private Long id;
-    private Long roomKindId;
-    private Long placeId;
-    private Long companyId;
-    private int totalNumber;
+    private long id;
+    private long roomKindId;
+    private long placeId;
+    private long companyId;
+    private int totalNum;
     private Boolean roomState;
+
+    public Room(long roomKindId, long placeId, long companyId, int totalNum, Boolean roomState) {
+        this.roomKindId = roomKindId;
+        this.placeId = placeId;
+        this.companyId = companyId;
+        this.totalNum = totalNum;
+        this.roomState = roomState;
+    }
 }

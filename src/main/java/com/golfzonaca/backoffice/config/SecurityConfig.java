@@ -4,7 +4,7 @@ import com.golfzonaca.backoffice.auth.filter.JsonIdPwAuthenticationProcessingFil
 import com.golfzonaca.backoffice.auth.filter.JwtAuthenticationFilter;
 import com.golfzonaca.backoffice.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.backoffice.auth.provider.IdPwAuthenticationProvider;
-import com.golfzonaca.backoffice.auth.token.JwtRepostiory;
+import com.golfzonaca.backoffice.auth.token.JwtRepository;
 import com.golfzonaca.backoffice.repository.mybatis.CompanyMapper;
 import com.golfzonaca.backoffice.repository.mybatis.MyBatisCompanyRepository;
 import com.golfzonaca.backoffice.service.auth.AuthService;
@@ -25,9 +25,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -44,8 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthService(new MyBatisCompanyRepository(companyMapper));
     }
     @Bean
-    public JwtRepostiory jwtRepostiory() {
-        return new JwtRepostiory();
+    public JwtRepository jwtRepostiory() {
+        return new JwtRepository();
     }
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
