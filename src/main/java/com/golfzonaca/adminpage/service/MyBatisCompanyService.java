@@ -4,13 +4,14 @@ import com.golfzonaca.adminpage.domain.Company;
 import com.golfzonaca.adminpage.repository.CompanyRepository;
 import com.golfzonaca.adminpage.repository.CompanySearchCond;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MyBatisCompanyService implements CompanyService {
@@ -20,6 +21,7 @@ public class MyBatisCompanyService implements CompanyService {
 
     @Override
     public Company save(Company company) {
+        log.info("company.getCompanyPw()={}",company.getCompanyPw());
         String encodedPw = bCryptPasswordEncoder.encode(company.getCompanyPw());
         Company savedCompany = companyRepository.save(new Company(
                 company.getId(),

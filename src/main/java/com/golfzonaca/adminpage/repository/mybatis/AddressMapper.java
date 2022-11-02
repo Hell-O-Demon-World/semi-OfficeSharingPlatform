@@ -11,4 +11,6 @@ public interface AddressMapper {
     void save(Location location);
 
     Optional<Location> findByAddressId(Long id);
+
+    void delete(Long id);
 }
