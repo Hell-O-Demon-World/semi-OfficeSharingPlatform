@@ -6,6 +6,8 @@ import com.golfzonaca.officesharingplatform.repository.mybatis.MileageMapper;
 import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import com.golfzonaca.officesharingplatform.repository.user.UserRepository;
+import com.golfzonaca.officesharingplatform.service.mileage.MileageService;
+import com.golfzonaca.officesharingplatform.service.mileage.MybatisMileageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,5 +27,10 @@ public class MyBatisConfig {
     @Bean
     public MileageRepository mileageRepository() {
         return new MyBatisMileageRepository(mileageMapper);
+    }
+
+    @Bean
+    public MileageService mileageService() {
+        return new MybatisMileageService(mileageRepository());
     }
 }

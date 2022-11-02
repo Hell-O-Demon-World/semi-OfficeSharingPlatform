@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-@Service
 @RequiredArgsConstructor
 public class MemoryMileageService implements MileageService{
     private final MileageRepository mileageRepository;
