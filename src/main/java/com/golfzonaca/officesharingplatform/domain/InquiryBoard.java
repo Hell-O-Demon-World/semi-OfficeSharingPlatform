@@ -5,8 +5,8 @@ import java.util.Date;
 public class InquiryBoard {
     private long id;
     private long userId;
-    private String title;
-    private String content;
-    private boolean status;
-    private Date writeDate;
+    private String inquiryTitle;
+    private String inquiryContent;
+    private boolean inquiryStatus;
+    private Date inquiryTime;
 }

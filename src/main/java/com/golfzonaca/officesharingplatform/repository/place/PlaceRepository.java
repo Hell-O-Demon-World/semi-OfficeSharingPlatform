@@ -1,4 +1,4 @@
-package com.golfzonaca.officesharingplatform.repository;
+package com.golfzonaca.officesharingplatform.repository.place;
 
 import com.golfzonaca.officesharingplatform.domain.Place;
 

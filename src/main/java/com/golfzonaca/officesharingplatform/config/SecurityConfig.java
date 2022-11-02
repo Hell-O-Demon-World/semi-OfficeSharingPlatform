@@ -1,9 +1,11 @@
 package com.golfzonaca.officesharingplatform.config;
 
+import com.golfzonaca.officesharingplatform.config.auth.PrincipalDetailsService;
 import com.golfzonaca.officesharingplatform.config.auth.filter.JsonIdPwAuthenticationProcessingFilter;
 import com.golfzonaca.officesharingplatform.config.auth.filter.JwtAuthenticationFilter;
 import com.golfzonaca.officesharingplatform.config.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.officesharingplatform.config.auth.provider.IdPwAuthenticationProvider;
+import com.golfzonaca.officesharingplatform.repository.user.MemoryUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,10 +25,15 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @RequiredArgsConstructor
 @EnableWebSecurity // 해당 파일로 시큐리티를 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService userDetailsService;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/auth/signin", "POST");
-
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(userDetailsService());
+    }
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new PrincipalDetailsService(new MemoryUserRepository());
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {  // passwordEncoder라는 인터페이스를 BcryptPasswordEncoder가 implement 하기 떄문에 new 가능!
         return new BCryptPasswordEncoder();
@@ -47,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService,
+        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService(),
                 passwordEncoder(),
                 new SimpleAuthorityMapper()));
     }
@@ -59,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/mypage").hasRole("USER");
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(jwtAuthenticationFilter, JsonIdPwAuthenticationProcessingFilter.class);
-        http.userDetailsService(userDetailsService);
+        http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
+        http.userDetailsService(userDetailsService());
     }
 
 }

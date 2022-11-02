@@ -1,7 +1,7 @@
 package com.golfzonaca.officesharingplatform.web.auth;
 
 import com.golfzonaca.officesharingplatform.domain.User;
-import com.golfzonaca.officesharingplatform.service.AuthService;
+import com.golfzonaca.officesharingplatform.service.auth.MemoryAuthService;
 import com.golfzonaca.officesharingplatform.web.auth.form.SignUpSaveForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-    private final AuthService authService;
+    private final MemoryAuthService memoryAuthService;
 
     @ResponseBody
     @GetMapping("/mypage")
@@ -39,7 +39,7 @@ public class AuthController {
         }
 
         User user = signUpSaveForm.toEntity();
-        if (!authService.join(user)) {
+        if (!memoryAuthService.join(user)) {
             errorMap.put("EmailError", "중복된 이메일 입니다.");
             return errorMap;
         }

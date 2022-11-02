@@ -1,4 +1,4 @@
-package com.golfzonaca.officesharingplatform.service;
+package com.golfzonaca.officesharingplatform.service.mileage;
 
 import com.golfzonaca.officesharingplatform.domain.Mileage;
 import com.golfzonaca.officesharingplatform.repository.mileage.MileageRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class MileageService {
+public class MemoryMileageService implements MileageService{
     private final MileageRepository mileageRepository;
     private final int initialPoint = 0;
     public Mileage join() {

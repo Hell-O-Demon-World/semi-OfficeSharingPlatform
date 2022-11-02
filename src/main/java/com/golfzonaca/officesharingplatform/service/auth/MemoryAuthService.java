@@ -1,10 +1,11 @@
-package com.golfzonaca.officesharingplatform.service;
+package com.golfzonaca.officesharingplatform.service.auth;
 
 import com.golfzonaca.officesharingplatform.config.auth.PrincipalDetails;
 import com.golfzonaca.officesharingplatform.config.auth.PrincipalDetailsRepository;
 import com.golfzonaca.officesharingplatform.domain.Mileage;
 import com.golfzonaca.officesharingplatform.domain.User;
 import com.golfzonaca.officesharingplatform.repository.user.UserRepository;
+import com.golfzonaca.officesharingplatform.service.mileage.MileageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class MemoryAuthService {
     private final UserRepository userRepository;
     private final MileageService mileageService;
     private final PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
@@ -31,22 +32,21 @@ public class AuthService {
     public Boolean join(User user) {
         boolean isJoin = true;
 
-        if (!emailCheck(user.getMail())) {
+        if (!emailCheck(user.getUserMail())) {
             isJoin = false;
         }
 
-        String rawPassword = user.getPw();
+        String rawPassword = user.getUserPw();
         String encPassword = bCryptPasswordEncoder.encode(rawPassword);
         Mileage mileage = mileageService.join();
         Set<GrantedAuthority> authorities = new HashSet<>();
 
-        user.setPw(encPassword);
+        user.setUserPw(encPassword);
         user.setMileageId(mileage.getId());
-        user.setAuthority("ROLE_USER");
         User userEntity = userRepository.save(user);
-        authorities.add(new SimpleGrantedAuthority(user.getAuthority()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-        PrincipalDetails principalDetails = new PrincipalDetails(userEntity.getMail(), userEntity.getPw(), authorities);
+        PrincipalDetails principalDetails = new PrincipalDetails(userEntity.getUserMail(), userEntity.getUserPw(), authorities);
         principalDetailsRepository.save(user.getId(), principalDetails);
 
         return isJoin;

@@ -1,7 +1,6 @@
 package com.golfzonaca.officesharingplatform.repository.place;
 
 import com.golfzonaca.officesharingplatform.domain.Place;
-import com.golfzonaca.officesharingplatform.repository.PlaceRepository;
 import org.springframework.stereotype.Repository;
 import java.util.concurrent.ConcurrentHashMap;
 

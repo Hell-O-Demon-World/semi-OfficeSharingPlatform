@@ -1,18 +1,12 @@
 package com.golfzonaca.officesharingplatform.web.reservation;
 
 import com.golfzonaca.officesharingplatform.domain.Place;
-import com.golfzonaca.officesharingplatform.domain.Room;
-import com.golfzonaca.officesharingplatform.repository.PlaceRepository;
-import com.golfzonaca.officesharingplatform.repository.room.RoomKindRepository;
+import com.golfzonaca.officesharingplatform.repository.place.PlaceRepository;
 import com.golfzonaca.officesharingplatform.repository.room.RoomRepository;
-import com.golfzonaca.officesharingplatform.web.reservation.form.ReservationViewFrom;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Iterator;
-import java.util.Map;
 
 @Slf4j
 @RestController

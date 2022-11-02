@@ -8,22 +8,20 @@ import java.util.List;
 @Data
 public class User {
     private long id;
-    private String name;
-    private String mail;
-    private String pw;
+    private String userName;
+    private String userMail;
+    private String userPw;
     private long mileageId;
-    private String phoneNumber;
-    private String job;
-    private List<PreferType> preferType;
+    private String userTel;
+    private String userJob;
+    private List<PreferType> userPlace;
 
-    private String authority;
-
-    public User(String name, String mail, String pw, String phoneNumber, String job, List<PreferType> preferType) {
-        this.name = name;
-        this.mail = mail;
-        this.pw = pw;
-        this.phoneNumber = phoneNumber;
-        this.job = job;
-        this.preferType = preferType;
+    public User(String userName, String userMail, String userPw, String userTel, String userJob, List<PreferType> userPlace) {
+        this.userName = userName;
+        this.userMail = userMail;
+        this.userPw = userPw;
+        this.userTel = userTel;
+        this.userJob = userJob;
+        this.userPlace = userPlace;
     }
 }

@@ -14,13 +14,13 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class Place {
 
-    private long id; //대여공간식별번호
-    private long companyId; //업체식별번호
-    private String name;
-    private String description;
-    private Map<String, Boolean> placeOpen;
-    private Date placeStartTime;
-    private Date placeEndTime;
-    private Map<String, Boolean> placeAddInfo;
-    private int postalCode; //우편번호
+    private long id;
+    private long companyId;
+    private String placeName;
+    private String placeDescription;
+    private Map<String, Boolean> placeOpendays;
+    private Date placeStart;
+    private Date placeEnd;
+    private Map<String, Boolean> placeAddinfo;
+    private int addressId;
 }

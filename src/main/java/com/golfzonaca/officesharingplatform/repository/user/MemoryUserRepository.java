@@ -36,7 +36,7 @@ public class MemoryUserRepository implements UserRepository {
         while( keys.hasNext() ){
             Long key = keys.next();
             User storedUser = store.get(key);
-            if (storedUser.getMail().equals(email)){
+            if (storedUser.getUserMail().equals(email)){
                 return storedUser;
             }
         }
@@ -51,7 +51,7 @@ public class MemoryUserRepository implements UserRepository {
         while( keys.hasNext() ){
             Long key = keys.next();
             User storedUser = store.get(key);
-            if (storedUser.getMail().equals(email)){
+            if (storedUser.getUserMail().equals(email)){
                 cnt++;
             }
         }
@@ -64,13 +64,13 @@ public class MemoryUserRepository implements UserRepository {
 
         User findUser = findById(id);
 
-        findUser.setName(updateParam.getName());
-        findUser.setMail(updateParam.getMail());
-        findUser.setPw(updateParam.getPw());
+        findUser.setUserName(updateParam.getUserName());
+        findUser.setUserMail(updateParam.getUserMail());
+        findUser.setUserPw(updateParam.getUserPw());
         findUser.setMileageId(updateParam.getMileageId());
-        findUser.setPhoneNumber(updateParam.getPhoneNumber());
-        findUser.setJob(updateParam.getJob());
-        findUser.setPreferType(updateParam.getPreferType());
+        findUser.setUserTel(updateParam.getUserTel());
+        findUser.setUserJob(updateParam.getUserJob());
+        findUser.setUserPlace(updateParam.getUserPlace());
 
         return findUser;
     }

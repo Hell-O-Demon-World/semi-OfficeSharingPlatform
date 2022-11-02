@@ -8,15 +8,12 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 @RequiredArgsConstructor
-@Service
 public class PrincipalDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
@@ -29,9 +26,9 @@ public class PrincipalDetailsService implements UserDetailsService {
         }
 
         Set<GrantedAuthority> grantedAuthorityList = new HashSet<>();
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(user.getAuthority());
+        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");
         grantedAuthorityList.add(simpleGrantedAuthority);
 
-        return new PrincipalDetails(user.getMail(), user.getPw(), grantedAuthorityList);
+        return new PrincipalDetails(user.getUserMail(), user.getUserPw(), grantedAuthorityList);
     }
 }

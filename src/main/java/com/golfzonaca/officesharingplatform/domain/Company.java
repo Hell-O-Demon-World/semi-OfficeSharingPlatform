@@ -10,14 +10,10 @@ import lombok.ToString;
 public class Company {
 
     private long id; //업체식별번호
-
-    private String companyName;
-
+    private String companyLoginid;
+    private String companyPw;
     private String companyTel;
-
-    private String registrationNumber;
-
-    private String chairmanName;
-
+    private String companyRegnum;
+    private String companyRepname;
     private Address addressId;
 }

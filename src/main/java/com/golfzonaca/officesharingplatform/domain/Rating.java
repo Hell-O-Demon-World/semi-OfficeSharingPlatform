@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 public class Rating {
 
     private long id;
-    private int score;
-    private String review;
-    private String assessmentWriter;
-    private LocalDateTime writeTime;
+    private int ratingScore;
+    private String ratingReview;
+    private String ratingWriter;
+    private LocalDateTime ratingTime;
 }
