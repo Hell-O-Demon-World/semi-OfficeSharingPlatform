@@ -74,7 +74,7 @@ public class PlaceController {
 
         for (int i = 0; i < roomService.countByRoomType(placeId).size(); i++) {
             List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
-            roomTypeQuantity.set(new Integer(result.get(0)), result.get(1));
+            roomTypeQuantity.set((new Integer(String.valueOf(result.get(0))) - 1), new Integer(String.valueOf(result.get(1))));
             log.info("result={}", result);
         }
 
