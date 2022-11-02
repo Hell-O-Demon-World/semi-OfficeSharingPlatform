@@ -43,8 +43,9 @@
         where id = #{Id}
     </select>
 
-    <select id="countByRoomType" resultType="java.lang.Integer">
-        SELECT COUNT(*)
+
+    <select id="countByRoomType" resultType="java.util.LinkedHashMap">
+        SELECT ROOM_KIND_ID, COUNT(*)
         FROM ROOM
         WHERE PLACE_ID = #{placeId}
         GROUP BY ROOM_KIND_ID;

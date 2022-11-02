@@ -5,6 +5,7 @@ import com.golfzonaca.backoffice.repository.dto.RoomStatusDto;
 import com.golfzonaca.backoffice.repository.dto.RoomUpdateDto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface RoomService {
@@ -21,5 +22,5 @@ public interface RoomService {
 
     List<Room> findAllByPlaceId(long id);
 
-    List<Integer> countByRoomType(long placeId);
+    List<Map<Integer, Integer>> countByRoomType(long placeId);
 }

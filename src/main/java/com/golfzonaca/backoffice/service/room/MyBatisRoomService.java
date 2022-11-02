@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -47,7 +48,7 @@ public class MyBatisRoomService implements RoomService {
     }
 
     @Override
-    public List<Integer> countByRoomType(long placeId) {
+    public List<Map<Integer, Integer>> countByRoomType(long placeId) {
         return roomRepository.countByRoomType(placeId);
     }
 }

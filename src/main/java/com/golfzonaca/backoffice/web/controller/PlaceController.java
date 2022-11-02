@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -66,7 +67,12 @@ public class PlaceController {
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
         Location location = locationService.findByAddressId(place.getAddressId());
-        List<Integer> roomTypeQuantity = roomService.countByRoomType(placeId);
+        List<Map<Integer, Integer>> roomResult = roomService.countByRoomType(placeId);
+        for (int i = 0; i < roomResult.size(); i++) {
+            log.info("roomResult.get(i)={}", roomResult.get(i));
+            log.info("roomResult.get(i).get(0)={}", roomResult.get(i).values());
+        }
+        Integer roomTypeQuantity = null;
         log.info("roomTypeQuantity={}", roomTypeQuantity);
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);

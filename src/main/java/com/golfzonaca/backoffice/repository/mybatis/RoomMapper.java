@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Mapper
@@ -24,5 +25,5 @@ public interface RoomMapper {
 
     Optional<Room> findByRoomId(long id);
 
-    List<Integer> countByRoomType(long placeId);
+    List<Map<Integer, Integer>> countByRoomType(long placeId);
 }

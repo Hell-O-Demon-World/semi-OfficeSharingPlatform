@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -48,7 +49,7 @@ public class MyBatisRoomRepository implements RoomRepository {
     }
 
     @Override
-    public List<Integer> countByRoomType(long placeId) {
+    public List<Map<Integer, Integer>> countByRoomType(long placeId) {
         return roomMapper.countByRoomType(placeId);
     }
 }
