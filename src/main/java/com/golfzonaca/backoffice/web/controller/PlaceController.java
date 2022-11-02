@@ -25,8 +25,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Controller
@@ -67,12 +67,17 @@ public class PlaceController {
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
         Location location = locationService.findByAddressId(place.getAddressId());
-        List<Map<Integer, Integer>> roomResult = roomService.countByRoomType(placeId);
-        for (int i = 0; i < roomResult.size(); i++) {
-            log.info("roomResult.get(i)={}", roomResult.get(i));
-            log.info("roomResult.get(i).get(0)={}", roomResult.get(i).values());
+        List<Integer> roomTypeQuantity = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            roomTypeQuantity.add(0);
         }
-        Integer roomTypeQuantity = null;
+
+        for (int i = 0; i < roomService.countByRoomType(placeId).size(); i++) {
+            List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
+            roomTypeQuantity.set(new Integer(result.get(0)), result.get(1));
+            log.info("result={}", result);
+        }
+
         log.info("roomTypeQuantity={}", roomTypeQuantity);
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);
