@@ -1,12 +1,9 @@
 package com.golfzonaca.officesharingplatform.repository.room;
 
 import com.golfzonaca.officesharingplatform.domain.Room;
-import com.golfzonaca.officesharingplatform.domain.User;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
