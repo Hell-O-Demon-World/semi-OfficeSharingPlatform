@@ -41,10 +41,6 @@
     <h2 th:if="${param.status}" th:text="'저장 완료'"></h2>
 
     <div>
-        <label for="Id">공간 ID</label>
-        <input type="text" id="Id" name="Id" class="form-control" value="1" th:value="${place.id}" readonly disabled="true">
-    </div>
-    <div>
         <label for="placeName">공간명</label>
         <input type="text" id="placeName" name="placeName" class="form-control" value="공간A" th:value="${place.placeName}" readonly disabled="true">
     </div>

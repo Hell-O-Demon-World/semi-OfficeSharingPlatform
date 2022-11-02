@@ -67,6 +67,7 @@ public class PlaceController {
     public String place(@PathVariable Long placeId, Model model) {
         Place place = placeService.findById(placeId).get();
         Location location = locationService.findByAddressId(place.getAddressId());
+
         List<Integer> roomTypeQuantity = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             roomTypeQuantity.add(0);
@@ -76,7 +77,7 @@ public class PlaceController {
             List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
             roomTypeQuantity.set((new Integer(String.valueOf(result.get(0))) - 1), new Integer(String.valueOf(result.get(1))));
         }
-        
+
         PlaceAddForm placeAddForm = transformType.stringToList(place);
         model.addAttribute("place", placeAddForm);
         model.addAttribute("location", location);
@@ -141,10 +142,20 @@ public class PlaceController {
         Place findPlace = placeService.findById(placeId).get();
         PlaceAddForm place = transformType.stringToList(findPlace);
         Location location = locationService.findByAddressId(place.getAddressId());
-        List<Room> rooms = roomService.findAllByPlaceId(placeId);
+
+        List<Integer> roomTypeQuantity = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            roomTypeQuantity.add(0);
+        }
+
+        for (int i = 0; i < roomService.countByRoomType(placeId).size(); i++) {
+            List<Integer> result = new ArrayList<>(roomService.countByRoomType(placeId).get(i).values());
+            roomTypeQuantity.set((new Integer(String.valueOf(result.get(0))) - 1), new Integer(String.valueOf(result.get(1))));
+        }
+        
         model.addAttribute("place", place);
         model.addAttribute("location", location);
-        model.addAttribute("rooms", rooms);
+        model.addAttribute("rooms", roomTypeQuantity);
         return "place/editForm";
     }
 

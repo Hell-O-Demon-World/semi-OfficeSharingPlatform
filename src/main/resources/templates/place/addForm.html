@@ -63,8 +63,8 @@
         <div>
             <label for="postalCode">우편 번호</label>
             <input type="text" id="postalCode" th:field="${location.postalCode}" name="postalCode" class="form-control" pattern="[0-9]{5}" minlength="5" maxlength="5" th:minlength="5" th:maxlength="5" required>
-            <label for="location">주소</label>
-            <input type="text" id="location" th:field="${location.address}" name="location" class="form-control" minlength="1" maxlength="100" th:minlength="1" th:maxlength="100" required>
+            <label for="address">주소</label>
+            <input type="text" id="address" th:field="${location.address}" name="address" class="form-control" minlength="1" maxlength="100" th:minlength="1" th:maxlength="100" required>
         </div>
         <div>
             <label for="placeStart">오픈 시간</label>
