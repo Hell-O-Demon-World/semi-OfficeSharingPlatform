@@ -31,7 +31,7 @@ public class MemoryUserRepository implements UserRepository {
     @Override
     public User findByEmail(String email) {
 
-        User findUser = new User("", "", "", "", "", new ArrayList<>());
+        User findUser = new User("", "", "", "", "", "");
         Iterator<Long> keys = store.keySet().iterator();
         while (keys.hasNext()) {
             Long key = keys.next();
@@ -66,7 +66,7 @@ public class MemoryUserRepository implements UserRepository {
 
         findUser.setUserTel(updateParam.getUserTel());
         findUser.setUserJob(updateParam.getUserJob());
-        findUser.setUserPlace(updateParam.getPreferType());
+        findUser.setUserPlace(updateParam.getPreferType().toString());
 
         return findUser;
     }
