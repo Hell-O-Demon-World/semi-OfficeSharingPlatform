@@ -6,11 +6,15 @@
   justify-content: space-between;
 }
 
-.desk {
-  height: 20vh;
-}
 .container .checkBtn {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.swiperContainer {
+  padding: 0 50px;
+}
+.desk,
+.office {
+  margin-left: 50px;
 }

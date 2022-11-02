@@ -4,9 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const DatePick = () => {
   const calenderRef = useRef();
   const [startDate, setStartDate] = useState(new Date());
-  const inputDate = () => {
-    console.log(calenderRef.current);
-  };
+  const inputDate = () => {};
   return (
     <DatePicker
       selected={startDate}

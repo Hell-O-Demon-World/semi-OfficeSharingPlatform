@@ -37,7 +37,7 @@ const OfficeList = () => {
       setIsLoading(false);
     };
     sendRequest();
-  }, []);
+  }, [dispatch]);
   return (
     <div className={classes.officeList}>
       <OfficeSearch />

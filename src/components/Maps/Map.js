@@ -56,15 +56,16 @@ const Map = () => {
   }, []);
   useEffect(() => {
     const showDetailHandler = (e) => {
+      console.log(e);
       history.push(`/main/${e.target.id}`);
-      e.target.style.backgroundColor = "rgb(91, 135, 218)";
-      e.target.nextSibling.style.backgroundColor = "rgb(91, 135, 218)";
     };
     officeList.map((elem) => {
-      let content = document.createElement("div");
+      const content = document.createElement("div");
       content.classList.add("wrap");
+      content.setAttribute("id", elem.key);
       let customOverlay = document.createElement("div");
       customOverlay.classList.add("customOverlay");
+      customOverlay.setAttribute("id", elem.key);
       customOverlay.textContent = elem.name;
       let arrow = document.createElement("div");
       arrow.classList.add("arrow");

@@ -1,16 +1,18 @@
 import React, { Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../UI/Button";
 import classes from "./Product.module.css";
 import { selectItemActions } from "../../store/selectItem";
 import SwiperCore, { Navigation } from "swiper";
 import "swiper/swiper-bundle.min.css";
+
 SwiperCore.use([Navigation]);
 const moneyPerHour = (count) => {
   return (count * 5000).toLocaleString("ko-KR");
 };
-const Office = () => {
+const MeetingRoom = () => {
   const dispatch = useDispatch();
   const selectItemHandler = (e) => {
     dispatch(
@@ -20,29 +22,30 @@ const Office = () => {
       })
     );
   };
-  const office = useSelector((state) => state.availableItem.office);
+  const meetingRoom = useSelector((state) => state.availableItem.meetingRoom);
   return (
     <Fragment>
-      <h1>Office</h1>
-      {!office && <h1>예약 가능한 Office가 없습니다.</h1>}
-      {!!office && (
+      <h1>Meeting Room</h1>
+      {!meetingRoom && <h1>이용 가능한 meetingRoom이 없습니다.</h1>}
+      {!!meetingRoom && (
         <Swiper
           navigation={true}
           className="mySwiper"
           spaceBetween={50}
           slidesPerView={3}
         >
-          {office.map((elem) => (
+          {meetingRoom.map((elem) => (
             <SwiperSlide
               className={`${classes.container} + ${classes.swiperContainer}`}
               key={elem}
             >
               <div>
-                <h1>{`${elem}`}평 회의실</h1>
+                <h1>{`${elem}`}인 회의실</h1>
                 <div>
-                  기업을 위한 Office 공간 <br /> 한 달 단위 예약 가능
+                  업무 회의를 위한 공간으로 적합합니다. {`최대 인원${elem}명`}
                 </div>
-                <div>이용 요금 - {`${moneyPerHour(elem)}`} / day</div>
+                <br />
+                <div>이용 요금 - {`${moneyPerHour(elem)}`}/hour</div>
               </div>
               <div>
                 <Button
@@ -61,4 +64,4 @@ const Office = () => {
   );
 };
 
-export default Office;
+export default MeetingRoom;

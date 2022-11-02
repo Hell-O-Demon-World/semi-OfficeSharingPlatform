@@ -1,11 +1,13 @@
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Fragment } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
+import { selectItemActions } from "../../store/selectItem";
 import Button from "../UI/Button";
 import classes from "./OfficeDetail.module.css";
 const OfficeDetail = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const officeList = useSelector((state) => state.location.officeList);
   const params = useParams();
@@ -16,6 +18,7 @@ const OfficeDetail = () => {
   };
   const showDetailHandler = () => {
     history.push(`/officeDetail/${params.officeId}`);
+    dispatch(selectItemActions.select({ itemName: null, itemPrice: null }));
   };
   return (
     <Fragment>

@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const selectItemInitialState = {
   isSelected: false,
-  selectItem: null,
+  itemName: null,
+  itemPrice: null,
 };
 
 const selectItemSlice = createSlice({
@@ -10,8 +11,9 @@ const selectItemSlice = createSlice({
   initialState: selectItemInitialState,
   reducers: {
     select(state, action) {
-      state.isSelected = true;
-      state.selectItem = action.payload;
+      state.isSelected = !!action.payload.itemName;
+      state.itemName = action.payload.itemName;
+      state.itemPrice = action.payload.itemPrice;
     },
   },
 });
