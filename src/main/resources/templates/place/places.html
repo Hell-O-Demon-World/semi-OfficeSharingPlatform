@@ -26,12 +26,6 @@
     <form method="get" class="form-inline">
         <div class="row">
             <div class="col">
-                <input type="text" class="form-control" placeholder="상품명"/>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-secondary mb-2">검색</button>
-            </div>
-            <div class="col">
             </div>
             <div class="col">
                 <div class="col">
@@ -51,7 +45,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>공간명</th>
                 <th>오픈시간</th>
                 <th>마감시간</th>
@@ -59,8 +52,6 @@
             </thead>
             <tbody>
             <tr th:each="place : ${places}">
-                <td><a href="place.html" th:href="@{/places/{Id}(Id=${place.id})}" th:text="${place.id}">공간ID</a>
-                </td>
                 <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">공간명</a></td>
                 <td th:text="${place.placeStart}">10:00</td>
                 <td th:text="${place.placeEnd}">12:00</td>

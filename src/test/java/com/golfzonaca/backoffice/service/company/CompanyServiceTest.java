@@ -21,7 +21,7 @@ class CompanyServiceTest {
     CompanyService companyService;
 
     @Test
-    void save() {
+    void 업체저장() {
         //Given
         Company company = new Company("testacc1", "test1234", "테스트 업체1", "02-1234-1234", "12-12341234", "어나니머스", 1L);
         //When
@@ -31,7 +31,7 @@ class CompanyServiceTest {
     }
 
     @Test
-    void findAll() {
+    void 업체조회() {
         //Given
         Company companyA = new Company("testacc1", "test1234", "테스트 업체1", "02-1234-1234", "12-12341234", "어나니머스", 1L);
         Company savedCompanyA = companyService.save(companyA);
@@ -44,7 +44,7 @@ class CompanyServiceTest {
     }
 
     @Test
-    void findByCompanyLoginId() {
+    void 업체아이디로조회() {
         //Given
         Company companyA = new Company("testacc1", "test1234", "테스트 업체1", "02-1234-1234", "12-12341234", "어나니머스", 1L);
         Company savedCompanyA = companyService.save(companyA);

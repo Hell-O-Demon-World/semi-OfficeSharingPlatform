@@ -3,6 +3,7 @@ package com.golfzonaca.backoffice.config;
 import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.LocationRepository;
 import com.golfzonaca.backoffice.repository.PlaceRepository;
+import com.golfzonaca.backoffice.repository.RoomRepository;
 import com.golfzonaca.backoffice.repository.mybatis.*;
 import com.golfzonaca.backoffice.service.address.LocationService;
 import com.golfzonaca.backoffice.service.address.MyBatisLocationService;
@@ -10,6 +11,8 @@ import com.golfzonaca.backoffice.service.company.CompanyService;
 import com.golfzonaca.backoffice.service.company.MyBatisCompanyService;
 import com.golfzonaca.backoffice.service.place.MyBatisPlaceService;
 import com.golfzonaca.backoffice.service.place.PlaceService;
+import com.golfzonaca.backoffice.service.room.MyBatisRoomService;
+import com.golfzonaca.backoffice.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +23,7 @@ public class MyBatisConfig {
     private final PlaceMapper placeMapper;
     private final CompanyMapper companyMapper;
     private final LocationMapper locationMapper;
+    private final RoomMapper roomMapper;
 
     @Bean
     public PlaceService placeService() {
@@ -51,4 +55,13 @@ public class MyBatisConfig {
         return new MyBatisLocationRepository(locationMapper);
     }
 
+    @Bean
+    public RoomService roomService() {
+        return new MyBatisRoomService(roomRepository());
+    }
+
+    @Bean
+    public RoomRepository roomRepository() {
+        return new MyBatisRoomRepository(roomMapper);
+    }
 }
