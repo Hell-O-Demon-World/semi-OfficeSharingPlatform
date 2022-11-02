@@ -38,33 +38,6 @@ public class JwtSuccessHandler implements AuthenticationSuccessHandler {
             jwtRepository.save((String) authentication.getPrincipal(), jwt.getEncoded());
             response.sendRedirect("/places");
         }
-
-//        JsonObject json = new JsonObject();
-//        json.addProperty("userId", (String) authentication.getPrincipal());
-//
-//        response.setHeader("Authorization",jwt.getEncoded());
-//        request.setAttribute("userId", (String) authentication.getPrincipal());
-
-
-//        request.getRequestDispatcher("/place/places").forward(request,response);
-//        try( PrintWriter writer = response.getWriter()) {
-//            Jwt jwt = JwtManager.createJwt((String) authentication.getPrincipal());
-//            JsonObject json = new JsonObject();
-//
-//            json.addProperty("accessToken",jwt.getEncoded());
-//            json.addProperty("userId", (String) authentication.getPrincipal());
-//            response.setStatus(HttpStatus.ACCEPTED.value());
-//            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-//            response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-//
-////            request.setAttribute("json", json);
-////            response.setHeader("Authorization",jwt.getEncoded());
-////            request.getRequestDispatcher("/auth/signin").forward(request,response);
-//
-//            writer.write(json.toString());
-//        } catch (IOException e) {
-//            log.error("fail to process file={}", e);
-//        }
     }
 
 }
