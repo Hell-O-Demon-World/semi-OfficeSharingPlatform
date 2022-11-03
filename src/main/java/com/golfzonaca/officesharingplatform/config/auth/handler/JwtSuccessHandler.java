@@ -1,7 +1,9 @@
 package com.golfzonaca.officesharingplatform.config.auth.handler;
 
 import com.golfzonaca.officesharingplatform.config.auth.token.JwtManager;
+import com.golfzonaca.officesharingplatform.repository.user.UserRepository;
 import com.google.gson.JsonObject;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +21,9 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtSuccessHandler implements AuthenticationSuccessHandler {
+    private final UserRepository userRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -27,6 +31,7 @@ public class JwtSuccessHandler implements AuthenticationSuccessHandler {
 
             Jwt jwt = JwtManager.createJwt((String) authentication.getPrincipal());
             JsonObject json = new JsonObject();
+            json.addProperty("userId", userRepository.findByEmail(authentication.getPrincipal().toString()).getId());
             json.addProperty("accessToken",jwt.getEncoded());
 
             response.setStatus(HttpStatus.ACCEPTED.value());
