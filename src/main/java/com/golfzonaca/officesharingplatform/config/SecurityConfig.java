@@ -24,7 +24,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @RequiredArgsConstructor
-@EnableWebSecurity // 해당 파일로 시큐리티를 활성화
+@EnableWebSecurity 
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserMapper userMapper;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/auth/signin", "POST");
