@@ -6,7 +6,6 @@ import com.golfzonaca.officesharingplatform.config.auth.filter.JwtAuthentication
 import com.golfzonaca.officesharingplatform.config.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.officesharingplatform.config.auth.provider.IdPwAuthenticationProvider;
 import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
-import com.golfzonaca.officesharingplatform.repository.user.MemoryUserRepository;
 import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

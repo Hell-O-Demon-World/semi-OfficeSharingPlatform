@@ -20,7 +20,7 @@ import java.util.Set;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MemoryAuthService implements AuthService{
+public class MyBatisAuthService implements AuthService{
     private final UserRepository userRepository;
     private final MileageService mileageService;
     private final PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();

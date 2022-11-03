@@ -1,9 +1,8 @@
 package com.golfzonaca.officesharingplatform.web.auth;
 
 import com.golfzonaca.officesharingplatform.domain.User;
-import com.golfzonaca.officesharingplatform.service.auth.MemoryAuthService;
+import com.golfzonaca.officesharingplatform.service.auth.MyBatisAuthService;
 import com.golfzonaca.officesharingplatform.web.auth.form.SignUpSaveForm;
-import com.golfzonaca.officesharingplatform.web.auth.form.prefertype.PreferType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -19,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
-    private final MemoryAuthService memoryAuthService;
+    private final MyBatisAuthService myBatisAuthService;
 
     @ResponseBody
     @GetMapping("/mypage")
@@ -40,7 +39,7 @@ public class AuthController {
         }
 
         User user = signUpSaveForm.toEntity();
-        if (!memoryAuthService.join(user)) {
+        if (!myBatisAuthService.join(user)) {
             errorMap.put("EmailError", "중복된 이메일 입니다.");
             return errorMap;
         }
