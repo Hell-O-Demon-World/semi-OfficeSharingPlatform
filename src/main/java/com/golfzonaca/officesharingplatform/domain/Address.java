@@ -9,12 +9,12 @@ public class Address {
 
     private String address;
 
-    private int postalCode;
+    private String postalCode;
 
     public Address() {
     }
 
-    public Address(Long id, String address, int postalCode) {
+    public Address(Long id, String address, String postalCode) {
         this.id = id;
         this.address = address;
         this.postalCode = postalCode;
