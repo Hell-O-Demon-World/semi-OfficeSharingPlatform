@@ -46,6 +46,8 @@ const SignUp = () => {
     }).then((res) => {
       setIsLoading(false);
       if (res.ok) {
+        console.log(res)
+        return res.json();
       } else {
         return res.json().then((data) => {
           let errorMessage = "회원가입 오류";
@@ -55,7 +57,19 @@ const SignUp = () => {
           }
         });
       }
-    });
+    }).then(data=>{
+      if(data.length === 0){
+        return;
+      }
+      else{
+        let errorMsg = ""
+        for (const errorMessage in data){
+          errorMsg += data[errorMessage]
+          errorMsg += `${`\r`}`
+        }
+        alert(errorMsg)
+      }
+    })
   };
   return (
     <Card className={classes.signUp}>
