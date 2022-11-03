@@ -56,7 +56,6 @@ const Map = () => {
   }, []);
   useEffect(() => {
     const showDetailHandler = (e) => {
-      console.log(e);
       history.push(`/main/${e.target.id}`);
     };
     officeList.map((elem) => {

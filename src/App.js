@@ -36,6 +36,9 @@ const App = () => {
       <Route path="/officeDetail/:officeId">
         <OfficeMain />
       </Route>
+      <Route path="/officeDetail/:officeId/:productType">
+        <OfficeMain />
+      </Route>
       <Route path="*" exact>
         <NotFound />
       </Route>

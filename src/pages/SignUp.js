@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import classes from "./SignUp.module.css";
 const SignUp = () => {
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -23,26 +24,9 @@ const SignUp = () => {
     const checkedDesk = deskCheckedRef.current.checked;
     const checkedMeeting = meetingCheckedRef.current.checked;
     const checkedOffice = officeCheckedRef.current.checked;
-    console.log(checkedDesk, checkedMeeting, checkedOffice);
     setIsLoading(true);
-    console.log(
-      JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        name: enteredName,
-        phone: enteredPhone,
-        job: enteredJob,
-        preferType: [
-          {
-            desk: checkedDesk,
-            meetingroom: checkedMeeting,
-            office: checkedOffice,
-          },
-        ],
-      })
-    );
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
       {
         method: "POST",
         body: JSON.stringify({
@@ -63,20 +47,25 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
       }
-    ).then((res) => {
-      setIsLoading(false);
-      if (res.ok) {
-        console.log("success");
-      } else {
-        return res.json().then((data) => {
-          let errorMessage = "회원가입 오류";
-          errorMessage = data.error.message;
-          if (data && data.error && data.error.message) {
-            alert(errorMessage);
-          }
-        });
-      }
-    });
+    )
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          history.replace("/");
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "회원가입 오류";
+            errorMessage = data.error.message;
+            if (data && data.error && data.error.message) {
+              alert(errorMessage);
+            }
+          });
+        }
+      })
+      .catch((data) => {
+        console.log(data);
+      });
   };
   return (
     <Card className={classes.signUp}>

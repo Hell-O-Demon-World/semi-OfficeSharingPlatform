@@ -1,0 +1,15 @@
+.swiper {
+  width: 80%;
+  margin-right: 100%;
+}
+.active {
+  background: rgb(106, 158, 255);
+  border: 1px solid #111;
+  text-align: center;
+  cursor: pointer;
+}
+.nonActive {
+  background: #999;
+  border: 1px solid #111;
+  text-align: center;
+}
