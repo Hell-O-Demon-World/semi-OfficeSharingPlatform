@@ -31,7 +31,7 @@ const SignUp = () => {
         email: enteredEmail,
         password: enteredPassword,
         name: enteredName,
-        phone: enteredPhone,
+        phoneNumber: enteredPhone,
         job: enteredJob,
         preferType: [
           {
