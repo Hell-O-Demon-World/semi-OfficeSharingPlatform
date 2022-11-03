@@ -9,11 +9,11 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class Company {
 
-    private long id; //업체식별번호
-    private String companyLoginid;
+    private long id;
+    private String companyLoginId;
     private String companyPw;
     private String companyTel;
-    private String companyRegnum;
-    private String companyRepname;
+    private String companyRegNum;
+    private String companyRepName;
     private Address addressId;
 }

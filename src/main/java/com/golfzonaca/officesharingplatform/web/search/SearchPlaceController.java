@@ -22,8 +22,8 @@ public class SearchPlaceController {
 
     private final SearchService searchService;
 
-    @PostMapping("/main/search") // 요청 데이터를 json 으로 받을 예정
-    public List<SearchResponseData> findRoomByWord(@RequestBody SearchRequestData searchRequestData) throws Exception {
+    @PostMapping("/main/search")
+    public List<SearchResponseData> findRoomByWord(@RequestBody SearchRequestData searchRequestData) {
         List<SearchResponseData> responseDataList = new LinkedList<>();
         List<Long> addressIds = new ArrayList<>();
         List<SearchPlaceResultData> placeSearchList = searchService.findPlaceBySearchWord(searchRequestData.getSearchWord());
@@ -31,10 +31,10 @@ public class SearchPlaceController {
         for (SearchPlaceResultData resultData : placeSearchList) {
             addressIds.add(resultData.getAddressId());
         }
-        
-        List<Address> addressSearchList = searchService.findByAddressIds(addressIds); // 공간의 주소 찾기
 
-        for (SearchPlaceResultData resultData : placeSearchList) { // 응답데이터리스트에 값 추가
+        List<Address> addressSearchList = searchService.findByAddressIds(addressIds);
+
+        for (SearchPlaceResultData resultData : placeSearchList) {
             for (Address address : addressSearchList) {
                 if (resultData.getAddressId() == address.getId()) {
                     SearchResponseData responseData = new SearchResponseData();

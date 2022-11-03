@@ -26,7 +26,6 @@ public class MyBatisConfig {
 
     private final UserMapper userMapper;
     private final MileageMapper mileageMapper;
-
     private final SearchMapper searchMapper;
 
     @Bean
