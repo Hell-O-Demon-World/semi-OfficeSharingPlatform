@@ -25,6 +25,7 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 public class JwtSuccessHandler implements AuthenticationSuccessHandler {
     private final UserRepository userRepository;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         try( PrintWriter writer = response.getWriter()) {
