@@ -5,7 +5,9 @@ import com.golfzonaca.officesharingplatform.config.auth.filter.JsonIdPwAuthentic
 import com.golfzonaca.officesharingplatform.config.auth.filter.JwtAuthenticationFilter;
 import com.golfzonaca.officesharingplatform.config.auth.handler.JwtSuccessHandler;
 import com.golfzonaca.officesharingplatform.config.auth.provider.IdPwAuthenticationProvider;
+import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.user.MemoryUserRepository;
+import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -25,6 +27,7 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 @RequiredArgsConstructor
 @EnableWebSecurity // 해당 파일로 시큐리티를 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserMapper userMapper;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/auth/signin", "POST");
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -32,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public UserDetailsService userDetailsService() {
-        return new PrincipalDetailsService(new MemoryUserRepository());
+        return new PrincipalDetailsService(new MyBatisUserRepository(userMapper));
     }
     @Bean
     public PasswordEncoder passwordEncoder() {  // passwordEncoder라는 인터페이스를 BcryptPasswordEncoder가 implement 하기 떄문에 new 가능!
