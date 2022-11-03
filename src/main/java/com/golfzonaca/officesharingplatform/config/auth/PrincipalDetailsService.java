@@ -24,9 +24,6 @@ public class PrincipalDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username);
-        if (user.equals(new User("","","","","", ""))) {
-            throw new AuthenticationCredentialsNotFoundException("User Not Found");
-        }
 
         Set<GrantedAuthority> grantedAuthorityList = new HashSet<>();
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("ROLE_USER");

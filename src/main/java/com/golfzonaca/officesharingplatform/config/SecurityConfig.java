@@ -9,6 +9,7 @@ import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,19 +24,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+@Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserMapper userMapper;
+    private final UserDetailsService userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
     private static final RequestMatcher LOGIN_REQUEST_MATCHER = new AntPathRequestMatcher("/auth/signin", "POST");
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(userDetailsService());
-    }
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new PrincipalDetailsService(new MyBatisUserRepository(userMapper));
-    }
     @Bean
     public PasswordEncoder passwordEncoder() {  // passwordEncoder라는 인터페이스를 BcryptPasswordEncoder가 implement 하기 떄문에 new 가능!
         return new BCryptPasswordEncoder();
@@ -45,18 +41,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public JsonIdPwAuthenticationProcessingFilter jsonIdPwAuthenticationProcessingFilter() throws Exception {
         JsonIdPwAuthenticationProcessingFilter jsonAuthenticationFilter = new JsonIdPwAuthenticationProcessingFilter(LOGIN_REQUEST_MATCHER);
         jsonAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
-        jsonAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler());
+        jsonAuthenticationFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         return jsonAuthenticationFilter;
-    }
-
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new JwtSuccessHandler();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService(),
+        auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService,
                 passwordEncoder(),
                 new SimpleAuthorityMapper()));
     }
@@ -68,8 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/mypage").hasRole("USER");
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
-        http.userDetailsService(userDetailsService());
+        http.addFilterBefore(jwtAuthenticationFilter, JsonIdPwAuthenticationProcessingFilter.class);
+        http.userDetailsService(userDetailsService);
     }
 
 }
