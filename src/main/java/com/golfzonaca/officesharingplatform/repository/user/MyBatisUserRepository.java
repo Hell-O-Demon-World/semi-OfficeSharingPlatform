@@ -4,8 +4,11 @@ import com.golfzonaca.officesharingplatform.domain.User;
 import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.mybatis.dto.UserInfoDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
+import javax.lang.model.type.ErrorType;
 import java.util.List;
 
 @Repository
@@ -27,6 +30,9 @@ public class MyBatisUserRepository implements UserRepository {
 
     @Override
     public User findByEmail(String email) {
+        if (userMapper.findByEmail(email) == null) {
+            throw new AuthenticationCredentialsNotFoundException(email);
+        }
         return userMapper.findByEmail(email);
     }
 

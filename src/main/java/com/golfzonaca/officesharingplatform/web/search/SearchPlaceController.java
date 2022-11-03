@@ -26,7 +26,6 @@ public class SearchPlaceController {
     public List<SearchResponseData> findRoomByWord(@RequestBody SearchRequestData searchRequestData) throws Exception {
         List<SearchResponseData> responseDataList = new LinkedList<>();
         List<Long> addressIds = new ArrayList<>();
-
         List<SearchPlaceResultData> placeSearchList = searchService.findPlaceBySearchWord(searchRequestData.getSearchWord());
 
         for (SearchPlaceResultData resultData : placeSearchList) {
