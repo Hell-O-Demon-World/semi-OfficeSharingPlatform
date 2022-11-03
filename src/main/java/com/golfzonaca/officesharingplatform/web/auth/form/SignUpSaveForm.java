@@ -37,6 +37,12 @@ public class SignUpSaveForm {
     private List<PreferType> preferType;
 
     public User toEntity() {
+
+        String changePreferString = getChangePreferString();
+        return new User(name, email, password, phoneNumber, job, changePreferString);
+    }
+
+    private String getChangePreferString() {
         String changePreferString = "";
         int cnt = 0;
         for (PreferType preferType1: preferType) {
@@ -50,7 +56,8 @@ public class SignUpSaveForm {
                 changePreferString.concat("office:");
             }
             changePreferString.concat(preferType1.toString()+"&");
+            cnt++;
         }
-        return new User(name, email, password, phoneNumber, job, changePreferString);
+        return changePreferString;
     }
 }
