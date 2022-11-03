@@ -25,29 +25,26 @@ const SignUp = () => {
     const checkedMeeting = meetingCheckedRef.current.checked;
     const checkedOffice = officeCheckedRef.current.checked;
     setIsLoading(true);
-    fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: enteredEmail,
-          password: enteredPassword,
-          name: enteredName,
-          phone: enteredPhone,
-          job: enteredJob,
-          preferType: [
-            {
-              desk: checkedDesk,
-              meetingroom: checkedMeeting,
-              office: checkedOffice,
-            },
-          ],
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch("/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        name: enteredName,
+        phone: enteredPhone,
+        job: enteredJob,
+        preferType: [
+          {
+            desk: checkedDesk,
+            meetingroom: checkedMeeting,
+            office: checkedOffice,
+          },
+        ],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
@@ -63,8 +60,17 @@ const SignUp = () => {
           });
         }
       })
-      .catch((data) => {
-        console.log(data);
+      .then((data) => {
+        if (data.length === 0) {
+          return;
+        } else {
+          let errorMsg = "";
+          for (const errorMessage in data) {
+            errorMsg += data[errorMessage];
+            errorMsg += `${`\r`}`;
+          }
+          alert(errorMsg);
+        }
       });
   };
   return (
