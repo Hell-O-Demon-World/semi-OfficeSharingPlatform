@@ -15,7 +15,7 @@ const OfficeList = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "https://react-http-673e2-default-rtdb.firebaseio.com/office.json"
+          "/main/search"
         );
         if (!response.ok) {
           throw new Error("Someting went wrong");
