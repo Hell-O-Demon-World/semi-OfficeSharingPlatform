@@ -14,9 +14,15 @@ const OfficeList = () => {
     const sendRequest = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          "/main/search"
-        );
+        const response = await fetch("/main/search", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            searchWord: "",
+          }),
+        });
         if (!response.ok) {
           throw new Error("Someting went wrong");
         }
