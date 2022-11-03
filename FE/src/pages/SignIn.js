@@ -15,16 +15,20 @@ const SignIn = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     setIsLoading(true);
-    fetch("/auth/signin", {
-      method: "POST",
-      body: JSON.stringify({
-        id: enteredEmail,
-        pw: enteredPassword,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
@@ -40,8 +44,8 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        console.log(data)
-        authCtx.login(data.accessToken);
+        localStorage.setItem("token", data.idToken);
+        authCtx.login(data.idToken);
         history.push("/");
       })
       .catch((err) => {

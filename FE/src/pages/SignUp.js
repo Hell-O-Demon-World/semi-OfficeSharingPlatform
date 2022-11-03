@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import classes from "./SignUp.module.css";
 const SignUp = () => {
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
@@ -24,52 +25,47 @@ const SignUp = () => {
     const checkedMeeting = meetingCheckedRef.current.checked;
     const checkedOffice = officeCheckedRef.current.checked;
     setIsLoading(true);
-    fetch("/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        name: enteredName,
-        phoneNumber: enteredPhone,
-        job: enteredJob,
-        preferType: [
-          {
-            desk: checkedDesk,
-            meetingroom: checkedMeeting,
-            office: checkedOffice,
-          },
-        ],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }).then((res) => {
-      setIsLoading(false);
-      if (res.ok) {
-        console.log(res)
-        return res.json();
-      } else {
-        return res.json().then((data) => {
-          let errorMessage = "회원가입 오류";
-          errorMessage = data.error.message;
-          if (data && data.error && data.error.message) {
-            alert(errorMessage);
-          }
-        });
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDa0MoK4QKzj8EDdhtfP5C2x7bVP7bPMns",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          name: enteredName,
+          phone: enteredPhone,
+          job: enteredJob,
+          preferType: [
+            {
+              desk: checkedDesk,
+              meetingroom: checkedMeeting,
+              office: checkedOffice,
+            },
+          ],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    }).then(data=>{
-      if(data.length === 0){
-        return;
-      }
-      else{
-        let errorMsg = ""
-        for (const errorMessage in data){
-          errorMsg += data[errorMessage]
-          errorMsg += `${`\r`}`
+    )
+      .then((res) => {
+        setIsLoading(false);
+        if (res.ok) {
+          history.replace("/");
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = "회원가입 오류";
+            errorMessage = data.error.message;
+            if (data && data.error && data.error.message) {
+              alert(errorMessage);
+            }
+          });
         }
-        alert(errorMsg)
-      }
-    })
+      })
+      .catch((data) => {
+        console.log(data);
+      });
   };
   return (
     <Card className={classes.signUp}>
