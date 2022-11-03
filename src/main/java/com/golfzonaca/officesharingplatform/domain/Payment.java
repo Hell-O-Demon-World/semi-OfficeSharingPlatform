@@ -10,6 +10,6 @@ public class Payment {
     private int companyId;
     private int roomId;
     private int trxPrice;
-    private boolean trxStatus; // 보증금 or 완납
-    private int trxMileage; // 적립 될 마일리지
+    private boolean trxStatus;
+    private int trxMileage;
 }
