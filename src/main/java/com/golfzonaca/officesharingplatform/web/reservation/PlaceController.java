@@ -9,12 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RestController
-@RequestMapping("/places")
-@RequiredArgsConstructor
+//@RestController
+//@RequestMapping("/places")
+//@RequiredArgsConstructor
 public class PlaceController {
-    private final PlaceRepository placeRepository;
-    private final RoomRepository roomRepository;
+//    private final PlaceRepository placeRepository;
+//    private final RoomRepository roomRepository;
 //    private final RoomKindRepository roomKindRepository;
 
 //    @GetMapping("/{placeId}")
@@ -32,10 +32,10 @@ public class PlaceController {
 //        reservationViewFrom.setDesk();
 //        return reservationViewFrom;
 //    }
-    @PostMapping("/{placeId}")
-    public String reservationForm(@PathVariable long placeId, Model model) {
-        Place place = placeRepository.findById(placeId);
-        model.addAttribute("place", place);
-        return ("");
-    }
+//    @PostMapping("/{placeId}")
+//    public String reservationForm(@PathVariable long placeId, Model model) {
+//        Place place = placeRepository.findById(placeId);
+//        model.addAttribute("place", place);
+//        return ("");
+//    }
 }

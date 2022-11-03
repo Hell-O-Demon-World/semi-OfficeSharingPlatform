@@ -38,26 +38,14 @@ public class SignUpSaveForm {
 
     public User toEntity() {
 
-        String changePreferString = getChangePreferString();
+        String changePreferString = getChangePreferString(preferType);
         return new User(name, email, password, phoneNumber, job, changePreferString);
     }
 
-    private String getChangePreferString() {
-        String changePreferString = "";
-        int cnt = 0;
-        for (PreferType preferType1: preferType) {
-            if (cnt == 0) {
-                changePreferString.concat("desk:");
-            }
-            if (cnt == 1) {
-                changePreferString.concat("meetingroom:");
-            }
-            if (cnt == 2) {
-                changePreferString.concat("office:");
-            }
-            changePreferString.concat(preferType1.toString()+"&");
-            cnt++;
-        }
+    private String getChangePreferString(List<PreferType> preferType) {
+        String changePreferString = "".concat("desk:"+String.valueOf(preferType.get(0).isDesk())+"&"
+                            + "meetingroom:"+String.valueOf(preferType.get(0).isMeetingroom())+"&"
+                            + "office:"+ String.valueOf(preferType.get(0).isOffice()));
         return changePreferString;
     }
 }

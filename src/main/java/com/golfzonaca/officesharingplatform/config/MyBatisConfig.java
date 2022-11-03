@@ -1,11 +1,14 @@
 package com.golfzonaca.officesharingplatform.config;
 
+import com.golfzonaca.officesharingplatform.config.auth.PrincipalDetailsRepository;
 import com.golfzonaca.officesharingplatform.repository.mileage.MileageRepository;
 import com.golfzonaca.officesharingplatform.repository.mileage.MyBatisMileageRepository;
 import com.golfzonaca.officesharingplatform.repository.mybatis.MileageMapper;
 import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.user.MyBatisUserRepository;
 import com.golfzonaca.officesharingplatform.repository.user.UserRepository;
+import com.golfzonaca.officesharingplatform.service.auth.AuthService;
+import com.golfzonaca.officesharingplatform.service.auth.MemoryAuthService;
 import com.golfzonaca.officesharingplatform.service.mileage.MileageService;
 import com.golfzonaca.officesharingplatform.service.mileage.MybatisMileageService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,11 @@ public class MyBatisConfig {
 
     private final UserMapper userMapper;
     private final MileageMapper mileageMapper;
+
+    @Bean
+    public AuthService authService() {
+        return new MemoryAuthService(userRepository(), mileageService(), new PrincipalDetailsRepository());
+    }
 
     @Bean
     public UserRepository userRepository() {

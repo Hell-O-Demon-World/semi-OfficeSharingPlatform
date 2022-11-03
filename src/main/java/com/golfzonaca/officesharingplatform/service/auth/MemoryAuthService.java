@@ -20,22 +20,23 @@ import java.util.Set;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class MemoryAuthService {
+public class MemoryAuthService implements AuthService{
     private final UserRepository userRepository;
     private final MileageService mileageService;
     private final PasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     private final PrincipalDetailsRepository principalDetailsRepository;
-
+    @Override
     public boolean emailCheck(String email) {
         return userRepository.countContainByEmail(email) == 0;
     }
 
+    @Override
     public Boolean join(User user) {
         boolean isJoin = true;
 
         if (!emailCheck(user.getUserMail())) {
-            isJoin = false;
+            return false;
         }
 
         String rawPassword = user.getUserPw();
