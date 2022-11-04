@@ -35,7 +35,7 @@ title OfficeSharingPlatform : BE
     Place 상세 조회                :chap5, 10-28, 1d
     Place 수정, 삭제               :chap6, 10-29, 1d
     로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 3d
-    공간 타입별 수량 추가             :chap8, 11-01, 2d
+    ROOM 타입별 수량 추가            :chap8, 11-01, 2d
     
     section 관리자 페이지
     업체 조회              :chap1, 10-29, 1d
