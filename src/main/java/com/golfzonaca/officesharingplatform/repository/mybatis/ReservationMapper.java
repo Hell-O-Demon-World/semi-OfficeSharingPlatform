@@ -11,7 +11,7 @@ public interface ReservationMapper {
 
     void save(Reservation reservation);
 
-    int findIdBySelectedType(String selectedType);
+    Integer findIdBySelectedType(String selectedType);
 
     List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId);
 

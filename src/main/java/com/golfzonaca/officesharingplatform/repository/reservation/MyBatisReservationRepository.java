@@ -21,7 +21,11 @@ public class MyBatisReservationRepository implements ReservationRepository {
 
     @Override
     public int findIdBySelectedType(String selectedType) {
-        return reservationMapper.findIdBySelectedType(selectedType);
+        Integer typeId = reservationMapper.findIdBySelectedType(selectedType);
+        if (typeId == null) {
+            return -1;
+        }
+        return typeId;
     }
 
     @Override
