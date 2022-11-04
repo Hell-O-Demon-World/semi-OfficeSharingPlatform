@@ -5,13 +5,11 @@
 }
 .active {
   background: #fff;
-  border: 1px solid #111;
   text-align: center;
   cursor: pointer;
 }
 .nonActive {
   background: rgb(122, 119, 119);
-  border: 1px solid #111;
   text-align: center;
 }
 

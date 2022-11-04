@@ -24,8 +24,8 @@ const AvailableTime = () => {
       availableFullTimeList.push(i);
     } else {
       timeList.forEach((elem) => {
-        if (!!document.getElementById(`${elem}`)) {
-          document.getElementById(`${elem}`).style.backgroundColor = "#fff";
+        if (!!document.getElementById(`time${elem}`)) {
+          document.getElementById(`time${elem}`).style.backgroundColor = "#fff";
         }
       });
       availableFullTimeList = [];
@@ -37,16 +37,18 @@ const AvailableTime = () => {
   const selectTimeHandler = (e) => {
     if (selectTimeList.length === 2) {
       timeList.forEach(
-        (elem) => (document.getElementById(elem).style.backgroundColor = "#fff")
+        (elem) =>
+          (document.getElementById(`time${elem}`).style.backgroundColor =
+            "#fff")
       );
     }
     dispatch(selectTimeActions.select(e.target.id));
-    document.getElementById(`${e.target.id}`).style.backgroundColor =
+    document.getElementById(`time${e.target.id}`).style.backgroundColor =
       "rgb(106, 158, 255)";
   };
   useEffect(() => {
     availableFullTimeList.forEach((elem) => {
-      document.getElementById(`${elem}`).style.backgroundColor =
+      document.getElementById(`time${elem}`).style.backgroundColor =
         "rgb(106, 158, 255)";
     });
   }, [availableFullTimeList]);
@@ -54,19 +56,19 @@ const AvailableTime = () => {
     <Card className={classes.card}>
       <div className={classes.line}></div>
       <h1>이용 가능 시간</h1>
-      <Swiper slidesPerView={8} spaceBetween={5} className={classes.swiper}>
+      <Swiper slidesPerView={8} className={classes.swiper}>
         {avaialbleTimeList.map((elem, idx) =>
           !!elem ? (
             <SwiperSlide
-              key={idx}
+              key={`time${idx}`}
               className={classes.active}
               onClick={selectTimeHandler}
-              id={idx}
+              id={`time${idx}`}
             >
               <TimeButton time={idx} />
             </SwiperSlide>
           ) : (
-            <SwiperSlide key={idx} className={classes.nonActive}>
+            <SwiperSlide key={`time${idx}`} className={classes.nonActive}>
               <TimeButton time={idx} />
             </SwiperSlide>
           )
@@ -85,11 +87,14 @@ const AvailableTime = () => {
         <p>날짜</p>
         {selectDate}
         <p>시간</p>
+        {selectTimeList[0] &&
+          !selectTimeList[1] &&
+          `${selectTimeList[0]}:00 ~ ${selectTimeList[0]}:00`}
         {selectTimeList[1] &&
           `${selectTimeList[0]}:00 ~ ${selectTimeList[1]}:00`}
       </div>
       <div className={classes.line}></div>
-      <Button>예약</Button>
+      {selectTimeList[0] && <Button>예약</Button>}
     </Card>
   );
 };
