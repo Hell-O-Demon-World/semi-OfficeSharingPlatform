@@ -21,6 +21,6 @@ public class ReservationController {
     public TimeListForm selectedDateTime(@PathVariable String placeId, @Valid @RequestBody SelectedDateTimeForm selectedDateTimeForm, BindingResult bindingResult) {
         TimeListForm timeListForm = new TimeListForm();
         timeListForm.setTimeList(reservationService.getReservationTimeList(Long.parseLong(placeId), selectedDateTimeForm));
-        return new TimeListForm();
+        return timeListForm;
     }
 }
