@@ -2,5 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.golfzonaca.officesharingplatform.repository.mybatis.ReservationMapper">
 
+    <select id="findAllByPlaceIdAndRoomKindIdAndDate" resultType="Reservation">
+        select *
+        from RESERVATION
+        where PLACE_ID = #{placeId}
+          AND ROOM_KIND_ID = #{roomKindId}
+          AND res_startdate = #{reservationDate}
+    </select>
 
 </mapper>

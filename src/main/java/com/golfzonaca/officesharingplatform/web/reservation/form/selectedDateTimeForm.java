@@ -3,13 +3,9 @@ package com.golfzonaca.officesharingplatform.web.reservation.form;
 import lombok.Data;
 
 @Data
-public class selectedDateTimeForm {
+public class SelectedDateTimeForm {
     private String selectedType;
-    private int year;
-    private int month;
-    private int day;
-    private int userId;
-
-
-//    public Reservation toEntity()
+    private Integer year;
+    private Integer month;
+    private Integer day;
 }
