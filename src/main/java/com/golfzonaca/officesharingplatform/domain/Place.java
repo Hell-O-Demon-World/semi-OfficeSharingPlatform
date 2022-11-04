@@ -5,6 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Map;
 
@@ -19,8 +23,8 @@ public class Place {
     private String placeName;
     private String placeDescription;
     private Map<String, Boolean> placeOpendays;
-    private Date placeStart;
-    private Date placeEnd;
+    private LocalTime placeStart;
+    private LocalTime placeEnd;
     private Map<String, Boolean> placeAddinfo;
     private int addressId;
 }

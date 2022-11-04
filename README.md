@@ -22,25 +22,26 @@ title OfficeSharingPlatform : BE
     section 메인플랫폼
     회원가입                :chap1, 10-25, 1d
     로그인                 :chap2, 10-26, 3d
-    스프링 시큐리티 적용       :chap3, 10-27, 11-01
-    CSRF -> JWT 방식 변경   :chap4, 10-27, 11-01
+    스프링 시큐리티 적용       :chap3, 10-27, 6d
+    CSRF -> JWT 방식 변경   :chap4, 10-27, 6d
     MariaDB, MyBatis 설정 :chap5, 11-02, 1d
+    예약 로직 구현           :chap6, 11-03, 4d
     
     section 백오피스
     Seudo Code, Test Case 작성    :chap1, 10-25, 1d
     MariaDB, MyBatis 설정         :chap2, 10-26, 1d
     Place 생성                    :chap3, 10-27, 1d
-    Thymeleaf HTML 작성           :chap4, 10-27, 10-30
+    Thymeleaf HTML 작성           :chap4, 10-27, 4d
     Place 상세 조회                :chap5, 10-28, 1d
     Place 수정, 삭제               :chap6, 10-29, 1d
-    로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 10-31
-    공간 타입별 수량 추가             :chap8, 11-01, 11-02
+    로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 3d
+    ROOM 타입별 수량 추가            :chap8, 11-01, 2d
     
     section 관리자 페이지
     업체 조회              :chap1, 10-29, 1d
     업체 생성              :chap2, 10-29, 1d
     업체 삭제              :chap3, 10-30, 1d
-    Thymeleaf HTML 작성   :chap4, 10-29, 10-31
-    업체 검색              :chap5, 10-31, 10-31
+    Thymeleaf HTML 작성   :chap4, 10-29, 3d
+    업체 검색              :chap5, 10-31, 2d
     
 ```
