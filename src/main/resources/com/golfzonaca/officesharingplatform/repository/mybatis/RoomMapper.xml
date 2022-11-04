@@ -5,6 +5,6 @@
         select *
         from ROOM
         where place_id = #{placeId}
-        and room_kind_id = #{roomKindId}
+        and room_kind_id = #{roomKindId};
     </select>
 </mapper>

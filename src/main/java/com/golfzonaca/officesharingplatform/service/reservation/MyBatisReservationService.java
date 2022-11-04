@@ -12,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -42,52 +40,56 @@ public class MyBatisReservationService implements ReservationService {
         int totalReservationCount = reservationRoomList.size();
         //Reservation Table에서 해당 날짜에 대한 예약 정보를 불러옴
         List<Reservation> findReservationList = reservationRepository.findAllByPlaceIdAndRoomKindIdAndDate(placeId, roomKindId, reservationDate);
+        //Set 변환 후 중복 제거
         //1-3 get beforeReservationCount
-        int beforeReservationCount = findReservationList.size();
-        //1-4 & 1-5 cnt == 0, empty list return
-        if (totalReservationCount - beforeReservationCount == 0) {
-            return new ArrayList<>();
+        Set<Long> countRoomIdSet = new HashSet<>();
+        for (int i = 0; i < findReservationList.size(); i++) {
+            countRoomIdSet.add(findReservationList.get(i).getRoomId());
         }
-
-        //2.
+        int beforeReservationCount = countRoomIdSet.size();
+        //1-4 & 1-5 cnt == 0, empty list return
+        // 이용 할 시간 삽입
+        Map<Integer, Boolean> inputTimeMap = getDefaultTimeMap();
         // 2-1 장소에 대한 시작시간 종료 시간 가져옴
         int startTime = findPlace.getPlaceStart().getHour();
         int endTime = findPlace.getPlaceEnd().getHour();
-        // 이용 할 시간 삽입
-        Map<Integer, Boolean> inputTimeMap = getDefaultTimeMap();
+        if (totalReservationCount - beforeReservationCount > 0) {
+            for (int i = startTime; i < endTime; i++) {
+                inputTimeMap.replace(i, false, true);
+            }
+        } else {
+            //2.
+            //2-2 get List Room
+            for (Reservation reservation : findReservationList) {
+                for (int i = reservation.getResStartTime().getHour(); i < reservation.getResEndTime().getHour(); i++) {
+                    if (inputTimeMap.get(i) == true) {
+                        continue;
+                    }
+                    inputTimeMap.replace(i, false, true);
+                }
+            }
 
-        //2-2 get List Room
-        for (Reservation reservation : findReservationList) {
-            for (int i = reservation.getResStartTime().getHour(); i < reservation.getResEndTime().getHour(); i++) {
+            // 영업시간 설정
+            for (int i = startTime; i < endTime; i++) {
                 if (inputTimeMap.get(i) == true) {
-                    continue;
+                    break;
+                }
+                inputTimeMap.replace(i, false, true);
+            }
+            for (int i = endTime - 1; i > startTime; i--) {
+                if (inputTimeMap.get(i) == true) {
+                    break;
                 }
                 inputTimeMap.replace(i, false, true);
             }
         }
-
+        // map을 list로 변환
         Iterator<Map.Entry<Integer, Boolean>> itr = inputTimeMap.entrySet().iterator();
 
-        while(itr.hasNext())
-        {
+        while (itr.hasNext()) {
             Map.Entry<Integer, Boolean> entry = itr.next();
             if (entry.getValue() == true) {
                 resultTimeList.add(entry.getKey());
-            }
-        }
-
-        // 영업 시간범위에 있는지도 추가
-        resultTimeList.sort(Comparator.naturalOrder());
-        int minTime = resultTimeList.get(0);
-        int maxTime = resultTimeList.get(resultTimeList.size() - 1);
-        if (startTime < minTime) {
-            for (int i = startTime; i < minTime; i++) {
-                resultTimeList.add(i);
-            }
-        }
-        if (endTime > maxTime) {
-            for (int i = maxTime + 1; i < endTime; i++) {
-                resultTimeList.add(i);
             }
         }
         return resultTimeList;
