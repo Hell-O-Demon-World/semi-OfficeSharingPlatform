@@ -42,4 +42,9 @@ public class MyBatisReservationRepository implements ReservationRepository {
     public List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate) {
         return reservationMapper.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
     }
+
+    @Override
+    public List<Integer> findRoomTypeByPlaceId(long placeId) {
+        return reservationMapper.findRoomTypeByPlaceId(placeId);
+    }
 }

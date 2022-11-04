@@ -3,20 +3,17 @@ package com.golfzonaca.officesharingplatform.web.reservation;
 import com.golfzonaca.officesharingplatform.domain.Reservation;
 import com.golfzonaca.officesharingplatform.service.reservation.ReservationService;
 import com.golfzonaca.officesharingplatform.web.reservation.form.ResRequestData;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @RestController
@@ -25,8 +22,72 @@ public class ReservationController {
 
     private final ReservationService reservationService;
 
+    @GetMapping("places/{placeId}")
+    public JsonObject findRoom(@PathVariable long placeId) {
+
+        List<Integer> findRoomTypeList = reservationService.findRoomTypeByPlaceId(placeId);
+        log.info("findRoomTypeList={}", findRoomTypeList);
+
+        List<Integer> meetingRoom = new ArrayList<>();
+        List<Integer> office = new ArrayList<>();
+        JsonObject responseData = new JsonObject();
+
+        int deskQuantity = Collections.frequency(findRoomTypeList, 1);
+        int meetingRoom4 = Collections.frequency(findRoomTypeList, 2);
+        int meetingRoom6 = Collections.frequency(findRoomTypeList, 3);
+        int meetingRoom10 = Collections.frequency(findRoomTypeList, 4);
+        int meetingRoom20 = Collections.frequency(findRoomTypeList, 5);
+        int office20 = Collections.frequency(findRoomTypeList, 6);
+        int office40 = Collections.frequency(findRoomTypeList, 7);
+        int office70 = Collections.frequency(findRoomTypeList, 8);
+        int office100 = Collections.frequency(findRoomTypeList, 9);
+
+        if (deskQuantity != 0) {
+            responseData.addProperty("desk", true);
+        } else {
+            responseData.addProperty("desk", false);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            if (Collections.frequency(findRoomTypeList, i + 1) != 0) {
+                if (i + 1 == 2) {
+                    meetingRoom.add(4);
+                } else if (i + 1 == 3) {
+                    meetingRoom.add(6);
+                } else if (i + 1 == 4) {
+                    meetingRoom.add(10);
+                } else if (i + 1 == 5) {
+                    meetingRoom.add(20);
+                }
+            }
+        }
+        String meetingRoomL = new Gson().toJson(meetingRoom);
+        responseData.addProperty("meetingRoom", meetingRoomL);
+
+        for (int i = 0; i < 4; i++) {
+            if (Collections.frequency(findRoomTypeList, i + 6) != 0) {
+                if (i + 6 == 6) {
+                    office.add(20);
+                } else if (i + 6 == 7) {
+                    office.add(40);
+                } else if (i + 6 == 8) {
+                    office.add(70);
+                } else {
+                    office.add(100);
+                }
+            }
+        }
+
+        String officeL = new Gson().toJson(office);
+        responseData.addProperty("office", officeL);
+
+        log.info("responseData={}", responseData);
+
+        return responseData;
+    }
+
     @PostMapping("places/{placeId}/book")
-    public Map Book(@PathVariable long placeId, @RequestBody ResRequestData resRequestData) {
+    public Map book(@PathVariable long placeId, @RequestBody ResRequestData resRequestData) {
 
         Map<String, String> errorMap = new LinkedHashMap<>();
 

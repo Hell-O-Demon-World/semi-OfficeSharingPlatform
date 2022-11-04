@@ -16,4 +16,6 @@ public interface ReservationService {
     int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
 
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
+
+    List<Integer> findRoomTypeByPlaceId(long placeId);
 }
