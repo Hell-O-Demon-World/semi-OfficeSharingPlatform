@@ -25,23 +25,13 @@ public class ReservationController {
     @GetMapping("places/{placeId}")
     public JsonObject findRoom(@PathVariable long placeId) {
 
-        List<Integer> findRoomTypeList = reservationService.findRoomTypeByPlaceId(placeId);
-        log.info("findRoomTypeList={}", findRoomTypeList);
-
-        List<Integer> meetingRoom = new ArrayList<>();
-        List<Integer> office = new ArrayList<>();
+        List<Integer> meetingRoomList = new ArrayList<>();
+        List<Integer> officeList = new ArrayList<>();
         JsonObject responseData = new JsonObject();
 
-        int deskQuantity = Collections.frequency(findRoomTypeList, 1);
-        int meetingRoom4 = Collections.frequency(findRoomTypeList, 2);
-        int meetingRoom6 = Collections.frequency(findRoomTypeList, 3);
-        int meetingRoom10 = Collections.frequency(findRoomTypeList, 4);
-        int meetingRoom20 = Collections.frequency(findRoomTypeList, 5);
-        int office20 = Collections.frequency(findRoomTypeList, 6);
-        int office40 = Collections.frequency(findRoomTypeList, 7);
-        int office70 = Collections.frequency(findRoomTypeList, 8);
-        int office100 = Collections.frequency(findRoomTypeList, 9);
+        List<Integer> findRoomTypeList = reservationService.findRoomTypeByPlaceId(placeId);
 
+        int deskQuantity = Collections.frequency(findRoomTypeList, 1);
         if (deskQuantity != 0) {
             responseData.addProperty("desk", true);
         } else {
@@ -51,38 +41,35 @@ public class ReservationController {
         for (int i = 0; i < 5; i++) {
             if (Collections.frequency(findRoomTypeList, i + 1) != 0) {
                 if (i + 1 == 2) {
-                    meetingRoom.add(4);
+                    meetingRoomList.add(4);
                 } else if (i + 1 == 3) {
-                    meetingRoom.add(6);
+                    meetingRoomList.add(6);
                 } else if (i + 1 == 4) {
-                    meetingRoom.add(10);
+                    meetingRoomList.add(10);
                 } else if (i + 1 == 5) {
-                    meetingRoom.add(20);
+                    meetingRoomList.add(20);
                 }
             }
         }
-        String meetingRoomL = new Gson().toJson(meetingRoom);
-        responseData.addProperty("meetingRoom", meetingRoomL);
+        String meetingRoom = new Gson().toJson(meetingRoomList);
+        responseData.addProperty("meetingRoom", meetingRoom);
 
         for (int i = 0; i < 4; i++) {
             if (Collections.frequency(findRoomTypeList, i + 6) != 0) {
                 if (i + 6 == 6) {
-                    office.add(20);
+                    officeList.add(20);
                 } else if (i + 6 == 7) {
-                    office.add(40);
+                    officeList.add(40);
                 } else if (i + 6 == 8) {
-                    office.add(70);
+                    officeList.add(70);
                 } else {
-                    office.add(100);
+                    officeList.add(100);
                 }
             }
         }
 
-        String officeL = new Gson().toJson(office);
-        responseData.addProperty("office", officeL);
-
-        log.info("responseData={}", responseData);
-
+        String office = new Gson().toJson(officeList);
+        responseData.addProperty("office", office);
         return responseData;
     }
 
@@ -131,7 +118,7 @@ public class ReservationController {
             if ((reservation.getResStartTime().isBefore(resStartTime) || reservation.getResStartTime().equals(resStartTime)) && reservation.getResEndTime().isAfter(resStartTime)) {
                 if (reservation.getUserId() != resRequestData.getUserId()) {
                     resCount++;
-                    findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                    findRoomIdList.remove(reservation.getRoomId());
                 } else {
                     errorMap.put("DuplicatedResForUserError", "선택하신 공간에 대한 예약 내역이 존재합니다.");
                     return errorMap;
@@ -139,14 +126,13 @@ public class ReservationController {
             } else if (resStartTime.isBefore(reservation.getResStartTime()) && resEndTime.isAfter(reservation.getResStartTime())) {
                 if (reservation.getUserId() != resRequestData.getUserId()) {
                     resCount++;
-                    findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                    findRoomIdList.remove(reservation.getRoomId());
                 } else {
                     errorMap.put("DuplicatedResForUserError", "선택하신 공간에 대한 예약 내역이 존재합니다.");
                     return errorMap;
                 }
             }
         }
-        log.info("resCount={}", resCount);
         if (roomQuantity == resCount) {
             errorMap.put("DuplicatedResForRoomError", "선택하신 타입의 이용가능한 공간이 없습니다.");
             return errorMap;
@@ -159,15 +145,13 @@ public class ReservationController {
     public LocalDate toLocalDate(String year, String month, String day) {
         String StringType = String.format("%s, %s, %s", year, month, day);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu, M, d");
-        LocalDate resDate = LocalDate.parse(StringType, formatter);
-        return resDate;
+        return LocalDate.parse(StringType, formatter);
     }
 
     public LocalTime toLocalTime(String hour) {
         String StringType = String.format("%s, %s, %s", hour, "0", "0");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H, m, s");
-        LocalTime resTime = LocalTime.parse(StringType, formatter);
-        return resTime;
+        return LocalTime.parse(StringType, formatter);
     }
 }
 
