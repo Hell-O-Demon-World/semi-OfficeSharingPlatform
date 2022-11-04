@@ -7,15 +7,16 @@ import classes from "./AvailableTime.module.css";
 import "swiper/swiper-bundle.min.css";
 import Card from "../UI/Card";
 import { selectTimeActions } from "../../store/selectTime";
+import Button from "../UI/Button";
 
 const AvailableTime = () => {
+  const selectDate = useSelector((state) => state.item.date);
   const dispatch = useDispatch();
   const avaialbleTimeList = useSelector((state) => state.time.timelist);
   const timeList = useSelector((state) => state.selectTime.timeList);
   const selectTimeList = useSelector(
     (state) => state.selectTime.selectTimeList
   );
-  console.log(selectTimeList);
   let availableFullTimeList = [];
 
   for (let i = selectTimeList[0]; i <= selectTimeList[1]; i++) {
@@ -79,7 +80,16 @@ const AvailableTime = () => {
         <label>선택</label>
         <div className={classes.checked}></div>
       </div>
+      <div>
+        <h3>예약 시간</h3>
+        <p>날짜</p>
+        {selectDate}
+        <p>시간</p>
+        {selectTimeList[1] &&
+          `${selectTimeList[0]}:00 ~ ${selectTimeList[1]}:00`}
+      </div>
       <div className={classes.line}></div>
+      <Button>예약</Button>
     </Card>
   );
 };
