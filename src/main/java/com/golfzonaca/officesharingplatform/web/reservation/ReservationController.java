@@ -47,7 +47,6 @@ public class ReservationController {
         }
 
         if (roomQuantity == 0) {
-            log.info("존재하지 않는 타입의 공간입니다.");
             errorMap.put("NotExistedRoomError", "존재하지 않는 공간입니다.");
             return errorMap;
         }
@@ -59,28 +58,35 @@ public class ReservationController {
         if (findResList.size() == 0) {
             Reservation reservation = new Reservation(placeId, resRequestData.getUserId(), findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
             reservationService.save(reservation);
-            log.info("예약 성공");
             return errorMap;
         }
 
         for (Reservation reservation : findResList) {
             if ((reservation.getResStartTime().isBefore(resStartTime) || reservation.getResStartTime().equals(resStartTime)) && reservation.getResEndTime().isAfter(resStartTime)) {
-                resCount++;
-                findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                if (reservation.getUserId() != resRequestData.getUserId()) {
+                    resCount++;
+                    findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                } else {
+                    errorMap.put("DuplicatedResForUserError", "선택한 시간에 예약하신 공간이 있습니다.");
+                    return errorMap;
+                }
             } else if (resStartTime.isBefore(reservation.getResStartTime()) && resEndTime.isAfter(reservation.getResStartTime())) {
-                resCount++;
-                findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                if (reservation.getUserId() != resRequestData.getUserId()) {
+                    resCount++;
+                    findRoomIdList.remove(Long.valueOf(reservation.getRoomId()));
+                } else {
+                    errorMap.put("DuplicatedResForUserError", "선택한 시간에 예약하신 공간이 있습니다.");
+                    return errorMap;
+                }
             }
         }
         log.info("resCount={}", resCount);
         if (roomQuantity == resCount) {
-            log.info("해당 시간에 모든 " + resRequestData.getSelectedType() + " 이 예약되어 있습니다.");
-            errorMap.put("DuplicatedResError", "이미 에약된 공간입니다.");
+            errorMap.put("DuplicatedResForRoomError", "이미 에약된 공간입니다.");
             return errorMap;
         }
         Reservation reservation = new Reservation(placeId, resRequestData.getUserId(), findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
         reservationService.save(reservation);
-        log.info("예약 성공");
         return errorMap;
     }
 
