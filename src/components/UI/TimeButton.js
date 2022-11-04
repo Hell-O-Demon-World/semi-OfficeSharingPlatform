@@ -1,9 +1,12 @@
 import React from "react";
-import classes from "./TimeButton.module.css";
+
 const TimeButton = (props) => {
+  const click = (e) => {
+    e.stopPropagation();
+  };
   return (
-    <div className={props.classActive + `${classes.box}`}>
-      <p>{props.time + ":00"}</p>
+    <div id={props.time}>
+      <p onClick={click}>{props.time + ":00"}</p>
     </div>
   );
 };

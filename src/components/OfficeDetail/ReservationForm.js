@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
-import { useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { avaialbleTimeActions } from "../../store/availableTime";
 import { selectItemActions } from "../../store/selectItem";
+import { selectTimeActions } from "../../store/selectTime";
 import Button from "../UI/Button";
+import Card from "../UI/Card";
 import DatePick from "../UI/DatePick";
 import AvailableTime from "./AvailableTime";
 import classes from "./ReservationForm.module.css";
@@ -36,16 +37,16 @@ const ReservationForm = () => {
       }
       setIsLoading(false);
       const data = await response.json();
-
       dispatch(
         avaialbleTimeActions.checkTimeList(availableTimeList(data.timeList))
       );
+      dispatch(selectTimeActions.getTimeList(data.timeList));
     } catch (err) {
       return err;
     }
   };
   return (
-    <Fragment>
+    <Card>
       {!isSelected && <h1>원하는 상품을 선택</h1>}
       {!!isSelected && (
         <form className={classes.productForm}>
@@ -75,9 +76,9 @@ const ReservationForm = () => {
           <Button onClick={checkAvailableTime}>시간 확인</Button>
         </form>
       )}
-      {showTimeLine && <AvailableTime />}
+      {!!isSelected && showTimeLine && !isLoading && <AvailableTime />}
       {isLoading && <p>Loading...</p>}
-    </Fragment>
+    </Card>
   );
 };
 
