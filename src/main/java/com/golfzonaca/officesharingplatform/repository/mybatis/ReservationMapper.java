@@ -10,4 +10,16 @@ import java.util.List;
 public interface ReservationMapper {
 
     List<Reservation> findAllByPlaceIdAndRoomKindIdAndDate(long placeId, long roomKindId, LocalDate reservationDate);
+
+    void save(Reservation reservation);
+
+    Integer findIdBySelectedType(String selectedType);
+
+    List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId);
+
+    int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
+
+    List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
+
+    List<Integer> findRoomTypeByPlaceId(long placeId);
 }

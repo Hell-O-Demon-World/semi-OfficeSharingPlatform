@@ -10,4 +10,45 @@
           AND res_startdate = #{reservationDate}
     </select>
 
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into reservation (place_id, user_id, room_id, room_kind_id, res_startdate, res_starttime, res_enddate,
+                                 res_endtime)
+        values (#{placeId}, #{userId}, #{roomId}, #{roomKindId}, #{resStartDate}, #{resStartTime}, #{resEndDate},
+                #{resEndTime})
+    </insert>
+
+    <select id="findIdBySelectedType" resultType="java.lang.Integer">
+        select id
+        from room_kind
+        where room_type like #{selectedType}
+    </select>
+
+    <select id="findRoomIdByPlaceIdAndRoomTypeId" resultType="java.lang.Long">
+        select id
+        from room
+        where place_id = #{placeId}
+          and room_kind_id = #{roomTypeId}
+    </select>
+
+    <select id="countRoomQuantityByPlaceId" resultType="java.lang.Integer">
+        select count(*)
+        from room
+        where place_id = #{placeId}
+          and room_kind_id = #{roomTypeId}
+    </select>
+
+    <select id="findResByPlaceIdAndRoomKindId" resultType="Reservation">
+        select *
+        from reservation
+        where place_id = #{placeId}
+          and room_kind_id = #{roomTypeId}
+          and res_startdate = #{resStartDate}
+          and res_enddate = #{resEndDate}
+    </select>
+
+    <select id="findRoomTypeByPlaceId" resultType="java.lang.Integer">
+        select room_kind_id
+        from room
+        where place_id = #{placeId}
+    </select>
 </mapper>

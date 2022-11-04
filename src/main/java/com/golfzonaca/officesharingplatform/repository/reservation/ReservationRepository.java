@@ -8,4 +8,15 @@ import java.util.List;
 public interface ReservationRepository {
 
     List<Reservation> findAllByPlaceIdAndRoomKindIdAndDate(Long placeId, Long roomKindId,LocalDate reservationDate);
+    void save(Reservation reservation);
+
+    int findIdBySelectedType(String selectedType);
+
+    List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId);
+
+    int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
+
+    List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
+
+    List<Integer> findRoomTypeByPlaceId(long placeId);
 }
