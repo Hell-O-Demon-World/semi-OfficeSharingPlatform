@@ -1,6 +1,7 @@
 .swiper {
   width: 100%;
   margin-right: 100%;
+  padding-top: 15px;
 }
 .active {
   background: #fff;

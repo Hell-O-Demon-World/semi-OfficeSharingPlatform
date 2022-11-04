@@ -1,13 +1,17 @@
-import React from "react";
-
+import React, { Fragment } from "react";
+import classes from "./TimeButton.module.css";
 const TimeButton = (props) => {
   const click = (e) => {
     e.stopPropagation();
   };
   return (
-    <div id={props.time}>
-      <p onClick={click}>{props.time + ":00"}</p>
-    </div>
+    <Fragment>
+      <div id={props.time} className={classes.box}>
+        <span className={classes.text} onClick={click}>
+          {props.time + ":00"}
+        </span>
+      </div>
+    </Fragment>
   );
 };
 

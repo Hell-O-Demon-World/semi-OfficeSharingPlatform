@@ -5,6 +5,7 @@ const initialSelectTimeState = {
   endTime: null,
   selectTimeList: [],
   timeList: [],
+  fullTimeList: [],
 };
 
 const selectTimeSlice = createSlice({
@@ -14,6 +15,7 @@ const selectTimeSlice = createSlice({
     getTimeList(state, action) {
       state.timeList = action.payload;
     },
+
     select(state, action) {
       if (state.selectTimeList.length === 2) {
         state.selectTimeList = [];
@@ -22,6 +24,15 @@ const selectTimeSlice = createSlice({
         state.selectTimeList.push(Number(action.payload));
       }
       state.selectTimeList.sort((a, b) => a - b);
+    },
+    deleteList(state) {
+      state.selectTimeList = [];
+    },
+    getFullTime(state, action) {
+      if (action.payload === []) {
+        state.fullTimeList = [];
+      }
+      state.fullTimeList.push(action.payload);
     },
   },
 });

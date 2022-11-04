@@ -26,6 +26,7 @@ const ReservationForm = () => {
     return timeArr;
   };
   const checkAvailableTime = async () => {
+    dispatch(selectTimeActions.deleteList());
     dispatch(selectItemActions.showTimeLine());
     try {
       setIsLoading(true);

@@ -29,6 +29,7 @@ const AvailableTime = () => {
       });
       availableFullTimeList = [];
       alert("예약이 불가능한 시간이 포함되어 있습니다.");
+      dispatch(selectTimeActions.deleteList());
       break;
     }
   }
