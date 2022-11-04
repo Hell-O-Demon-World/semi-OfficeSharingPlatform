@@ -3,7 +3,6 @@ package com.golfzonaca.officesharingplatform.domain;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Builder
@@ -14,7 +13,8 @@ public class Reservation {
     private long userId;
     private long roomId;
     private long roomKindId;
+    private LocalDate resStartDate;
     private LocalTime resStartTime;
+    private LocalDate resEndDate;
     private LocalTime resEndTime;
-
 }
