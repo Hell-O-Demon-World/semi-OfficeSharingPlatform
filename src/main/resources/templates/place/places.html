@@ -45,6 +45,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th>공간아이디</th>
                 <th>공간명</th>
                 <th>오픈시간</th>
                 <th>마감시간</th>
@@ -52,6 +53,7 @@
             </thead>
             <tbody>
             <tr th:each="place : ${places}">
+                <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.id}">공간 아이디</a></td>
                 <td><a href="place.html" th:href="@{|/places/${place.id}|}" th:text="${place.placeName}">공간명</a></td>
                 <td th:text="${place.placeStart}">10:00</td>
                 <td th:text="${place.placeEnd}">12:00</td>
