@@ -11,12 +11,6 @@ public interface ReservationRepository {
     
     List<Reservation> findAllByUserId(Long userId);
 
-    int findIdBySelectedType(String selectedType);
-
-    List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId);
-
-    int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
-
     void save(Reservation reservation);
     
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
