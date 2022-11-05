@@ -21,6 +21,11 @@ public class MyBatisReservationRepository implements ReservationRepository {
     }
 
     @Override
+    public List<Reservation> findAllByUserId(Long userId) {
+        return reservationMapper.findAllByUserId(userId);
+    }
+
+    @Override
     public void save(Reservation reservation) {
         reservationMapper.save(reservation);
     }
@@ -29,4 +34,15 @@ public class MyBatisReservationRepository implements ReservationRepository {
     public List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate) {
         return reservationMapper.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
     }
+
+    @Override
+    public List<Integer> findRoomTypeByPlaceId(long placeId) {
+        return reservationMapper.findRoomTypeByPlaceId(placeId);
+    }
+
+    @Override
+    public void deleteById(Long reservationId) {
+        reservationMapper.deleteById(reservationId);
+    }
+
 }

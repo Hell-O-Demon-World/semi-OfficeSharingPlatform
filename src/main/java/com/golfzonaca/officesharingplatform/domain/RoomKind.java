@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 public class RoomKind {
     private long id;
-    private RoomType roomType;
+    private String roomType;
     private int price;
 }

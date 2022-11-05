@@ -54,6 +54,7 @@ public class JwtManager {
         Jwt decodedJwt = JwtHelper.decodeAndVerify(jwt, macSigner);
 
         String claims = decodedJwt.getClaims();
+
         return gson.fromJson(claims, JsonObject.class);
     }
 }

@@ -11,7 +11,13 @@ public interface ReservationMapper {
 
     List<Reservation> findAllByPlaceIdAndRoomKindIdAndDate(long placeId, long roomKindId, LocalDate reservationDate);
 
+    List<Reservation> findAllByUserId(Long userId);
+
     void save(Reservation reservation);
 
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
+
+    List<Integer> findRoomTypeByPlaceId(long placeId);
+
+    void deleteById(Long reservationId);
 }

@@ -26,6 +26,7 @@ public class MyBatisReservationService implements ReservationService {
     private final RoomKindRepository roomKindRepository;
     private final PlaceRepository placeRepository;
 
+
     @Override
     public List<Integer> getReservationTimeList(Long placeId, SelectedDateTimeForm selectedDateTimeForm) {
         List<Integer> resultTimeList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.golfzonaca.officesharingplatform.repository.roomkind;
 
+import com.golfzonaca.officesharingplatform.domain.RoomKind;
 import com.golfzonaca.officesharingplatform.repository.mybatis.RoomKindMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,5 +17,10 @@ public class MybatisRoomKindRepository implements RoomKindRepository {
             return -1L;
         }
         return typeId;
+    }
+
+    @Override
+    public RoomKind findById(long roomKindId) {
+        return roomKindMapper.findById(roomKindId);
     }
 }

@@ -10,6 +10,12 @@
           AND res_startdate = #{reservationDate}
     </select>
 
+    <select id="findAllByUserId" resultType="Reservation">
+        select *
+        from reservation
+        where user_id = #{userId}
+    </select>
+
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
         insert into reservation (place_id, user_id, room_id, room_kind_id, res_startdate, res_starttime, res_enddate,
                                  res_endtime)
@@ -24,5 +30,16 @@
           and room_kind_id = #{roomTypeId}
           and res_startdate = #{resStartDate}
           and res_enddate = #{resEndDate}
+    </select>
+
+    <select id="findRoomTypeByPlaceId" resultType="java.lang.Integer">
+        select room_kind_id
+        from room
+        where place_id = #{placeId}
+    </select>
+    <select id="deleteById">
+        delete
+        from reservation
+        where id = #{reservationId}
     </select>
 </mapper>
