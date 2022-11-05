@@ -14,20 +14,26 @@ const OfficeList = () => {
     const sendRequest = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          "https://react-http-673e2-default-rtdb.firebaseio.com/office.json"
-        );
+        const response = await fetch("/main/search", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            searchWord: "",
+          }),
+        });
         if (!response.ok) {
           throw new Error("Someting went wrong");
         }
         const data = await response.json();
         for (const key in data) {
           office.push({
-            key,
+            key: data[key].key,
             name: data[key].name,
             address: data[key].address,
             option: data[key].option,
-            postcode: data[key].postcode,
+            postcode: Number(data[key].postcode),
           });
         }
 
