@@ -16,7 +16,7 @@ const AvailableTime = () => {
   const avaialbleTimeList = useSelector((state) => state.time.timelist);
   const timeList = useSelector((state) => state.selectTime.timeList);
   const selectedDate = useSelector((state) => state.item.date);
-  const selectItem = useSelector((state) => state.item.selectItem);
+  const selectItem = useSelector((state) => state.item.itemId);
   const dateArr = selectedDate.split(". ");
   const year = dateArr[0];
   const month = dateArr[1];
