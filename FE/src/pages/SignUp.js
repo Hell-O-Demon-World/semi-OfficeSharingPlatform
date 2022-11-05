@@ -25,7 +25,7 @@ const SignUp = () => {
     const checkedMeeting = meetingCheckedRef.current.checked;
     const checkedOffice = officeCheckedRef.current.checked;
     setIsLoading(true);
-    fetch("/auth/singup", {
+    fetch("/auth/signup", {
       method: "POST",
       body: JSON.stringify({
         email: enteredEmail,
@@ -48,7 +48,7 @@ const SignUp = () => {
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
-          history.replace("/");
+          history.replace("/auth/signin");
           return res.json();
         } else {
           return res.json().then((data) => {
@@ -70,7 +70,9 @@ const SignUp = () => {
             errorMsg += data[errorMessage];
             errorMsg += `${`\r`}`;
           }
-          alert(errorMsg);
+          if(errorMsg.length !== 0){
+            alert(errorMsg);          
+          }
         }
       });
   };
