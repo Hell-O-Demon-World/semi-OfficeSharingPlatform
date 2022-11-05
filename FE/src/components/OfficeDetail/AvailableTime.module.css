@@ -1,0 +1,43 @@
+.swiper {
+  width: 100%;
+  margin-right: 100%;
+  padding-top: 15px;
+}
+.active {
+  background: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+.nonActive {
+  background: rgb(122, 119, 119);
+  text-align: center;
+}
+
+.card {
+  margin-top: 50px;
+}
+.line {
+  border-top: 2px solid rgb(106, 158, 255);
+  border-bottom: 2px solid rgb(106, 158, 255);
+}
+.checkStatus {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 200px;
+}
+.checkStatus div {
+  border: 2px solid #111;
+  width: 17px;
+  height: 17px;
+}
+.disabled {
+  background: rgb(122, 119, 119);
+}
+.available {
+  background: #fff;
+}
+.checked {
+  background: rgb(106, 158, 255);
+}

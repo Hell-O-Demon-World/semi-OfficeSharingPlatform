@@ -15,17 +15,19 @@ const moneyPerHour = (count) => {
 const MeetingRoom = () => {
   const dispatch = useDispatch();
   const selectItemHandler = (e) => {
+    dispatch(selectItemActions.hideTimeLine());
     dispatch(
       selectItemActions.select({
         itemName: `${e.target.id}인 회의실`,
         itemPrice: `${moneyPerHour(e.target.id)} / hour`,
+        itemId: `meetingRoom${e.target.id}`,
       })
     );
   };
   const meetingRoom = useSelector((state) => state.availableItem.meetingRoom);
   return (
     <Fragment>
-      <h1>Meeting Room</h1>
+      <h1 className={classes.productName}>Meeting Room</h1>
       {!meetingRoom && <h1>이용 가능한 meetingRoom이 없습니다.</h1>}
       {!!meetingRoom && (
         <Swiper

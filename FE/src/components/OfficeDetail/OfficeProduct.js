@@ -13,25 +13,22 @@ const moneyPerHour = (count) => {
 const Office = () => {
   const dispatch = useDispatch();
   const selectItemHandler = (e) => {
+    dispatch(selectItemActions.hideTimeLine());
     dispatch(
       selectItemActions.select({
         itemName: `${e.target.id}인 회의실`,
         itemPrice: `${moneyPerHour(e.target.id)} / hour`,
+        itemId: `office${e.target.id}`,
       })
     );
   };
   const office = useSelector((state) => state.availableItem.office);
   return (
     <Fragment>
-      <h1>Office</h1>
+      <h1 className={classes.productName}>Office</h1>
       {!office && <h1>예약 가능한 Office가 없습니다.</h1>}
       {!!office && (
-        <Swiper
-          navigation={true}
-          className="mySwiper"
-          spaceBetween={50}
-          slidesPerView={3}
-        >
+        <Swiper navigation={true} spaceBetween={50} slidesPerView={3}>
           {office.map((elem) => (
             <SwiperSlide
               className={`${classes.container} + ${classes.swiperContainer}`}

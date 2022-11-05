@@ -1,12 +1,19 @@
 .container {
   width: 100%;
 }
+.productName {
+  position: relative;
+  top: -50px;
+  left: 20px;
+  font-size: 40px;
+}
 .container main {
   display: flex;
   justify-content: space-between;
 }
 
-.container .checkBtn {
+.container Button {
+  width: 80%;
   display: flex;
   justify-content: center;
   align-items: center;

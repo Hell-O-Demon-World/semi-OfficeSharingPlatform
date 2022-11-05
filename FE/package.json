@@ -1,5 +1,5 @@
 {
-  "name": "react-complete-guide",
+  "name": "office-sharing-platform",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8080/",
@@ -19,7 +19,7 @@
     "react-redux": "^8.0.4",
     "react-router-dom": "^5.3.4",
     "react-scripts": "^5.0.1",
-    "swiper": "^6.8.4",
+    "swiper": "^8.4.4",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

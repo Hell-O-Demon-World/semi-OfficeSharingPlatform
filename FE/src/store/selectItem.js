@@ -4,6 +4,9 @@ const selectItemInitialState = {
   isSelected: false,
   itemName: null,
   itemPrice: null,
+  itemId: "",
+  showTimeLine: false,
+  date: new Date().toLocaleDateString(),
 };
 
 const selectItemSlice = createSlice({
@@ -14,6 +17,16 @@ const selectItemSlice = createSlice({
       state.isSelected = !!action.payload.itemName;
       state.itemName = action.payload.itemName;
       state.itemPrice = action.payload.itemPrice;
+      state.itemId = action.payload.itemId;
+    },
+    hideTimeLine(state) {
+      state.showTimeLine = false;
+    },
+    showTimeLine(state) {
+      state.showTimeLine = true;
+    },
+    selectDate(state, action) {
+      state.date = action.payload;
     },
   },
 });

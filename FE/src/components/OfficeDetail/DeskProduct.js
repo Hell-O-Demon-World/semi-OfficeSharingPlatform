@@ -10,13 +10,15 @@ const Desk = () => {
       selectItemActions.select({
         itemName: "1인 Desk",
         itemPrice: "10,000 / hour",
+        itemId: "desk",
       })
     );
+    dispatch(selectItemActions.hideTimeLine());
   };
   const desk = useSelector((state) => state.availableItem.desk);
   return (
     <Fragment>
-      <h1>DESK</h1>
+      <h1 className={classes.productName}>DESK</h1>
       {!desk && <h1>이용 가능한 Desk가 없습니다.</h1>}
       {!!desk && (
         <main className={`${classes.desk} + ${classes.container}`}>

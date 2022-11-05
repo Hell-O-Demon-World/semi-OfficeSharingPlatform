@@ -15,21 +15,17 @@ const SignIn = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     setIsLoading(true);
-    fetch(
-      "/auth/signin",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          id: enteredEmail,
-          pw: enteredPassword,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
+    fetch("/auth/signin", {
+      method: "POST",
+      body: JSON.stringify({
+        id: enteredEmail,
+        pw: enteredPassword,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
-        console.log(res)
         setIsLoading(false);
         if (res.ok) {
           return res.json();
@@ -44,13 +40,18 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        console.log(data)
-        localStorage.setItem("token", data.accessToken);
-        authCtx.login(data.accessToken);
-        history.push("/");
-      })
-      .catch((err) => {
-        alert(err.message);
+        if (data.length === 0) {
+          localStorage.setItem("token", data.userId);
+          authCtx.login(data.accessToken);
+          history.push("/");
+        } else {
+          let errorMsg = "";
+          for (const errorMessage in data) {
+            errorMsg += data[errorMessage];
+            errorMsg += `${`\r`}`;
+          }
+          alert(errorMsg);
+        }
       });
   };
   return (

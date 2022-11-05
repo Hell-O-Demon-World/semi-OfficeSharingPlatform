@@ -11,7 +11,7 @@ const OfficeDetail = () => {
   const history = useHistory();
   const officeList = useSelector((state) => state.location.officeList);
   const params = useParams();
-  const office = officeList.filter((elem) => elem.key == params.officeId);
+  const office = officeList.filter((elem) => elem.key === params.officeId);
 
   const prevBtnHandler = () => {
     history.push("/main");
