@@ -46,7 +46,7 @@ const SignIn = () => {
       .then((data) => {
         localStorage.setItem("token", data.idToken);
         authCtx.login(data.idToken);
-        history.push("/");
+        history.go(-1);
       })
       .catch((err) => {
         alert(err.message);
