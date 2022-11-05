@@ -33,7 +33,7 @@ const OfficeList = () => {
             name: data[key].name,
             address: data[key].address,
             option: data[key].option,
-            postcode: Number(data[key].postcode),
+            postcode: String(data[key].postcode),
           });
         }
 
