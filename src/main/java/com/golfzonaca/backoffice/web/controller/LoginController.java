@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
     @GetMapping("/signin")
     public String loginForm(@ModelAttribute LoginForm loginForm, Model model) {
-        log.info("loginForm={}",loginForm);
         model.addAttribute(loginForm);
         return "/login/loginForm";
     }
