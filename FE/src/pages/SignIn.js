@@ -43,7 +43,7 @@ const SignIn = () => {
         if (data.userId) {
           localStorage.setItem("token", data.userId);
           authCtx.login(data.userId);
-          history.push("/");
+          history.go(-1);
         } else {
           let errorMsg = "";
           for (const errorMessage in data) {

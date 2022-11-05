@@ -30,6 +30,15 @@ const AvailableTime = () => {
   const userId = localStorage.getItem("token");
   const submitReservationHandler = async (e) => {
     e.preventDefault();
+    if (!authCtx.isLoggedIn) {
+      alert("로그인이 필요합니다. 로그인 페이지로 이동합니다");
+      history.push("/auth/signin");
+      return;
+    }
+    if (selectTimeList.length === 1) {
+      console.log(1);
+      console.log(selectTimeList[1] || selectTimeList[0]);
+    }
     try {
       await fetch(`/places/${params.officeId}/book`, {
         method: "POST",
@@ -42,7 +51,7 @@ const AvailableTime = () => {
           month,
           day,
           startTime: String(selectTimeList[0]),
-          endTime: String(selectTimeList[1]),
+          endTime: String(selectTimeList[1] || selectTimeList[0]),
           userId,
         }),
       })
