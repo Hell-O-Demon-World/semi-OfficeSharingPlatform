@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,9 +8,12 @@ import "swiper/swiper-bundle.min.css";
 import Card from "../UI/Card";
 import { selectTimeActions } from "../../store/selectTime";
 import Button from "../UI/Button";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { AuthContext } from "../../store/auth-Context";
 
 const AvailableTime = () => {
+  const authCtx = useContext(AuthContext);
+  const history = useHistory();
   const selectDate = useSelector((state) => state.item.date);
   const dispatch = useDispatch();
   const avaialbleTimeList = useSelector((state) => state.time.timelist);
