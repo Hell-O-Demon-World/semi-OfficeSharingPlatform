@@ -105,31 +105,31 @@ public class PlaceController {
         Place savedPlace = placeService.save(place); //Place 저장
 
         for (int i = 0; i < roomAddForm.getDesk(); i++) {
-            roomService.save(new Room(1L, savedPlace.getId(), savedPlace.getCompanyId(), 1, false));
+            roomService.save(new Room(1L, savedPlace.getId(), savedPlace.getCompanyId(), 1));
         }
         for (int i = 0; i < roomAddForm.getMeetingRoom4(); i++) {
-            roomService.save(new Room(2L, savedPlace.getId(), savedPlace.getCompanyId(), 4, false));
+            roomService.save(new Room(2L, savedPlace.getId(), savedPlace.getCompanyId(), 4));
         }
         for (int i = 0; i < roomAddForm.getMeetingRoom6(); i++) {
-            roomService.save(new Room(3L, savedPlace.getId(), savedPlace.getCompanyId(), 6, false));
+            roomService.save(new Room(3L, savedPlace.getId(), savedPlace.getCompanyId(), 6));
         }
         for (int i = 0; i < roomAddForm.getMeetingRoom10(); i++) {
-            roomService.save(new Room(4L, savedPlace.getId(), savedPlace.getCompanyId(), 10, false));
+            roomService.save(new Room(4L, savedPlace.getId(), savedPlace.getCompanyId(), 10));
         }
         for (int i = 0; i < roomAddForm.getMeetingRoom20(); i++) {
-            roomService.save(new Room(5L, savedPlace.getId(), savedPlace.getCompanyId(), 20, false));
+            roomService.save(new Room(5L, savedPlace.getId(), savedPlace.getCompanyId(), 20));
         }
         for (int i = 0; i < roomAddForm.getOffice20(); i++) {
-            roomService.save(new Room(6L, savedPlace.getId(), savedPlace.getCompanyId(), 20, false));
+            roomService.save(new Room(6L, savedPlace.getId(), savedPlace.getCompanyId(), 20));
         }
         for (int i = 0; i < roomAddForm.getOffice40(); i++) {
-            roomService.save(new Room(7L, savedPlace.getId(), savedPlace.getCompanyId(), 40, false));
+            roomService.save(new Room(7L, savedPlace.getId(), savedPlace.getCompanyId(), 40));
         }
         for (int i = 0; i < roomAddForm.getOffice70(); i++) {
-            roomService.save(new Room(8L, savedPlace.getId(), savedPlace.getCompanyId(), 70, false));
+            roomService.save(new Room(8L, savedPlace.getId(), savedPlace.getCompanyId(), 70));
         }
         for (int i = 0; i < roomAddForm.getOffice100(); i++) {
-            roomService.save(new Room(9L, savedPlace.getId(), savedPlace.getCompanyId(), 100, false));
+            roomService.save(new Room(9L, savedPlace.getId(), savedPlace.getCompanyId(), 100));
         }
 
         redirectAttributes.addAttribute("id", savedPlace.getId());
