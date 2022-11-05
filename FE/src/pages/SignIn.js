@@ -3,8 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import { AuthContext } from "../store/auth-Context";
+import { modalActions } from "../store/modal";
+
 import classes from "./SignUp.module.css";
 const SignIn = () => {
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const authCtx = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
