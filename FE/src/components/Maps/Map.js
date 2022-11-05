@@ -44,15 +44,6 @@ const Map = () => {
     };
     const map = new kakao.maps.Map(container, options);
     setMap(map);
-    const iwContent = `<div class = "wrap">
-                          <div class = "customOverlay">Golfzon</div>
-                          <div class = "arrow"></div>
-                        </div>`;
-    new kakao.maps.CustomOverlay({
-      content: iwContent,
-      map: map,
-      position: mainLocation,
-    });
   }, []);
   useEffect(() => {
     const showDetailHandler = (e) => {

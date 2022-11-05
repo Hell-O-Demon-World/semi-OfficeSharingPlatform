@@ -20,10 +20,10 @@ const ReservationForm = () => {
   const showTimeLine = useSelector((state) => state.item.showTimeLine);
   const selectedDate = useSelector((state) => state.item.date);
   const dateArr = selectedDate.split(". ");
+  console.log(dateArr);
   const year = dateArr[0];
   const month = dateArr[1];
   const day = dateArr[2].substr(0, dateArr[2].length - 1);
-  console.log(year, month, day);
   const availableTimeList = (data) => {
     let timeArr = new Array(24);
     timeArr.fill(0, 0, 24);

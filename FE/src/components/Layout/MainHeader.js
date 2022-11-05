@@ -22,7 +22,7 @@ const MainHeader = () => {
   return (
     <Fragment>
       <header className={classes.header}>
-        <Link to="/main" className={classes.headerLink}>
+        <Link to="/" className={classes.headerLink}>
           <h1>
             <FontAwesomeIcon icon={faBorderTopLeft} /> Office Sharing Platform
           </h1>
