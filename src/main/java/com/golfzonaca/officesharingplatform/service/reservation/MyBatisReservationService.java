@@ -126,27 +126,7 @@ public class MyBatisReservationService implements ReservationService {
     }
 
     @Override
-    public int findIdBySelectedType(String selectedType) {
-        return reservationRepository.findIdBySelectedType(selectedType);
-    }
-
-    @Override
-    public List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId) {
-        return reservationRepository.findRoomIdByPlaceIdAndRoomTypeId(placeId, roomTypeId);
-    }
-
-    @Override
-    public int countRoomQuantityByPlaceId(long placeId, long roomTypeId) {
-        return reservationRepository.countRoomQuantityByPlaceId(placeId, roomTypeId);
-    }
-
-    @Override
     public List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate) {
         return reservationRepository.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
-    }
-
-    @Override
-    public List<Integer> findRoomTypeByPlaceId(long placeId) {
-        return reservationRepository.findRoomTypeByPlaceId(placeId);
     }
 }

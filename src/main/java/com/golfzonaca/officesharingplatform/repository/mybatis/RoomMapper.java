@@ -8,4 +8,10 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
     List<Room> findRoomByPlaceIdAndRoomKindId(Long placeId, Long roomKindId);
+
+    List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId);
+
+    int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
+
+    List<Integer> findRoomTypeByPlaceId(long placeId);
 }

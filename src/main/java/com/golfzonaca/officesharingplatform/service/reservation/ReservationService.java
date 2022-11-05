@@ -11,13 +11,7 @@ public interface ReservationService {
     List<Integer> getReservationTimeList(Long placeId, SelectedDateTimeForm selectedDateTimeForm);
 
     void save(Reservation reservation);
-
-    int findIdBySelectedType(String selectedType);
-
-    List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long RoomTypeId);
-
-    int countRoomQuantityByPlaceId(long placeId, long roomTypeId);
-
+    
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
 
     List<Integer> findRoomTypeByPlaceId(long placeId);

@@ -29,26 +29,7 @@ public class MyBatisReservationRepository implements ReservationRepository {
     public void save(Reservation reservation) {
         reservationMapper.save(reservation);
     }
-
-    @Override
-    public int findIdBySelectedType(String selectedType) {
-        Integer typeId = reservationMapper.findIdBySelectedType(selectedType);
-        if (typeId == null) {
-            return -1;
-        }
-        return typeId;
-    }
-
-    @Override
-    public List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId) {
-        return reservationMapper.findRoomIdByPlaceIdAndRoomTypeId(placeId, roomTypeId);
-    }
-
-    @Override
-    public int countRoomQuantityByPlaceId(long placeId, long roomTypeId) {
-        return reservationMapper.countRoomQuantityByPlaceId(placeId, roomTypeId);
-    }
-
+    
     @Override
     public List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate) {
         return reservationMapper.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
@@ -63,4 +44,5 @@ public class MyBatisReservationRepository implements ReservationRepository {
     public void deleteById(Long reservationId) {
         reservationMapper.deleteById(reservationId);
     }
+
 }

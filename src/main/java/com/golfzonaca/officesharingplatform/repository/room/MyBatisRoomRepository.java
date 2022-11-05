@@ -11,11 +11,26 @@ import java.util.List;
 @Slf4j
 @Repository
 @RequiredArgsConstructor
-public class MyBatisRoomRepository implements RoomRepository{
+public class MyBatisRoomRepository implements RoomRepository {
     private final RoomMapper roomMapper;
 
     @Override
     public List<Room> findRoomByPlaceIdAndRoomKindId(Long placeId, Long roomKindId) {
         return roomMapper.findRoomByPlaceIdAndRoomKindId(placeId, roomKindId);
+    }
+
+    @Override
+    public List<Long> findRoomIdByPlaceIdAndRoomTypeId(long placeId, long roomTypeId) {
+        return roomMapper.findRoomIdByPlaceIdAndRoomTypeId(placeId, roomTypeId);
+    }
+
+    @Override
+    public int countRoomQuantityByPlaceId(long placeId, long roomTypeId) {
+        return roomMapper.countRoomQuantityByPlaceId(placeId, roomTypeId);
+    }
+
+    @Override
+    public List<Integer> findRoomTypeByPlaceId(long placeId) {
+        return roomMapper.findRoomTypeByPlaceId(placeId);
     }
 }
