@@ -30,7 +30,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("/places") //기본 url 시작을 위한 RequestMapping
+@RequestMapping("/places")
 @RequiredArgsConstructor
 public class PlaceController {
     private final JwtRepository jwtRepository;
@@ -96,13 +96,13 @@ public class PlaceController {
     @PostMapping("/add")
     public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RoomAddForm roomAddForm, RedirectAttributes redirectAttributes) {
 
-        Location savedAddress = locationService.save(location); // 주소 추가
-        placeAddForm.setAddressId(savedAddress.getId()); //주소ID 추가
+        Location savedAddress = locationService.save(location);
+        placeAddForm.setAddressId(savedAddress.getId());
 
-        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepository.getId()).get().getId()); //회사ID 추가
+        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepository.getId()).get().getId());
 
         Place place = transformType.listToString(placeAddForm);
-        Place savedPlace = placeService.save(place); //Place 저장
+        Place savedPlace = placeService.save(place);
 
         for (int i = 0; i < roomAddForm.getDesk(); i++) {
             roomService.save(new Room(1L, savedPlace.getId(), savedPlace.getCompanyId(), 1));
@@ -134,7 +134,7 @@ public class PlaceController {
 
         redirectAttributes.addAttribute("id", savedPlace.getId());
         redirectAttributes.addAttribute("status", true);
-        return "redirect:/places/{id}"; //postman으로 테스트 할 때 redirect 페이지 존재하지 않으면 bindingException
+        return "redirect:/places/{id}";
     }
 
     @GetMapping("/{placeId}/edit")
