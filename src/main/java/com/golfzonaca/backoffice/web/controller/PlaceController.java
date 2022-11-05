@@ -58,6 +58,7 @@ public class PlaceController {
     @GetMapping
     public String places(Model model) {
         Company company = companyService.findByCompanyLoginId(jwtRepository.getId()).get();
+        jwtRepository.findAll();
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
         return "place/places";

@@ -1,8 +1,6 @@
 package com.golfzonaca.backoffice.auth.token;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class JwtRepository {
     private static final Map<String, String> store = new HashMap<>();
@@ -20,6 +18,13 @@ public class JwtRepository {
             id = keys.next();
         }
         return id;
+    }
+    public void findAll() {
+        Iterator<String> keys = store.keySet().iterator();
+        String id = "";
+        while ( keys.hasNext() ) {
+            System.out.println("keys.next() = " + keys.next());
+        }
     }
 
     public String getToken(String userId) {
