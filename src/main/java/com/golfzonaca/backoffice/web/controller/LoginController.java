@@ -18,14 +18,4 @@ public class LoginController {
         model.addAttribute(loginForm);
         return "/login/loginForm";
     }
-
-//    @PostMapping("/signin")
-//    public String login(Model model,@AuthenticationPrincipal CompanyPrincipalDetails companyPrincipalDetails) {
-//        System.out.println("LoginController.login");
-//        log.info("companyDetail={}",companyPrincipalDetails);
-//
-////        log.info("userId={}", userId);
-////        model.addAttribute(tokenForm.getUserId());
-//        return "/place/places";
-//    }
 }
