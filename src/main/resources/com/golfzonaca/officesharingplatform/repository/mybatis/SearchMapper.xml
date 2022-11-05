@@ -13,16 +13,4 @@
         </where>
     </select>
 
-    <select id="findByAddressIds"
-            resultType="Address">
-        select *
-        from location
-        <where>
-            <foreach collection="addressIds" item="addressId" index="index" open="id in (" separator=","
-                     close=")">
-                #{addressId}
-            </foreach>
-        </where>
-    </select>
-
 </mapper>

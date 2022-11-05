@@ -21,4 +21,6 @@ public interface UserMapper {
     User update(@Param("id") long id, @Param("updateParam") UserInfoDto updateParam);
 
     List<User> findAll();
+
+    int validateUserByUserId(long userId);
 }

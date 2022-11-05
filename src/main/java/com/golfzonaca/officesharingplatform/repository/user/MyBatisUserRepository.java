@@ -5,10 +5,8 @@ import com.golfzonaca.officesharingplatform.repository.mybatis.UserMapper;
 import com.golfzonaca.officesharingplatform.repository.mybatis.dto.UserInfoDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import javax.lang.model.type.ErrorType;
 import java.util.List;
 
 @Repository
@@ -49,5 +47,14 @@ public class MyBatisUserRepository implements UserRepository {
     @Override
     public List<User> findAll() {
         return userMapper.findAll();
+    }
+
+    @Override
+    public Boolean validateUserByUserId(long userId) {
+        if (userMapper.validateUserByUserId(userId) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
