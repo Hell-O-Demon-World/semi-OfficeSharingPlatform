@@ -9,12 +9,14 @@ import com.golfzonaca.officesharingplatform.repository.room.RoomRepository;
 import com.golfzonaca.officesharingplatform.repository.roomkind.RoomKindRepository;
 import com.golfzonaca.officesharingplatform.web.reservation.form.SelectedDateTimeForm;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MyBatisReservationService implements ReservationService {
@@ -28,7 +30,11 @@ public class MyBatisReservationService implements ReservationService {
     public List<Integer> getReservationTimeList(Long placeId, SelectedDateTimeForm selectedDateTimeForm) {
         List<Integer> resultTimeList = new ArrayList<>();
         Place findPlace = placeRepository.findById(placeId);
-
+        //validation 추가 빈 배열 이라면?
+        if (findPlace == null) {
+            log.error("placeId 에 맞는 place가 없습니다.");
+            return new ArrayList<>();
+        }
         // form에 저장된 값을 localdate로 변환
         LocalDate reservationDate = toLocalDate(selectedDateTimeForm.getYear().toString()
                 , selectedDateTimeForm.getMonth().toString(), selectedDateTimeForm.getDay().toString());
@@ -53,6 +59,9 @@ public class MyBatisReservationService implements ReservationService {
         // 2-1 장소에 대한 시작시간 종료 시간 가져옴
         int startTime = findPlace.getPlaceStart().getHour();
         int endTime = findPlace.getPlaceEnd().getHour();
+        if (endTime == 0) {
+            endTime = 24;
+        }
         if (totalReservationCount - beforeReservationCount > 0) {
             for (int i = startTime; i < endTime; i++) {
                 inputTimeMap.replace(i, false, true);
