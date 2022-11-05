@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Office from "./Office";
 
 import classes from "./OfficeList.module.css";
@@ -9,7 +9,7 @@ const OfficeList = () => {
   const office = [];
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  const [officeList, setOfficeList] = useState([]);
+  const officeList = useSelector((state) => state.location.officeList);
   useEffect(() => {
     const sendRequest = async () => {
       setIsLoading(true);
@@ -36,8 +36,6 @@ const OfficeList = () => {
             postcode: String(data[key].postcode),
           });
         }
-
-        setOfficeList(office);
         dispatch(officeLocationActions.addOfficeList(office));
       } catch (error) {}
       setIsLoading(false);
