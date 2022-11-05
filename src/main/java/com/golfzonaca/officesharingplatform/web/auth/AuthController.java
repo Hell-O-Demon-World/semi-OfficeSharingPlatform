@@ -21,12 +21,6 @@ public class AuthController {
     private final MyBatisAuthService myBatisAuthService;
 
     @ResponseBody
-    @GetMapping("/mypage")
-    public String success() {
-        return "success";
-    }
-
-    @ResponseBody
     @PostMapping("/signup")
     public ConcurrentHashMap<String, Object> signup(@Valid @RequestBody SignUpSaveForm signUpSaveForm, BindingResult bindingResult) {
 

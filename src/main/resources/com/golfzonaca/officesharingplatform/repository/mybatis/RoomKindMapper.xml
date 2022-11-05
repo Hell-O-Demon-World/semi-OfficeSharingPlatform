@@ -6,4 +6,10 @@
         from room_kind
         where room_type like #{selectedType}
     </select>
+
+    <select id="findById" resultType="RoomKind">
+        select *
+        from room_kind
+        where id = #{roomKindId}
+    </select>
 </mapper>

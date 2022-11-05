@@ -30,6 +30,7 @@ public class JwtSuccessHandler implements AuthenticationSuccessHandler {
         try( PrintWriter writer = response.getWriter()) {
 
             Jwt jwt = JwtManager.createJwt((String) authentication.getPrincipal());
+            System.out.println("jwt = " + jwt);
             JsonObject json = new JsonObject();
             json.addProperty("userId", userRepository.findByEmail(authentication.getPrincipal().toString()).getId());
             json.addProperty("accessToken",jwt.getEncoded());

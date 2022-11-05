@@ -8,6 +8,7 @@ import java.util.List;
 public interface ReservationRepository {
 
     List<Reservation> findAllByPlaceIdAndRoomKindIdAndDate(Long placeId, Long roomKindId,LocalDate reservationDate);
+    List<Reservation> findAllByUserId(Long userId);
     void save(Reservation reservation);
 
     int findIdBySelectedType(String selectedType);
@@ -19,4 +20,6 @@ public interface ReservationRepository {
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
 
     List<Integer> findRoomTypeByPlaceId(long placeId);
+
+    void deleteById(Long reservationId);
 }

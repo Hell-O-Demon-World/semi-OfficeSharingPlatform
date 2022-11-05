@@ -88,7 +88,7 @@ public class ReservationController {
     public Map book(@PathVariable long placeId, @RequestBody ResRequestData resRequestData) {
 
         Map<String, String> errorMap = new LinkedHashMap<>();
-
+        System.out.println("resRequestData = " + resRequestData);
         int roomTypeId = reservationService.findIdBySelectedType(resRequestData.getSelectedType());
 
         if (roomTypeId == -1) {

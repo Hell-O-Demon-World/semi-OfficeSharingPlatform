@@ -21,4 +21,5 @@ public interface ReservationService {
     List<Reservation> findResByPlaceIdAndRoomKindId(long placeId, long roomTypeId, LocalDate resStartDate, LocalDate resEndDate);
 
     List<Integer> findRoomTypeByPlaceId(long placeId);
+
 }
