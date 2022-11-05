@@ -141,7 +141,7 @@ public class ReservationController {
                     resCount++;
                     findRoomIdList.remove(reservation.getRoomId());
                 } else {
-                    errorMap.put("DuplicatedResForUserError", "선택하신 공간에 대한 예약 내역이 존재합니다.");
+                    errorMap.put("DuplicatedResForUserError", "선택하신 시간과 공간에 대한 예약 내역이 존재합니다.");
                     return errorMap;
                 }
             } else if (resStartTime.isBefore(reservation.getResStartTime()) && resEndTime.isAfter(reservation.getResStartTime())) {
@@ -149,7 +149,7 @@ public class ReservationController {
                     resCount++;
                     findRoomIdList.remove(reservation.getRoomId());
                 } else {
-                    errorMap.put("DuplicatedResForUserError", "선택하신 공간에 대한 예약 내역이 존재합니다.");
+                    errorMap.put("DuplicatedResForUserError", "선택하신 시간과 공간에 대한 예약 내역이 존재합니다.");
                     return errorMap;
                 }
             }
