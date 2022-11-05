@@ -31,7 +31,7 @@ const AvailableTime = () => {
   const submitReservationHandler = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`places/${params.officeId}`, {
+      await fetch(`/places/${params.officeId}/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const AvailableTime = () => {
           }
         })
         .then((data) => {
-          if (data.length() === 0) {
+          if (data.length === 0) {
             alert("예약 성공");
           } else {
             let errorMsg = "";
