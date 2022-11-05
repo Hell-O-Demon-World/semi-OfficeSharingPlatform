@@ -32,8 +32,8 @@ const OfficeMain = () => {
         setIsLoading(false);
         const data = await response.json();
         dispatch(availableItemActions.selectdesk(data.desk));
-        dispatch(availableItemActions.selectMeetingRoom(data.meetingRoom));
-        dispatch(availableItemActions.selectOffice(data.office));
+        dispatch(availableItemActions.selectMeetingRoom(JSON.parse(data.meetingRoom)));
+        dispatch(availableItemActions.selectOffice(JSON.parse(data.office)));
       } catch (error) {}
     };
     requestOfficeProducts();

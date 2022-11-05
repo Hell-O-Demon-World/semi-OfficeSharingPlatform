@@ -52,7 +52,7 @@ const AvailableTime = () => {
           }
         })
         .then((data) => {
-          if (data.length === 0) {
+          if (data.length() === 0) {
             alert("예약 성공");
           } else {
             let errorMsg = "";
