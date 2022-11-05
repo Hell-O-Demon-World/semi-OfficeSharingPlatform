@@ -1,21 +1,22 @@
 import { faBorderTopLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../store/auth-Context";
+import { modalActions } from "../../store/modal";
 
 import Modal from "../Modal/Modal";
 
 import classes from "./MainHeader.module.css";
 const MainHeader = () => {
+  const dispatch = useDispatch();
   const authCtx = useContext(AuthContext);
-  const [isLoginClicked, setIsLoginClick] = useState(false);
+  const isLoginClicked = useSelector((state) => state.modal.isLoginClicked);
   const onClickLogin = () => {
-    setIsLoginClick(true);
+    dispatch(modalActions.loginClick());
   };
-  const modalHandler = () => {
-    setIsLoginClick(false);
-  };
+
   const logoutHandler = () => {
     authCtx.logout();
   };
@@ -54,7 +55,7 @@ const MainHeader = () => {
           )}
         </ul>
       </header>
-      {isLoginClicked && <Modal onConfirm={modalHandler} />}
+      {isLoginClicked && <Modal />}
     </Fragment>
   );
 };
