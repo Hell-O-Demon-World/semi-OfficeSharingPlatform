@@ -1,4 +1,4 @@
-# AdminPageTest
+# AdminPage
 
 ```mermaid
 gantt
