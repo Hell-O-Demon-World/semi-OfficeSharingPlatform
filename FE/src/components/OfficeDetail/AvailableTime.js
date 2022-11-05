@@ -31,7 +31,7 @@ const AvailableTime = () => {
   const submitReservationHandler = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`places/${params.officeId}`, {
+      await fetch(`places/${params.officeId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,24 @@ const AvailableTime = () => {
           endTime: String(selectTimeList[1]),
           userId,
         }),
-      }).then((data) => {});
+      })
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          if (data.length === 0) {
+            alert("예약 성공");
+          } else {
+            let errorMsg = "";
+            for (const errorMessage in data) {
+              errorMsg += data[errorMessage];
+              errorMsg += `${`\r`}`;
+            }
+            alert(errorMsg);
+          }
+        });
     } catch (err) {
       alert(err);
     }
