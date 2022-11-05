@@ -54,11 +54,8 @@
             </thead>
             <tbody class="tableContent">
             <tr th:each="company : ${companies}">
-                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}"
-                       th:text="${company.id}">업체아이디</a>
-                </td>
-                </td>
-                <td th:text="${company.companyName}"></td>
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.id}">업체아이디</a></td>
+                <td><a href="company.html" th:href="@{/companies/{Id}(Id=${company.id})}" th:text="${company.companyName}"></a></td>
                 <td th:text="${company.companyTel}"></td>
                 <td th:text="${company.companyRepName}"></td>
                 <td>
