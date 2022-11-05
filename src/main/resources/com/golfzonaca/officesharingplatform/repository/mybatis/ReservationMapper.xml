@@ -4,7 +4,7 @@
 
     <select id="findAllByPlaceIdAndRoomKindIdAndDate" resultType="Reservation">
         select *
-        from RESERVATION
+        from reservation
         where PLACE_ID = #{placeId}
           AND ROOM_KIND_ID = #{roomKindId}
           AND res_startdate = #{reservationDate}
@@ -17,26 +17,6 @@
                 #{resEndTime})
     </insert>
 
-    <select id="findIdBySelectedType" resultType="java.lang.Integer">
-        select id
-        from room_kind
-        where room_type like #{selectedType}
-    </select>
-
-    <select id="findRoomIdByPlaceIdAndRoomTypeId" resultType="java.lang.Long">
-        select id
-        from room
-        where place_id = #{placeId}
-          and room_kind_id = #{roomTypeId}
-    </select>
-
-    <select id="countRoomQuantityByPlaceId" resultType="java.lang.Integer">
-        select count(*)
-        from room
-        where place_id = #{placeId}
-          and room_kind_id = #{roomTypeId}
-    </select>
-
     <select id="findResByPlaceIdAndRoomKindId" resultType="Reservation">
         select *
         from reservation
@@ -44,11 +24,5 @@
           and room_kind_id = #{roomTypeId}
           and res_startdate = #{resStartDate}
           and res_enddate = #{resEndDate}
-    </select>
-
-    <select id="findRoomTypeByPlaceId" resultType="java.lang.Integer">
-        select room_kind_id
-        from room
-        where place_id = #{placeId}
     </select>
 </mapper>

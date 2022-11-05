@@ -1,6 +1,7 @@
 package com.golfzonaca.officesharingplatform.web.search;
 
 import com.golfzonaca.officesharingplatform.domain.Address;
+import com.golfzonaca.officesharingplatform.service.address.AddressService;
 import com.golfzonaca.officesharingplatform.service.search.SearchService;
 import com.golfzonaca.officesharingplatform.web.search.form.SearchPlaceResultData;
 import com.golfzonaca.officesharingplatform.web.search.form.SearchRequestData;
@@ -21,6 +22,7 @@ import java.util.List;
 public class SearchPlaceController {
 
     private final SearchService searchService;
+    private final AddressService addressService;
 
     @PostMapping("/main/search")
     public List<SearchResponseData> findRoomByWord(@RequestBody SearchRequestData searchRequestData) {
@@ -32,7 +34,7 @@ public class SearchPlaceController {
             addressIds.add(resultData.getAddressId());
         }
 
-        List<Address> addressSearchList = searchService.findByAddressIds(addressIds);
+        List<Address> addressSearchList = addressService.findByAddressIds(addressIds);
 
         for (SearchPlaceResultData resultData : placeSearchList) {
             for (Address address : addressSearchList) {

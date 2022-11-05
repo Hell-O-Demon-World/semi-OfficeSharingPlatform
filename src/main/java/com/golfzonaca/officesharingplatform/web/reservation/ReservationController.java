@@ -2,6 +2,9 @@ package com.golfzonaca.officesharingplatform.web.reservation;
 
 import com.golfzonaca.officesharingplatform.domain.Reservation;
 import com.golfzonaca.officesharingplatform.service.reservation.ReservationService;
+import com.golfzonaca.officesharingplatform.service.room.RoomService;
+import com.golfzonaca.officesharingplatform.service.roomkind.RoomKindService;
+import com.golfzonaca.officesharingplatform.service.user.UserService;
 import com.golfzonaca.officesharingplatform.web.reservation.form.ResRequestData;
 import com.golfzonaca.officesharingplatform.web.reservation.form.SelectedDateTimeForm;
 import com.golfzonaca.officesharingplatform.web.reservation.form.TimeListForm;
@@ -24,7 +27,11 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ReservationController {
 
+    private final RoomKindService roomKindService;
     private final ReservationService reservationService;
+    private final RoomService roomService;
+
+    private final UserService userService;
 
     @GetMapping("places/{placeId}")
     public JsonObject findRoom(@PathVariable long placeId) {
@@ -33,14 +40,10 @@ public class ReservationController {
         List<Integer> officeList = new ArrayList<>();
         JsonObject responseData = new JsonObject();
 
-        List<Integer> findRoomTypeList = reservationService.findRoomTypeByPlaceId(placeId);
+        List<Integer> findRoomTypeList = roomService.findRoomTypeByPlaceId(placeId);
 
         int deskQuantity = Collections.frequency(findRoomTypeList, 1);
-        if (deskQuantity != 0) {
-            responseData.addProperty("desk", true);
-        } else {
-            responseData.addProperty("desk", false);
-        }
+        responseData.addProperty("desk", deskQuantity != 0);
 
         for (int i = 0; i < 5; i++) {
             if (Collections.frequency(findRoomTypeList, i + 1) != 0) {
@@ -89,14 +92,21 @@ public class ReservationController {
 
         Map<String, String> errorMap = new LinkedHashMap<>();
 
-        int roomTypeId = reservationService.findIdBySelectedType(resRequestData.getSelectedType());
+        Boolean registeredStatus = userService.validateUserByUserId(resRequestData.getUserId());
+
+        if (!registeredStatus) {
+            errorMap.put("InvalidUserError", "등록되지 않은 회원입니다.");
+            return errorMap;
+        }
+
+        Long roomTypeId = roomKindService.findIdByRoomType(resRequestData.getSelectedType());
 
         if (roomTypeId == -1) {
             errorMap.put("NonexistentRoomTypeError", "선택하신 타입은 존재하지 않습니다.");
             return errorMap;
         }
 
-        int roomQuantity = reservationService.countRoomQuantityByPlaceId(placeId, roomTypeId);
+        int roomQuantity = roomService.countRoomQuantityByPlaceId(placeId, roomTypeId);
 
         int resCount = 0;
 
@@ -115,7 +125,7 @@ public class ReservationController {
             return errorMap;
         }
 
-        List<Long> findRoomIdList = reservationService.findRoomIdByPlaceIdAndRoomTypeId(placeId, roomTypeId);
+        List<Long> findRoomIdList = roomService.findRoomIdByPlaceIdAndRoomTypeId(placeId, roomTypeId);
 
         List<Reservation> findResList = reservationService.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
 

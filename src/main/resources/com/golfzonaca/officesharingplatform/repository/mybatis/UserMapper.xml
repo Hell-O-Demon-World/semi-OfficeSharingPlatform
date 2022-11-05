@@ -27,9 +27,9 @@
 
     <update id="update">
         update user
-        set user_tel=#{updateParam.userTel},
-            user_job=#{updateParam.userJob},
-            prefer_type=#{updateParam.preferType}
+        set user_tel    = #{updateParam.userTel},
+            user_job    = #{updateParam.userJob},
+            prefer_type = #{updateParam.preferType}
         where id = #{id}
     </update>
 
@@ -38,4 +38,9 @@
         from user
     </select>
 
+    <select id="validateUserByUserId" resultType="java.lang.Integer">
+        select count(*)
+        from user
+        where id = #{userId}
+    </select>
 </mapper>
