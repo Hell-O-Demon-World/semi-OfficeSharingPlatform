@@ -15,7 +15,6 @@ public class MyBatisMyPageService implements MyPageService{
     @Override
     public void cancelByOrderAndUserId(Integer order, Long userId) {
         List<Reservation> reservationList = reservationRepository.findAllByUserId(userId);
-        System.out.println("reservationList = " + reservationList);
         reservationRepository.deleteById( reservationList.get(order - 1).getId());
     }
 }
