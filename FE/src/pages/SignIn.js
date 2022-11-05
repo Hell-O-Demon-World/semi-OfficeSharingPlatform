@@ -40,9 +40,9 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        if (data.length === 0) {
+        if (data.userId) {
           localStorage.setItem("token", data.userId);
-          authCtx.login(data.accessToken);
+          authCtx.login(data.userId);
           history.push("/");
         } else {
           let errorMsg = "";
