@@ -21,7 +21,6 @@ import java.util.List;
 public class CompanyController {
 
     private final CompanyService companyService;
-
     private final AddressService addressService;
 
     @GetMapping //업체 등록 조회
@@ -35,7 +34,6 @@ public class CompanyController {
     public String company(@PathVariable Long companyId, Model model) {
         Company company = companyService.findById(companyId).get();
         Location location = addressService.findByAddressId(company.getAddressId()).get();
-        log.info("company={} ", company);
         model.addAttribute("company", company);
         model.addAttribute("location", location);
         return "/company/company";
