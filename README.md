@@ -26,8 +26,8 @@ title OfficeSharingPlatform : BE
     CSRF -> JWT 방식 변경   :chap4, 10-27, 6d
     MariaDB, MyBatis 설정  :chap5, 11-02, 1d
     예약 로직 구현           :chap6, 11-03, 4d
-    마이페이지 구현.          :chap7, 11-05, 1d
-    Jwt 토큰 복호화 로직 추가  :chap8, 11-06, 1d
+    마이페이지               :chap7, 11-05, 1d
+    Jwt 토큰 복호화 로직 구현  :chap8, 11-06, 1d
     
     section 백오피스
     Seudo Code, Test Case 작성    :chap1, 10-25, 1d
@@ -38,8 +38,8 @@ title OfficeSharingPlatform : BE
     Place 수정, 삭제               :chap6, 10-29, 1d
     로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 3d
     ROOM 타입별 수량 추가            :chap8, 11-01, 2d
-    Jwt 토큰 복호화 로직 추가         :chap9, 11-06, 1d
-    로그아웃 구현                   :chap10, 11-06, 1d
+    Jwt 토큰 복호화 로직 구현         :chap9, 11-06, 1d
+    로그아웃                       :chap10, 11-06, 1d
     
     section 관리자 페이지
     업체 조회              :chap1, 10-29, 1d
