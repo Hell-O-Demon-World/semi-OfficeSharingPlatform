@@ -1,6 +1,7 @@
 package com.golfzonaca.officesharingplatform.web.reservation;
 
 import com.golfzonaca.officesharingplatform.domain.Reservation;
+import com.golfzonaca.officesharingplatform.service.company.CompanyService;
 import com.golfzonaca.officesharingplatform.service.reservation.ReservationService;
 import com.golfzonaca.officesharingplatform.service.room.RoomService;
 import com.golfzonaca.officesharingplatform.service.roomkind.RoomKindService;
@@ -20,6 +21,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.*;
 
 @Slf4j
@@ -30,7 +32,7 @@ public class ReservationController {
     private final RoomKindService roomKindService;
     private final ReservationService reservationService;
     private final RoomService roomService;
-
+    private final CompanyService companyService;
     private final UserService userService;
 
     @GetMapping("places/{placeId}")
@@ -116,6 +118,13 @@ public class ReservationController {
         LocalDate resEndDate = toLocalDate(resRequestData.getYear(), resRequestData.getMonth(), resRequestData.getDay());
         LocalTime resStartTime = toLocalTime(resRequestData.getStartTime());
         LocalTime resEndTime = toLocalTime(resRequestData.getEndTime());
+        String resStartDayOfWeek = resStartDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US);
+        String resEndDayOfWeek = resEndDate.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.US);
+        
+        if (!(companyService.findOpenDaysById(placeId).contains(resStartDayOfWeek)) || !(companyService.findOpenDaysById(placeId).contains(resEndDayOfWeek))) {
+            errorMap.put("InvalidOpenDaysError", "선택하신 요일은 휴무일입니다.");
+            return errorMap;
+        }
 
         if (resStartTime.equals(resEndTime)) {
             errorMap.put("InvalidResTimeError", "최소 1시간 이상 예약 가능합니다.");
@@ -162,7 +171,7 @@ public class ReservationController {
             }
         }
         if (roomQuantity == resCount) {
-            errorMap.put("DuplicatedResForRoomError", "선택하신 타입의 이용가능한 공간이 없습니다.");
+            errorMap.put("DuplicatedResForRoomError", "해당 Place 에 선택하신 타입의 이용가능한 사무공간이 없습니다.");
             return errorMap;
         }
         Reservation reservation = new Reservation(placeId, resRequestData.getUserId(), findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
