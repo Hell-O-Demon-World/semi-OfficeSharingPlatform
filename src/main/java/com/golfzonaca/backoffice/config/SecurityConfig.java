@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new JwtSuccessHandler(jwtRepostiory());
+        return new JwtSuccessHandler(jwtRepostiory(),new MyBatisCompanyRepository(companyMapper));
     }
     @Bean
     public JsonIdPwAuthenticationProcessingFilter jsonIdPwAuthenticationProcessingFilter() throws Exception {

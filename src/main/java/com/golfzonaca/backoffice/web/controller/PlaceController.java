@@ -1,5 +1,7 @@
 package com.golfzonaca.backoffice.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.golfzonaca.backoffice.auth.token.JwtRepository;
 import com.golfzonaca.backoffice.domain.Company;
 import com.golfzonaca.backoffice.domain.Location;
@@ -8,6 +10,7 @@ import com.golfzonaca.backoffice.domain.Room;
 import com.golfzonaca.backoffice.domain.type.AddInfoType;
 import com.golfzonaca.backoffice.domain.type.DaysType;
 import com.golfzonaca.backoffice.domain.type.RoomType;
+import com.golfzonaca.backoffice.repository.CompanyRepository;
 import com.golfzonaca.backoffice.repository.dto.LocationUpdateDto;
 import com.golfzonaca.backoffice.repository.dto.PlaceUpdateDto;
 import com.golfzonaca.backoffice.service.address.LocationService;
@@ -20,6 +23,8 @@ import com.golfzonaca.backoffice.web.form.room.RoomAddForm;
 import com.golfzonaca.backoffice.web.transformtype.TransformType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.jwt.Jwt;
+import org.springframework.security.jwt.JwtHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -37,6 +43,7 @@ public class PlaceController {
     private final PlaceService placeService;
     private final RoomService roomService;
     private final CompanyService companyService;
+    private final CompanyRepository companyRepository;
     private final LocationService locationService;
     private final TransformType transformType;
 
@@ -56,8 +63,8 @@ public class PlaceController {
     }
 
     @GetMapping
-    public String places(Model model) {
-        Company company = companyService.findByCompanyLoginId(jwtRepository.getId()).get();
+    public String places(Model model) throws JsonProcessingException {
+        Company company = companyRepository.findById(jwtRepository.getUserId());
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
         model.addAttribute("companyLoginId", jwtRepository.getId());
@@ -95,12 +102,12 @@ public class PlaceController {
     }
 
     @PostMapping("/add")
-    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RoomAddForm roomAddForm, RedirectAttributes redirectAttributes) {
+    public String addPlace(@ModelAttribute PlaceAddForm placeAddForm, Location location, RoomAddForm roomAddForm, RedirectAttributes redirectAttributes) throws JsonProcessingException {
 
         Location savedAddress = locationService.save(location); // 주소 추가
         placeAddForm.setAddressId(savedAddress.getId()); //주소ID 추가
 
-        placeAddForm.setCompanyId(companyService.findByCompanyLoginId(jwtRepository.getId()).get().getId()); //회사ID 추가
+        placeAddForm.setCompanyId(jwtRepository.getUserId()); //회사ID 추가
 
         Place place = transformType.listToString(placeAddForm);
         Place savedPlace = placeService.save(place); //Place 저장

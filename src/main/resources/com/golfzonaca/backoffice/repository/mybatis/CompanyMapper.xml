@@ -19,4 +19,9 @@
         from Company
         where company_loginid = #{companyLoginId}
     </select>
+    <select id="findById" resultType="Company">
+        select *
+        from Company
+        where id = #{id}
+    </select>
 </mapper>
