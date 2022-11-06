@@ -16,5 +16,5 @@ public class ResRequestData {
     private String day;
     private String startTime;
     private String endTime;
-    private long userId;
+    private String accessToken;
 }

@@ -1,5 +1,7 @@
 package com.golfzonaca.officesharingplatform.web.reservation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.golfzonaca.officesharingplatform.config.auth.token.JwtManager;
 import com.golfzonaca.officesharingplatform.domain.Reservation;
 import com.golfzonaca.officesharingplatform.service.company.CompanyService;
 import com.golfzonaca.officesharingplatform.service.reservation.ReservationService;
@@ -90,11 +92,12 @@ public class ReservationController {
     }
 
     @PostMapping("places/{placeId}/book")
-    public Map book(@PathVariable long placeId, @RequestBody ResRequestData resRequestData) {
+    public Map book(@PathVariable long placeId, @RequestBody ResRequestData resRequestData) throws JsonProcessingException {
 
         Map<String, String> errorMap = new LinkedHashMap<>();
+        Long userId = JwtManager.getIdByToken(resRequestData.getAccessToken());
 
-        Boolean registeredStatus = userService.validateUserByUserId(resRequestData.getUserId());
+        Boolean registeredStatus = userService.validateUserByUserId(userId);
 
         log.info("resRequestData={}", resRequestData);
 
@@ -146,14 +149,14 @@ public class ReservationController {
         List<Reservation> findResList = reservationService.findResByPlaceIdAndRoomKindId(placeId, roomTypeId, resStartDate, resEndDate);
 
         if (findResList.size() == 0) {
-            Reservation reservation = new Reservation(placeId, resRequestData.getUserId(), findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
+            Reservation reservation = new Reservation(placeId, userId, findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
             reservationService.save(reservation);
             return errorMap;
         }
 
         for (Reservation reservation : findResList) {
             if ((reservation.getResStartTime().isBefore(resStartTime) || reservation.getResStartTime().equals(resStartTime)) && reservation.getResEndTime().isAfter(resStartTime)) {
-                if (reservation.getUserId() != resRequestData.getUserId()) {
+                if (reservation.getUserId() != userId) {
                     resCount++;
                     findRoomIdList.remove(reservation.getRoomId());
                 } else {
@@ -161,7 +164,7 @@ public class ReservationController {
                     return errorMap;
                 }
             } else if (resStartTime.isBefore(reservation.getResStartTime()) && resEndTime.isAfter(reservation.getResStartTime())) {
-                if (reservation.getUserId() != resRequestData.getUserId()) {
+                if (reservation.getUserId() != userId) {
                     resCount++;
                     findRoomIdList.remove(reservation.getRoomId());
                 } else {
@@ -174,7 +177,7 @@ public class ReservationController {
             errorMap.put("DuplicatedResForRoomError", "해당 Place 에 선택하신 타입의 이용가능한 사무공간이 없습니다.");
             return errorMap;
         }
-        Reservation reservation = new Reservation(placeId, resRequestData.getUserId(), findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
+        Reservation reservation = new Reservation(placeId, userId, findRoomIdList.get(0), roomTypeId, resStartDate, resStartTime, resEndDate, resEndTime);
         reservationService.save(reservation);
         return errorMap;
     }
