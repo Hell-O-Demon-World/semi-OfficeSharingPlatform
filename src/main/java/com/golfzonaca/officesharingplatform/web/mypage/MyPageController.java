@@ -32,8 +32,8 @@ public class MyPageController {
                 .build();
     }
 
-    @PostMapping("{userId}/cancel")
-    public void cancelReservation(@PathVariable Long userId, @RequestParam Integer order) {
-        myPageService.cancelByOrderAndUserId(order, userId);
+    @PostMapping("/cancel")
+    public void cancelReservation(@RequestParam String accessToken, @RequestParam Integer order) throws JsonProcessingException {
+        myPageService.cancelByOrderAndUserId(order, JwtManager.getIdByToken(accessToken));
     }
 }
