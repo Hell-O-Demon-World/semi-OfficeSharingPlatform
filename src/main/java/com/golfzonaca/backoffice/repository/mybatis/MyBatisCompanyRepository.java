@@ -28,4 +28,9 @@ public class MyBatisCompanyRepository implements CompanyRepository {
     public Optional<Company> findByCompanyLoginId(String companyLoginId) {
         return companyMapper.findByCompanyLoginId(companyLoginId);
     }
+
+    @Override
+    public Company findById(Long id) {
+        return companyMapper.findById(id);
+    }
 }
