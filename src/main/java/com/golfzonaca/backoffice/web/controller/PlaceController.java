@@ -60,6 +60,7 @@ public class PlaceController {
         Company company = companyService.findByCompanyLoginId(jwtRepository.getId()).get();
         List<Place> places = placeService.findAll(company.getId());
         model.addAttribute("places", places);
+        model.addAttribute("companyLoginId", jwtRepository.getId());
         return "place/places";
     }
 
