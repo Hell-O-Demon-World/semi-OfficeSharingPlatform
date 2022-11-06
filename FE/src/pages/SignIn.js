@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useDispatch } from "react-router-dom";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import { AuthContext } from "../store/auth-Context";
@@ -45,6 +45,7 @@ const SignIn = () => {
       })
       .then((data) => {
         if (data.userId) {
+          dispatch(modalActions.loginClick());
           localStorage.setItem("token", data.userId);
           authCtx.login(data.userId);
           history.go(-1);

@@ -28,7 +28,7 @@ const ModalOverlay = (props) => {
   );
 };
 
-const Modal = (props) => {
+const Modal = () => {
   const dispatch = useDispatch();
   const confirmHandler = () => {
     dispatch(modalActions.modalHandler());
