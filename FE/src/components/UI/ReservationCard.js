@@ -17,7 +17,6 @@ const ReservationCard = (props) => {
       alert(error);
     }
   };
-  console.log(props.item.key);
   return (
     <Card className={classes.Card}>
       <div>

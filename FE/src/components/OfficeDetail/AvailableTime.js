@@ -24,7 +24,6 @@ const AvailableTime = () => {
   const year = dateArr[0];
   const month = dateArr[1];
   const day = dateArr[2].substr(0, dateArr[2].length - 1);
-  console.log(year, month, day);
   const selectTimeList = useSelector(
     (state) => state.selectTime.selectTimeList
   );
@@ -37,10 +36,6 @@ const AvailableTime = () => {
       alert("로그인이 필요합니다. 로그인 페이지로 이동합니다");
       history.push("/auth/signin");
       return;
-    }
-    if (selectTimeList.length === 1) {
-      console.log(1);
-      console.log(selectTimeList[1] || selectTimeList[0]);
     }
     try {
       await fetch(`/places/${params.officeId}/book`, {
