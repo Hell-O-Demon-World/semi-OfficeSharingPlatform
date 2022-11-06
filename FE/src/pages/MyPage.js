@@ -18,7 +18,7 @@ const MyPage = () => {
     const sendRequest = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`/mypage/${userId}`);
+        const response = await fetch(`/mypage?accessToken=${userId}`);
         if (!response.ok) {
           throw new Error("Someting went wrong");
         }
