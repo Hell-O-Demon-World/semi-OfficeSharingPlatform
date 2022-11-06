@@ -14,11 +14,13 @@ public class Room {
     private long placeId;
     private long companyId;
     private int totalNum;
+    private Boolean roomState;
 
-    public Room(long roomKindId, long placeId, long companyId, int totalNum) {
+    public Room(long roomKindId, long placeId, long companyId, int totalNum, Boolean roomState) {
         this.roomKindId = roomKindId;
         this.placeId = placeId;
         this.companyId = companyId;
         this.totalNum = totalNum;
+        this.roomState = roomState;
     }
 }

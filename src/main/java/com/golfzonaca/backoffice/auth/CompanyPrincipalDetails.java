@@ -41,22 +41,22 @@ public class CompanyPrincipalDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; //아니
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; //아니
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // 아니 회사가면 필요할 수 있음 이거 false면 로그인안됨
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; //활성화 되어 있음
+        return true;
     }
 
 }

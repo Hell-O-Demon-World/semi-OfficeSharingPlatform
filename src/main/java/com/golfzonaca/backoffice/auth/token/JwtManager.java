@@ -55,4 +55,5 @@ public class JwtManager {
         String claims = decodedJwt.getClaims();
         return gson.fromJson(claims, JsonObject.class);
     }
+
 }

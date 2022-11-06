@@ -13,7 +13,7 @@ title OfficeSharingPlatform : BE
     테이블 설계            :chap4, 10-21, 4d
     변수 이름 명세          :chap5, 10-24, 1d
     IntelliJ 환경 설정     :chap6, 10-24, 1d
-
+    
     section 백오피스
     Seudo Code, Test Case 작성    :chap1, 10-25, 1d
     MariaDB, MyBatis 설정         :chap2, 10-26, 1d
@@ -23,5 +23,7 @@ title OfficeSharingPlatform : BE
     Place 수정, 삭제               :chap6, 10-29, 1d
     로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 3d
     ROOM 타입별 수량 추가            :chap8, 11-01, 2d
-    
+    토큰 복호화 로직 적용             :chap9, 11-06, 1d
+    개발 완료                      :chap10, 11-06, 1d
+    배포                          :chap11, 11-06, 1d
 ```

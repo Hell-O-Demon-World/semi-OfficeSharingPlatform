@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new JwtSuccessHandler(jwtRepostiory());
+        return new JwtSuccessHandler(jwtRepostiory(),new MyBatisCompanyRepository(companyMapper));
     }
     @Bean
     public JsonIdPwAuthenticationProcessingFilter jsonIdPwAuthenticationProcessingFilter() throws Exception {
@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/signin").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll();
+                .antMatchers("/").hasAnyRole();
         http.addFilterAt(jsonIdPwAuthenticationProcessingFilter(),UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(jwtAuthenticationFilter(), JsonIdPwAuthenticationProcessingFilter.class);
         http.userDetailsService(userDetailsService());
@@ -80,7 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(new IdPwAuthenticationProvider(userDetailsService(),
                 passwordEncoder(),
-                new SimpleAuthorityMapper()));
+                new SimpleAuthorityMapper(),
+                jwtRepostiory()));
     }
 
 }

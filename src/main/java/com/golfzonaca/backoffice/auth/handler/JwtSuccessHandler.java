@@ -2,6 +2,7 @@ package com.golfzonaca.backoffice.auth.handler;
 
 import com.golfzonaca.backoffice.auth.token.JwtManager;
 import com.golfzonaca.backoffice.auth.token.JwtRepository;
+import com.golfzonaca.backoffice.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,10 +24,11 @@ import java.util.Iterator;
 @RequiredArgsConstructor
 public class JwtSuccessHandler implements AuthenticationSuccessHandler {
     private final JwtRepository jwtRepository;
+    private final CompanyRepository companyRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        Jwt jwt = JwtManager.createJwt((String) authentication.getPrincipal());
+        Jwt jwt = JwtManager.createJwt(companyRepository.findByCompanyLoginId((String) authentication.getPrincipal()).get().getId().toString());
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iter = authorities.iterator();
         if (iter.hasNext()) {

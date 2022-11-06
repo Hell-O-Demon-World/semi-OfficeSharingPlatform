@@ -13,4 +13,6 @@ public interface CompanyRepository {
     List<Company> findAll();
 
     Optional<Company> findByCompanyLoginId(String companyLoginId);
+
+    Company findById(Long id);
 }

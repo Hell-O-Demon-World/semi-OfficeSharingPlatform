@@ -8,4 +8,5 @@ import lombok.Data;
 public class RoomUpdateDto {
     private long roomKindId;
     private int totalNum;
+    private Boolean roomState;
 }

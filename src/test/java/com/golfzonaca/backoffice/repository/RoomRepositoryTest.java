@@ -36,16 +36,17 @@ class RoomRepositoryTest {
     @Test
     void 대여공간업데이트() {
         //Given
-        Room room = new Room(1L, 1L, 1L, 10);
+        Room room = new Room(1L, 1L, 1L, 10, false);
         Room savedRoom = roomRepository.save(room);
         long roomId = savedRoom.getId();
-        RoomUpdateDto updateParam = new RoomUpdateDto(2L, 20);
+        RoomUpdateDto updateParam = new RoomUpdateDto(2L, 20, true);
         //When
         roomRepository.updateInfo(roomId, updateParam);
         //Then
         Optional<Room> findRoom = roomRepository.findByRoomId(roomId);
         assertThat(findRoom.get().getRoomKindId()).isEqualTo(2L);
         assertThat(findRoom.get().getTotalNum()).isEqualTo(20);
+        assertThat(findRoom.get().getRoomState()).isEqualTo(true);
     }
 
     @Test

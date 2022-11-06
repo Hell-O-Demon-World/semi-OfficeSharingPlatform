@@ -3,8 +3,8 @@
 <mapper namespace="com.golfzonaca.backoffice.repository.mybatis.RoomMapper">
 
     <insert id="save" useGeneratedKeys="true" keyProperty="id">
-        insert into room (room_kind_id, place_id, company_id, total_num)
-        values (#{roomKindId}, #{placeId}, #{companyId}, #{totalNum})
+        insert into room (room_kind_id, place_id, company_id, total_num, room_state)
+        values (#{roomKindId}, #{placeId}, #{companyId}, #{totalNum}, #{roomState})
     </insert>
 
     <update id="updateInfo">
