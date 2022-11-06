@@ -47,10 +47,10 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        dispatch(modalActions.loginClick());
+        dispatch(modalActions.modalHandler());
         localStorage.setItem("token", data.idToken);
         authCtx.login(data.idToken);
-        history.go(-1);
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);
