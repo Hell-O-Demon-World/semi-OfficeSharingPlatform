@@ -1,0 +1,23 @@
+.header {
+  font-weight: 900;
+  font-size: 2rem;
+  position: relative;
+  top: 20px;
+  left: 20px;
+}
+
+.userName p {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 1.5rem;
+  font-size: 800;
+}
+
+.line {
+  border: 2px solid rgb(106, 158, 255);
+}
+.listBox {
+  height: 50vh;
+  overflow-y: scroll;
+}
