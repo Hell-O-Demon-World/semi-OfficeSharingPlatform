@@ -22,4 +22,6 @@ title OfficeSharingPlatform : BE
     Place 수정, 삭제               :chap6, 10-29, 1d
     로그인 - 스프링 시큐리티 적용       :chap7, 10-29, 3d
     ROOM 타입별 수량 추가            :chap8, 11-01, 2d
+    개발 완료                      :chap9, 11-05, 1d
+    배포                          :chap10, 11-06, 1d
 ```
