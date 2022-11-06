@@ -45,10 +45,10 @@ const SignIn = () => {
         }
       })
       .then((data) => {
-        if (data.userId) {
+        if (data.accessToken) {
           dispatch(modalActions.modalHandler());
-          localStorage.setItem("token", data.userId);
-          authCtx.login(data.userId);
+          localStorage.setItem("token", data.accessToken);
+          authCtx.login(data.accessToken);
           history.replace("/");
         } else {
           let errorMsg = "";
