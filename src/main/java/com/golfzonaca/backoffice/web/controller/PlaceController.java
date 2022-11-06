@@ -176,4 +176,10 @@ public class PlaceController {
         roomService.deleteByPlaceId(placeId);
         return "redirect:/places";
     }
+
+    @GetMapping("/signout")
+    public String signout() {
+        jwtRepository.clearAll();
+        return "redirect:/signin";
+    }
 }

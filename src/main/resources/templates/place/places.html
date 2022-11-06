@@ -23,18 +23,21 @@
             </div>
         </div>
     -->
-    <form method="get" class="form-inline">
+
         <div class="row">
             <div class="col">
+                <button class="btn btn-primary float-end"
+                        style="float: left!important;"
+                        th:onclick="|location.href='@{/places/signout}'|"
+                        type="button">로그아웃
+                </button>
             </div>
             <div class="col">
-                <div class="col">
-                    <button class="btn btn-primary float-end"
-                            onclick="location.href='addForm.html'"
-                            th:onclick="|location.href='@{/places/add}'|"
-                            type="button">상품 등록
-                    </button>
-                </div>
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='addForm.html'"
+                        th:onclick="|location.href='@{/places/add}'|"
+                        type="button">상품 등록
+                </button>
             </div>
         </div>
 

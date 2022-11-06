@@ -17,4 +17,5 @@ public class LoginController {
         model.addAttribute(loginForm);
         return "/login/loginForm";
     }
+
 }
