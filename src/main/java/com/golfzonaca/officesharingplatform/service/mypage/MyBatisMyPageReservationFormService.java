@@ -26,7 +26,7 @@ public class MyBatisMyPageReservationFormService implements MyPageReservationFor
             MyPageReservationForm myPageReservationForm = MyPageReservationForm.builder()
                     .resDate(findReservation.getResStartDate().toString() + "~" + findReservationList.get(i).getResEndDate().toString())
                     .placeName(placeRepository.findById(findReservation.getPlaceId()).getPlaceName())
-                    .roomKind(roomKindRepository.findById(findReservation.getRoomId()).getRoomType())
+                    .roomKind(roomKindRepository.findById(findReservation.getRoomKindId()).getRoomType())
                     .resTime(findReservation.getResStartTime().toString() + "~" + findReservation.getResEndTime().toString())
                     .build();
             myPageReservationFormList.add(myPageReservationForm);
