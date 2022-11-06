@@ -6,11 +6,11 @@ import java.util.List;
 
 @Data
 public class User {
-    private long id;
+    private Long id;
     private String userName;
     private String userMail;
     private String userPw;
-    private long mileageId;
+    private Long mileageId;
     private String userTel;
     private String userJob;
     private String userPlace;

@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class MyPageReservationForm {
-    private String userName;
     private String resDate;
     private String placeName;
     private String roomKind;
