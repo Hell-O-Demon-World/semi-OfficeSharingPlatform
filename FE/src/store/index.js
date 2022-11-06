@@ -5,7 +5,7 @@ import availableItem from "./availableItem";
 import availableTime from "./availableTime";
 import selectTime from "./selectTime";
 import modal from "./modal";
-
+import myPage from "./myPage";
 const store = configureStore({
   reducer: {
     time: availableTime,
@@ -14,6 +14,7 @@ const store = configureStore({
     selectTime,
     location: officeLocation,
     modal,
+    myPage,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
