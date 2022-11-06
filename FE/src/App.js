@@ -23,6 +23,9 @@ const App = () => {
           <MyPage />
         </Route>
       )}
+      <Route path="/user/delete" exact>
+        <Redirect to="/user" />
+      </Route>
       {!authCtx.isLoggedIn && (
         <Route path="/auth/signin">
           <SignIn />
