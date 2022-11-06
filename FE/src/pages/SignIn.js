@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link, useHistory, useDispatch } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import Button from "../components/UI/Button";
 import Card from "../components/UI/Card";
 import { AuthContext } from "../store/auth-Context";
