@@ -50,7 +50,7 @@ const AvailableTime = () => {
           day,
           startTime: String(selectTimeList[0]),
           endTime: String(selectTimeList[1] || selectTimeList[0]),
-          userId,
+          accessToken: userId,
         }),
       })
         .then((res) => {

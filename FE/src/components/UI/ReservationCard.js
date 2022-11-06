@@ -7,8 +7,10 @@ const ReservationCard = (props) => {
     try {
       const userId = localStorage.getItem("token");
       const response = await fetch(
-        `mypage/${userId}/cancel?order=${props.item.key}`
-      );
+        `mypage/cancel?accessToken=${userId}&order=${props.item.key}`
+      ,{
+        method: "POST"
+      });
       if (!response.ok) {
         throw new Error("Someting went wrong");
       }
