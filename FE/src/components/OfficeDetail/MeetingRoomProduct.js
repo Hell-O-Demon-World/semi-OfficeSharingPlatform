@@ -12,7 +12,7 @@ SwiperCore.use([Navigation]);
 const moneyPerHour = (count) => {
   return (count * 5000).toLocaleString("ko-KR");
 };
-const MeetingRoom = () => {
+const MeetingRoomProduct = () => {
   const dispatch = useDispatch();
   const selectItemHandler = (e) => {
     dispatch(selectItemActions.hideTimeLine());
@@ -66,4 +66,4 @@ const MeetingRoom = () => {
   );
 };
 
-export default MeetingRoom;
+export default MeetingRoomProduct;

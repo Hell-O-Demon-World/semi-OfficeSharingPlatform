@@ -16,8 +16,8 @@ const Office = () => {
     dispatch(selectItemActions.hideTimeLine());
     dispatch(
       selectItemActions.select({
-        itemName: `${e.target.id}인 회의실`,
-        itemPrice: `${moneyPerHour(e.target.id)} / hour`,
+        itemName: `${e.target.id}인 사무실`,
+        itemPrice: `${moneyPerHour(e.target.id)} / day`,
         itemId: `office${e.target.id}`,
       })
     );
@@ -35,7 +35,7 @@ const Office = () => {
               key={elem}
             >
               <div>
-                <h1>{`${elem}`}평 회의실</h1>
+                <h1>{`${elem}`}인 사무실</h1>
                 <div>
                   기업을 위한 Office 공간 <br /> 한 달 단위 예약 가능
                 </div>

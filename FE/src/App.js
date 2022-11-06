@@ -18,14 +18,14 @@ const App = () => {
       <Route path="/main">
         <Main />
       </Route>
+      <Route path="/user/delete" exact>
+        <Redirect to="/user" />
+      </Route>
       {authCtx.isLoggedIn && (
         <Route path="/user">
           <MyPage />
         </Route>
       )}
-      <Route path="/user/delete" exact>
-        <Redirect to="/user" />
-      </Route>
       {!authCtx.isLoggedIn && (
         <Route path="/auth/signin">
           <SignIn />
