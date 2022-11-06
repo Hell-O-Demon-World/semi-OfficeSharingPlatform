@@ -22,7 +22,7 @@ public class Place {
     private long companyId;
     private String placeName;
     private String placeDescription;
-    private Map<String, Boolean> placeOpendays;
+    private String placeOpendays;
     private LocalTime placeStart;
     private LocalTime placeEnd;
     private Map<String, Boolean> placeAddinfo;
