@@ -46,10 +46,10 @@ const SignIn = () => {
       })
       .then((data) => {
         if (data.userId) {
-          dispatch(modalActions.loginClick());
+          dispatch(modalActions.modalHandler());
           localStorage.setItem("token", data.userId);
           authCtx.login(data.userId);
-          history.go(-1);
+          history.replace("/");
         } else {
           let errorMsg = "";
           for (const errorMessage in data) {

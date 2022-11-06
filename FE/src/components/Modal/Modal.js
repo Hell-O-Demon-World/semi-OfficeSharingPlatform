@@ -11,7 +11,7 @@ import classes from "./Modal.module.css";
 const Backdrop = (props) => {
   return <div className={classes.backdrop} onClick={props.onConfirm} />;
 };
-const ModalOverlay = (props) => {
+const ModalOverlay = () => {
   const dispatch = useDispatch();
   const confirmHandler = () => {
     dispatch(modalActions.modalHandler());
