@@ -1,11 +1,9 @@
 package com.golfzonaca.officesharingplatform.domain;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 public class BlackList {
-    private AtomicLong id;
-    private AtomicLong userId;
-    private AtomicLong providerId;
-    private AtomicLong placeId;
+    private long id;
+    private long userId;
+    private long companyId;
+    private long placeId;
     private String reason;
 }
