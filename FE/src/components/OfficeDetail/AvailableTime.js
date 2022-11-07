@@ -61,6 +61,7 @@ const AvailableTime = () => {
         .then((data) => {
           if (Object.keys(data).length === 0) {
             alert("예약 성공");
+            history.replace("/user");
           } else {
             let errorMsg = "";
             for (const errorMessage in data) {
