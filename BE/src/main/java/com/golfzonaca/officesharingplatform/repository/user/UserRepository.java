@@ -1,12 +1,9 @@
 package com.golfzonaca.officesharingplatform.repository.user;
 
 import com.golfzonaca.officesharingplatform.domain.User;
-import org.springframework.stereotype.Repository;
+import com.golfzonaca.officesharingplatform.repository.mybatis.dto.UserInfoDto;
 
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 public interface UserRepository {
     User save(User user);
@@ -16,9 +13,10 @@ public interface UserRepository {
     User findByEmail(String email);
 
     int countContainByEmail(String email);
-    User update(long id, User user);
+
+    User update(long id, UserInfoDto updateParam);
 
     List<User> findAll();
 
-    void clearStore();
+    Boolean validateUserByUserId(long userId);
 }

@@ -26,7 +26,10 @@ title OfficeSharingPlatform : BE
     로그인                 :chap2, 10-26, 3d
     스프링 시큐리티 적용       :chap3, 10-27, 6d
     CSRF -> JWT 방식 변경   :chap4, 10-27, 6d
-    MariaDB, MyBatis 설정 :chap5, 11-02, 1d
+    MariaDB, MyBatis 설정  :chap5, 11-02, 1d
     예약 로직 구현           :chap6, 11-03, 4d
+    마이페이지               :chap7, 11-05, 1d
+    Jwt 토큰 복호화 로직 구현  :chap8, 11-06, 1d
+
     
 ```

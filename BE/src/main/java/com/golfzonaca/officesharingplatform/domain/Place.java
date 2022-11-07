@@ -2,24 +2,29 @@ package com.golfzonaca.officesharingplatform.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
+@Setter
 @ToString
 @RequiredArgsConstructor
 public class Place {
 
-    private AtomicLong id; //대여공간식별번호
-    private AtomicLong companyId; //업체식별번호
-    private String name;
-    private String description;
-    private Map<String, Boolean> placeOpen;
-    private Date placeStartTime;
-    private Date placeEndTime;
-    private Map<String, Boolean> placeAddInfo;
-    private int postalCode; //우편번호
+    private long id;
+    private long companyId;
+    private String placeName;
+    private String placeDescription;
+    private String placeOpendays;
+    private LocalTime placeStart;
+    private LocalTime placeEnd;
+    private Map<String, Boolean> placeAddinfo;
+    private int addressId;
 }
