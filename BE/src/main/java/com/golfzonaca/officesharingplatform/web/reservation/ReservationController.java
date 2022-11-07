@@ -99,8 +99,6 @@ public class ReservationController {
 
         Boolean registeredStatus = userService.validateUserByUserId(userId);
 
-        log.info("resRequestData={}", resRequestData);
-
         if (!registeredStatus) {
             errorMap.put("InvalidUserError", "등록되지 않은 회원입니다.");
             return errorMap;
