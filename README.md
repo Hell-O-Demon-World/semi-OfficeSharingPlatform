@@ -53,7 +53,7 @@ title OfficeSharingPlatform : FE
     로그인                 :chap3, 10-26, 1d
     페이지 구성            :chap4, 10-27, 1d
     예약 페이지            :chap5, 10-28, 7d
-    마이 페이지            :chap6, 11-3, 1d
+    마이 페이지            :chap6, 11-03, 1d
 
 
 ```
