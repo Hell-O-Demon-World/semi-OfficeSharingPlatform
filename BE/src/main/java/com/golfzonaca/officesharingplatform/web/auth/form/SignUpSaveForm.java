@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -36,6 +37,15 @@ public class SignUpSaveForm {
     private List<PreferType> preferType;
 
     public User toEntity() {
-        return new User(name, email, password, phoneNumber, job, preferType);
+
+        String changePreferString = getChangePreferString(preferType);
+        return new User(name, email, password, phoneNumber, job, changePreferString);
+    }
+
+    private String getChangePreferString(List<PreferType> preferType) {
+        String changePreferString = "".concat("desk:"+String.valueOf(preferType.get(0).isDesk())+"&"
+                            + "meetingroom:"+String.valueOf(preferType.get(0).isMeetingroom())+"&"
+                            + "office:"+ String.valueOf(preferType.get(0).isOffice()));
+        return changePreferString;
     }
 }

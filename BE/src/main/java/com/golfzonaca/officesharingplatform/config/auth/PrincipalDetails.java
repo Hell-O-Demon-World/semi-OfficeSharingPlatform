@@ -21,8 +21,8 @@ public class PrincipalDetails implements UserDetails, CredentialsContainer {
     private final String username;
     private String password;
     private final boolean accountNonExpired;
-    private final boolean acccountNonLocked;
-    private final boolean creditionalNonExpired;
+    private final boolean accountNonLocked;
+    private final boolean conditionalNonExpired;
     private final boolean enabled;
     private final Set<GrantedAuthority> authorities;
 
@@ -47,17 +47,17 @@ public class PrincipalDetails implements UserDetails, CredentialsContainer {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; //아니
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true; // 아니 회사가면 필요할 수 있음 이거 false면 로그인안됨
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return true; //활성화 되어 있음
+        return true;
     }
 
     @Override

@@ -1,13 +1,12 @@
 package com.golfzonaca.officesharingplatform.domain;
 
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class InquiryBoard {
-    private AtomicLong id;
-    private AtomicLong userId;
-    private String title;
-    private String content;
-    private boolean status;
-    private Date writeDate;
+    private long id;
+    private long userId;
+    private String inquiryTitle;
+    private String inquiryContent;
+    private boolean inquiryStatus;
+    private Date inquiryTime;
 }

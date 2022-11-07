@@ -1,20 +1,15 @@
 package com.golfzonaca.officesharingplatform.domain;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
-import java.util.concurrent.atomic.AtomicLong;
-
-@Getter
-@ToString
-@RequiredArgsConstructor
+@Data
 public class Room {
 
-    private AtomicLong id;
-    private AtomicLong placeTypeId;
-    private AtomicLong placeId;
-    private AtomicLong companyId;
-    private int totalNumber;
-    private Boolean roomState;
+    private Long id;
+    private Long roomKindId;
+    private Long placeId;
+    private Long companyId;
+    private int totalNum;
+    private boolean roomState;
+
 }
