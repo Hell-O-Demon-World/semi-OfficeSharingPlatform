@@ -1,9 +1,9 @@
-# BackOfficeTest
+# BackOffice
 
 ```mermaid
 gantt
 dateFormat MM-DD
-title OfficeSharingPlatform : BE
+title BackOffice
 
     section 공통
     요구사항 명세서 분석      :chap1, 10-21, 1d
