@@ -1,10 +1,12 @@
 # OfficeSharingPlatform
 
-## Repository for Deploy Project
+## Repository for Release Project
 
-### BE : 오령기, 최한성, 이동훈
+### Collaborator
 
-### FE : 이찬형
+#### BE : 오령기, 최한성, 이동훈
+
+#### FE : 이찬형
 
 ### 개발 일정
 
