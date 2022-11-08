@@ -1,5 +1,15 @@
 # BackOffice
 
+## Repository for Release Project
+
+### Collaborator
+
+#### BE : 오령기, 최한성, 이동훈
+
+#### FE : 이찬형
+
+### 개발 일정
+
 ```mermaid
 gantt
 dateFormat MM-DD
