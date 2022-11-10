@@ -8,8 +8,8 @@ import java.util.List;
 @Data
 public class PlaceAddForm {
 
-    private Long id; //대여공간식별번호
-    private Long companyId; //업체식별번호
+    private Long id;
+    private Long companyId;
     private String placeName;
     private String placeDescription;
     private List<String> placeOpenDays;
@@ -18,19 +18,8 @@ public class PlaceAddForm {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "kk:mm:ss", timezone = "Asia/Seoul")
     private String placeEnd;
     private List<String> placeAddInfo;
-    private Long addressId; //우편번호
+    private Long addressId;
 
     public PlaceAddForm() {
-    }
-
-    public PlaceAddForm(Long companyId, String placeName, String placeDescription, List<String> placeOpenDays, String placeStart, String placeEnd, List<String> placeAddInfo, Long addressId) {
-        this.companyId = companyId;
-        this.placeName = placeName;
-        this.placeDescription = placeDescription;
-        this.placeOpenDays = placeOpenDays;
-        this.placeStart = placeStart;
-        this.placeEnd = placeEnd;
-        this.placeAddInfo = placeAddInfo;
-        this.addressId = addressId;
     }
 }

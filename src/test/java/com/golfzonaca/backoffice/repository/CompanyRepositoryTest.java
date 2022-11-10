@@ -35,7 +35,7 @@ class CompanyRepositoryTest {
         //Given
         Company companyA = new Company("testacc1", "test1234", "테스트 업체1", "02-1234-1234", "12-12341234", "어나니머스", 1L);
         Company savedCompanyA = companyRepository.save(companyA);
-        Company companyB = new Company("testacc2", "test1234", "테스트 업체2", "02-1234-1234", "12-12341234", "이너", 1L);
+        Company companyB = new Company("testacc2", "test1234", "테스트 업체2", "02-1234-4321", "12-12344321", "이너", 1L);
         Company savedCompanyB = companyRepository.save(companyB);
         //When
         List<Company> result = companyRepository.findAll();
