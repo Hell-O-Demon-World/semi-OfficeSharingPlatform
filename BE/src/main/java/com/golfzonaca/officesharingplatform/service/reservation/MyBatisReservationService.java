@@ -70,7 +70,6 @@ public class MyBatisReservationService implements ReservationService {
             if (hasFullReservation(totalReservationCount, beforeReservationCount)) {
                 inputTimeMap = setStartTimeAndEndTime(inputTimeMap, startTime, endTime);
             } else {
-                //2-2 get List Room
                 for (Reservation reservation : findReservationList) {
                     for (int i = reservation.getResStartTime().getHour(); i < reservation.getResEndTime().getHour(); i++) {
                         if (inputTimeMap.get(i) == true) {
@@ -80,7 +79,6 @@ public class MyBatisReservationService implements ReservationService {
                     }
                 }
 
-                // 영업시간 설정
                 for (int i = startTime; i < endTime; i++) {
                     if (inputTimeMap.get(i) == true) {
                         break;
