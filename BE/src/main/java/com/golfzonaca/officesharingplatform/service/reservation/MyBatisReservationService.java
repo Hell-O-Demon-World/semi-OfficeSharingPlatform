@@ -113,7 +113,6 @@ public class MyBatisReservationService implements ReservationService {
         if (isOpenToday(reservationDayOfWeek, placeOpenList)) {
             Long roomKindId = roomKindRepository.findIdByRoomType(selectedDateTimeForm.getSelectedType());
             List<Room> reservationRoomList = roomRepository.findRoomByPlaceIdAndRoomKindId(placeId, roomKindId);
-            //Reservation Table에서 해당 날짜에 대한 예약 정보를 불러옴
             List<Reservation> findReservationList = reservationRepository.findAllByPlaceIdAndRoomKindIdAndDate(placeId, roomKindId, reservationDate);
 
             int totalReservationCount = reservationRoomList.size();
@@ -122,7 +121,6 @@ public class MyBatisReservationService implements ReservationService {
             int startTime = findPlace.getPlaceStart().getHour();
             int endTime = findPlace.getPlaceEnd().getHour();
 
-            //1-4 & 1-5 cnt == 0, empty list return
             if (hasFullReservation(totalReservationCount, beforeReservationCount)) {
                 inputTimeMap = setStartTimeAndEndTime(inputTimeMap, startTime, endTime);
             } else {
@@ -154,7 +152,6 @@ public class MyBatisReservationService implements ReservationService {
 
     private List<Integer> parsingMapToList(Map<Integer, Boolean> inputTimeMap) {
         List<Integer> resultTimeList = new ArrayList<>();
-        // map을 list로 변환
         Iterator<Map.Entry<Integer, Boolean>> itr = inputTimeMap.entrySet().iterator();
 
         while (itr.hasNext()) {
@@ -185,8 +182,6 @@ public class MyBatisReservationService implements ReservationService {
     }
 
     private int countBeforeReservationList(List<Reservation> findReservationList) {
-//Set 변환 후 중복 제거
-        //1-3 get beforeReservationCount
         Set<Long> countRoomIdSet = new HashSet<>();
         for (int i = 0; i < findReservationList.size(); i++) {
             countRoomIdSet.add(findReservationList.get(i).getRoomId());

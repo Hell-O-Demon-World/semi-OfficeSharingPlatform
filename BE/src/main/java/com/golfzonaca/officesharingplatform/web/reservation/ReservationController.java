@@ -8,7 +8,6 @@ import com.golfzonaca.officesharingplatform.web.reservation.form.TimeListForm;
 import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,8 +27,9 @@ public class ReservationController {
     }
 
     @PostMapping("/places/{placeId}")
-    public TimeListForm selectedDateTime(@PathVariable String placeId, @Valid @RequestBody SelectedDateTimeForm selectedDateTimeForm, BindingResult bindingResult) {
+    public TimeListForm selectedDateTime(@PathVariable String placeId, @Valid @RequestBody SelectedDateTimeForm selectedDateTimeForm) {
         TimeListForm timeListForm = new TimeListForm();
+
         timeListForm.setTimeList(reservationService.getReservationTimeList(Long.parseLong(placeId), selectedDateTimeForm));
         return timeListForm;
     }
