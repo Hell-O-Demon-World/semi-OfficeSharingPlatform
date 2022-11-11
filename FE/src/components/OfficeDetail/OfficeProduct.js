@@ -26,7 +26,7 @@ const Office = () => {
   return (
     <Fragment>
       <h1 className={classes.productName}>Office</h1>
-      {!office && <h1>예약 가능한 Office가 없습니다.</h1>}
+      {!office.length && <h1>예약 가능한 Office가 없습니다.</h1>}
       {!!office && (
         <Swiper navigation={true} spaceBetween={50} slidesPerView={3}>
           {office.map((elem) => (

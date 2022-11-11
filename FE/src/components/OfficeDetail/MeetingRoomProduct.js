@@ -28,7 +28,7 @@ const MeetingRoomProduct = () => {
   return (
     <Fragment>
       <h1 className={classes.productName}>Meeting Room</h1>
-      {!meetingRoom && <h1>이용 가능한 meetingRoom이 없습니다.</h1>}
+      {!meetingRoom.length && <h1>이용 가능한 meetingRoom이 없습니다.</h1>}
       {!!meetingRoom && (
         <Swiper
           navigation={true}
