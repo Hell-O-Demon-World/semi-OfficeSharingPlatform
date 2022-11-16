@@ -1,0 +1,64 @@
+.signUp {
+  width: 500px;
+  background: rgb(255, 255, 255);
+  margin: 120px auto;
+  height: 700px;
+  border: 1px solid #111;
+}
+.signUp header {
+  text-align: center;
+  font-weight: 900;
+  font-size: 30px;
+  width: 100%;
+}
+
+.headerLink {
+  color: #111;
+  text-decoration: none;
+  font-size: 30px;
+  font-weight: 900;
+  text-align: center;
+}
+.signUpForm form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.signUpForm form input {
+  width: 80%;
+  height: 40px;
+  margin: 10px auto;
+}
+.signUpForm .select {
+  display: flex;
+  margin-left: 46px;
+  flex-direction: column;
+  align-self: flex-start;
+}
+.signUpForm .select p {
+  margin: 0;
+}
+.signUpForm .select input {
+  position: relative;
+  top: 14px;
+  width: 15px;
+}
+.signUpForm .select .selectBox {
+  width: 100%;
+}
+
+Button {
+  width: 80%;
+  margin-top: 20px;
+}
+.navLink {
+  text-align: center;
+}
+.signIn {
+  height: 500px;
+  width: 500px;
+  padding: 0;
+  margin: 0 auto;
+}

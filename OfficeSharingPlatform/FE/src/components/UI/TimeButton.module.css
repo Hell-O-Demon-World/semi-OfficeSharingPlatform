@@ -1,0 +1,13 @@
+.box {
+  position: relative;
+  height: 30px;
+  border: 1px solid #111;
+}
+.text {
+  position: absolute;
+  top: -19px;
+  left: 0px;
+  z-index: 10;
+  font-weight: 500;
+  cursor: auto;
+}
