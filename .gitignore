@@ -40,5 +40,5 @@ out/
 .DS_Store
 
 ### Node ###
-FE/node_modules
-FE/package-lock.json
+**/FE/node_modules
+**/FE/package-lock.json
