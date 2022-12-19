@@ -1,6 +1,10 @@
 # OfficeSharingPlatform
 
-## Repository for Deploy Project
+## Repository for 2nd Semi Project
+
+## DEVELOP : 개발 DIRECTORY
+## RELEASE : 최종 DIRECTORY
+## DOCUMENT : 문서 DIRECTORY
 
 ### BE : 오령기, 최한성, 이동훈
 
