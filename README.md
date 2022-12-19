@@ -18,6 +18,7 @@ dateFormat MM-DD
 title OfficeSharingPlatform
 
     section 공통
+    프로젝트 : chap0, 10-21, 11-07
     요구사항 명세서 분석      :chap1, 10-21, 1d
     구현 기능 분석          :chap2, 10-21, 1d
     클래스 다이어그램 작성    :chap3, 10-21, 1d
